@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\AMI.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -53,7 +56,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Nodes\Connector.cs" />
-    <Compile Include="Nodes\NodeGuid.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\NodeTypes\AdditionNode.cs" />
     <Compile Include="Nodes\NodeTypes\ConstantNode.cs" />
@@ -93,6 +95,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Connector.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Addition.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Addition_Hoover.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Constant_Hoover.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AMI.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AMI.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -24,22 +24,22 @@ namespace HYDRA.Nodes
     public class Connector
     {
         //Tail MouseOver GUID
-        private static UInt32 _TailmouseOverGuid;
-        public static UInt32 TailMouseOverGuid { get { return _TailmouseOverGuid; } set { _TailmouseOverGuid = value; } }
+        private static Guid _TailmouseOverGuid;
+        public static Guid TailMouseOverGuid { get { return _TailmouseOverGuid; } set { _TailmouseOverGuid = value; } }
 
         //Head MouseOver GUID
-        private static UInt32 _HeadmouseOverGuid;
-        public static UInt32 HeadOverGuid { get { return _HeadmouseOverGuid; } set { _HeadmouseOverGuid = value; } }
+        private static Guid _HeadmouseOverGuid;
+        public static Guid HeadOverGuid { get { return _HeadmouseOverGuid; } set { _HeadmouseOverGuid = value; } }
 
         //Tail - This is the source node of the link.
-        private UInt32 _tailNodeGuid;
-        public UInt32 TailNodeGuid { get { return _tailNodeGuid; } set { _tailNodeGuid = value; } }
+        private Guid _tailNodeGuid;
+        public Guid TailNodeGuid { get { return _tailNodeGuid; } set { _tailNodeGuid = value; } }
 
         //Head - This is the destination node of the link.
-        private UInt32 _headNodeGuid;
-        public UInt32 HeadNodeGuid { get { return _headNodeGuid; } set { _headNodeGuid = value; } }
+        private Guid _headNodeGuid;
+        public Guid HeadNodeGuid { get { return _headNodeGuid; } set { _headNodeGuid = value; } }
 
-        public Connector(UInt32 Tail, UInt32 Head)
+        public Connector(Guid Tail, Guid Head)
         {
             this._tailNodeGuid = Tail;
             this._headNodeGuid = Head;
@@ -48,8 +48,8 @@ namespace HYDRA.Nodes
 
         private void ClearConnectors()
         {
-            TailMouseOverGuid = 0;
-            HeadOverGuid = 0;
+            TailMouseOverGuid = Guid.Empty;
+            HeadOverGuid = Guid.Empty;
         }
 
     }

@@ -33,16 +33,22 @@ namespace HYDRA
         {
             InitializeComponent();
         }
-        private List<Node> _nodes = new List<Node>();
 
-        public static Dictionary<uint, Node> AllNodes = new Dictionary<uint, Node>();
+        //Used to store logic nodes.
+        private List<Node> _LogicNodes = new List<Node>();
 
+        //Store all nodes using GUID as key and ONode as value.
+        public static Dictionary<Guid, Node> AllNodes = new Dictionary<Guid, Node>();
+
+        //Used as a stack for tool selection menu
         private List<ToolStripButton> lastSelectedTool = new List<ToolStripButton>();
-        //Addition node button
-        private void toolStripButton1_Click(object sender, EventArgs e)
+
+        //Addition Button
+        #region Addition_Button
+        private void AdditionToolButton_Click(object sender, EventArgs e)
         {
             bUsingConnector = false;
-            switch (toolStripButton1.Checked)
+            switch (AdditionToolButton.Checked)
             {
                 case true:
                     //Tool remains checked until you select another tool.
@@ -55,17 +61,31 @@ namespace HYDRA
                         lastSelectedTool.RemoveAt(0);
                     }
 
-                    toolStripButton1.Checked = true;
+                    AdditionToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
             }        
         }
 
-        //Constant node button
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        //Addition button image change on mouse enter.
+        private void AdditionToolButton_MouseEnter(object sender, EventArgs e)
+        {
+            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Addition_Hoover;
+        }
+
+        //Addition button image change on mouse leave.
+        private void AdditionToolButton_MouseLeave(object sender, EventArgs e)
+        {
+            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Addition;
+        }
+        #endregion
+
+        //Constant Button
+        #region Constant_Button
+        private void ConstantToolButton_Click(object sender, EventArgs e)
         {
             bUsingConnector = false;
-            switch (toolStripButton2.Checked)
+            switch (ConstantToolButton.Checked)
             {
                 case true:
                     //Tool remains checked until you select another tool.
@@ -78,17 +98,32 @@ namespace HYDRA
                         lastSelectedTool.RemoveAt(0);
                     }
 
-                    toolStripButton2.Checked = true;
+                    ConstantToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
             }        
         }
 
+        //Constant button image change on mouse enter.
+        private void ConstantToolButton_MouseEnter(object sender, EventArgs e)
+        {
+            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Constant_Hoover;
+        }
+
+        //Constant button image change on mouse enter.
+        private void ConstantToolButton_MouseLeave(object sender, EventArgs e)
+        {
+            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Constant;
+        }
+        #endregion
+
+        //Connector Button
+        #region Connector_Button
         public static bool bUsingConnector = false;
-        //Connector
-        private void toolStripButton4_Click(object sender, EventArgs e)
+   
+        private void ConnectorToolButton_Click(object sender, EventArgs e)
         {
-            switch (toolStripButton4.Checked)
+            switch (ConnectorToolButton.Checked)
             {
                 case true:
                     //Tool remains checked until you select another tool.
@@ -100,55 +135,59 @@ namespace HYDRA
                         lastSelectedTool.RemoveAt(0);
                     }
 
-                    toolStripButton4.Checked = true;
+                    ConnectorToolButton.Checked = true;
                     bUsingConnector = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
             }           
         }
+        #endregion
 
-        Random r = new Random();
+        //Execute Button
+        #region Execute Button
+        private void ExecuteToolButton_MouseClick(object sender, EventArgs e)
+        {
+            foreach (Node a in _LogicNodes)
+            {
+                a.Process();
+            }
+        }
+        #endregion
+
         //Draws || Interact with the graph panel.
-        private void panel1_MouseClick(object sender, MouseEventArgs e)
+        #region Graph_Panel
+        Random r = new Random();
+
+        private void graphPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //Connector Tool
-            if (toolStripButton4.Checked)
+            if (ConnectorToolButton.Checked)
             {             
                 return;
             }
 
             //Addition Node
-            if (toolStripButton1.Checked)
+            if (AdditionToolButton.Checked)
             {
-                var _newAdditionNode = new AdditionNode(NodeGuid.GUID, this.panel1);
-                //NodeGuidMap.nodeGuidMap.Add(_newAdditionNode.GUID, _newAdditionNode);
-                _newAdditionNode.Draw(e.Location);
-                textBox1.Text += _newAdditionNode.Log();
-                _nodes.Add(_newAdditionNode);
-                AllNodes.Add(_newAdditionNode.GUID, _newAdditionNode);
+                var _newAdditionNode = new AdditionNode(Guid.NewGuid(), this.graphPanel); //New Node.
+                _newAdditionNode.Draw(e.Location); //Draw it on mouse location.
+                logTextBox.Text += _newAdditionNode.Log(); //Deploy log into the bottom textlog.
+                _LogicNodes.Add(_newAdditionNode); //Add to a node List.
+
+                //AllNodes.Add(_newAdditionNode.GUID, _newAdditionNode); //Add to dictionary.
                 return;
             }
 
             //Constant Node
-            if (toolStripButton2.Checked)
+            if (ConstantToolButton.Checked)
             {
-                var _newConstantNode = new ConstantNode(NodeGuid.GUID, this.panel1, r.Next(100));
-                
+                var _newConstantNode = new ConstantNode(Guid.NewGuid(), this.graphPanel, r.Next(100));
                 _newConstantNode.Draw(e.Location);
-                textBox1.Text += _newConstantNode.Log();
-               // _nodes.Add(_newConstantNode);
+                logTextBox.Text += _newConstantNode.Log();
                 AllNodes.Add(_newConstantNode.GUID, _newConstantNode);
                 return;
             }
         }
-
-        //Execute
-        private void toolStripButton3_Click(object sender, EventArgs e)
-        {
-            foreach(Node a in _nodes)
-            {
-                a.Process();
-            }           
-        }
+        #endregion
     }
 }

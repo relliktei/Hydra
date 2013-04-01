@@ -63,10 +63,30 @@ namespace HYDRA.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AdditionNode {
+        internal static System.Drawing.Bitmap Addition {
             get {
-                object obj = ResourceManager.GetObject("AdditionNode", resourceCulture);
+                object obj = ResourceManager.GetObject("Addition", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Addition_Hoover {
+            get {
+                object obj = ResourceManager.GetObject("Addition_Hoover", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon AMI {
+            get {
+                object obj = ResourceManager.GetObject("AMI", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
         
@@ -86,6 +106,16 @@ namespace HYDRA.Properties {
         internal static System.Drawing.Bitmap Constant {
             get {
                 object obj = ResourceManager.GetObject("Constant", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Constant_Hoover {
+            get {
+                object obj = ResourceManager.GetObject("Constant_Hoover", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

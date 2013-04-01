@@ -25,7 +25,7 @@ namespace HYDRA.Nodes.NodeTypes
 {
     public class AdditionNode : Node
     {
-        public AdditionNode(UInt32 id, Control panel)
+        public AdditionNode(Guid id, Control panel)
             : base(id, panel)
         {
             this.Name = "Addition";
@@ -37,34 +37,45 @@ namespace HYDRA.Nodes.NodeTypes
                 this.Location = Location;
 
             var nodePBox = new PictureBox();
-            nodePBox.Image = HYDRA.Properties.Resources.AdditionNode;
-            nodePBox.Width = HYDRA.Properties.Resources.AdditionNode.Width;
-            nodePBox.Height = HYDRA.Properties.Resources.AdditionNode.Height;
+            nodePBox.Image = HYDRA.Properties.Resources.Addition;
+            nodePBox.Width = this.Width;
+            nodePBox.Height = this.Height;
             nodePBox.Location = this.Location;
             nodePBox.MouseClick +=new MouseEventHandler(nodePBox_MouseClick);
             Panel.Controls.Add(nodePBox);
+
+            //Label that will display the result/value of the Node.
+            var _valueLabel = new Label(); //Value Label
+            _valueLabel.Font = new Font (_valueLabel.Font, FontStyle.Bold);
+            _valueLabel.Text = this.Value + "";
+            _valueLabel.Location = new Point(this.Location.X, this.Location.Y + 50);
+            _valueLabel.ForeColor = System.Drawing.Color.Green;
+            Panel.Controls.Add(_valueLabel);
+            ValueLabel = _valueLabel;
+            _valueLabel.Show();
             nodePBox.Show();
             base.Draw(this.Location);
         }
 
         public override float Process()
         {
+            //We concatenate the different input values in here:
+            float Sum = 0;
+
             if (Input.Count >= 2)
             {
-                float a = Form1.AllNodes[Input[0].TailNodeGuid].Value;
-                float b = Form1.AllNodes[Input[1].TailNodeGuid].Value;
-                Console.WriteLine("Processed Addition node with " + Input.Count + " input elements the result was " + (a+b));
-                if (Output.Count > 0)
+                for (int i = 0; i < Input.Count; i++)
                 {
-                    Form1.AllNodes[Output[0].TailNodeGuid].Value = a+b;
-                    Form1.AllNodes[Output[0].TailNodeGuid].GUITEXT.Text = (a + b) + "";
+                    var _floatValue = Form1.AllNodes[Input[i].TailNodeGuid].Value;
+                    Sum += _floatValue;
                 }
-                return a + b;
+                Console.WriteLine("Log: " + this.Name + "|| Processed an addition with " + Input.Count + " input elements the result was " + Sum);
+                
+                this.ValueLabel.Text = Sum + "";
             }
-            //set the values of any nodes in the Output list.
-            Console.WriteLine("Processed Addition node with " + Input.Count + " input elements");
             return 1f;
         }
+
         public override string Log()
         {
             return "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
@@ -73,9 +84,8 @@ namespace HYDRA.Nodes.NodeTypes
         //Updates the GUID with the Node in which the mouse its placed. Used to connect nodes.
         public void nodePBox_MouseClick(object sender, MouseEventArgs e)
         {
-            if (Connector.TailMouseOverGuid > 0)
+            if (Connector.TailMouseOverGuid != Guid.Empty)
             {
-
                 Connector.HeadOverGuid = GUID;
                 if (e.Button == MouseButtons.Right)
                 {
@@ -83,6 +93,7 @@ namespace HYDRA.Nodes.NodeTypes
                     return;
                 }
                 Input.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid));
+                Console.WriteLine("Log: " + this.Name + "|| Input count: " + Input.Count + " || Output count: " + Output.Count);
             }
             else
             {

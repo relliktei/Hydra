@@ -25,20 +25,24 @@ namespace HYDRA.Nodes
 {
     public class Node
     {
-        //Displays node value
-        public Label GUITEXT;
-
         //GUID - Global Unique Identifer used to map our nodes.
-        private UInt32 _guid;
-        public UInt32 GUID { get { return _guid; } set { _guid = value; } }
+        private Guid _guid;
+        public Guid GUID { get { return _guid; } set { _guid = value; } }     
 
         //Input & Output connectors
         public List<Connector> Input = new List<Connector>();
         public List<Connector> Output = new List<Connector>();
 
+        //Node Dimensions
+        protected Int32 Height = 48;
+        protected Int32 Width = 48;
+
         //Name of the node
         private string _name;
         public string Name { get { return _name; } set { _name = value; } }
+
+        //Value visual label
+        public Label ValueLabel;
 
         //Node Location (Set onDraw event)
         private Point _location;
@@ -48,15 +52,12 @@ namespace HYDRA.Nodes
         private Control _panel;
         public Control Panel { get { return _panel; } set { _panel = value; } }
 
-        //Result
-        protected Int32 Result;
-
         //Value
         private float _value;
         public float Value { get { return _value; } set { _value = value; } }
 
         //Constructor
-        public Node(UInt32 id, Control panel)
+        public Node(Guid id, Control panel)
         {
             this.GUID = id;
             this.Panel = panel;

@@ -25,7 +25,7 @@ namespace HYDRA.Nodes.NodeTypes
 {
     public class ConstantNode : Node
     {
-        public ConstantNode(UInt32 id, Control panel, float Value)
+        public ConstantNode(Guid id, Control panel, float Value)
             : base(id, panel)
         {
             this.Value = Value;
@@ -36,37 +36,38 @@ namespace HYDRA.Nodes.NodeTypes
         {
             if(Location.X != 0 || Location.Y != 0)
                 this.Location = Location;
-
+            //Create a PictureBox object which will hold the Node visuals.
             var nodePBox = new PictureBox();
-            nodePBox.Image = HYDRA.Properties.Resources.Constant;
-            nodePBox.Width = HYDRA.Properties.Resources.AdditionNode.Width;
-            nodePBox.Height = HYDRA.Properties.Resources.AdditionNode.Height;
-            nodePBox.Location = this.Location;
+            //Event used to GET the GUID from the clicked node, used to make the proper connections.
             nodePBox.MouseClick += new MouseEventHandler(nodePBox_MouseClick);
+            //General PBox properties.
+            nodePBox.Image = HYDRA.Properties.Resources.Constant;
+            nodePBox.Width = this.Width;
+            nodePBox.Height = this.Height;
+            nodePBox.Location = this.Location;
+            //Add the new Pbox Object to the Parent form Panel control.
             Panel.Controls.Add(nodePBox);
-            var val = new Label();
-            val.Text = this.Value + "";
-            val.Location = new Point(this.Location.X, this.Location.Y + 50);
-            Panel.Controls.Add(val);
-            GUITEXT = val;
-            val.Show();
+
+            //Label that will display the value of the Node.
+            var _valueLabel = new Label(); //Value Label
+            _valueLabel.Text = this.Value + "";
+            _valueLabel.Location = new Point(this.Location.X, this.Location.Y + 50);
+            Panel.Controls.Add(_valueLabel);
+            ValueLabel = _valueLabel;
+            _valueLabel.Show();
             nodePBox.Show();
             base.Draw(this.Location);
         }
 
         public override string Log()
         {
-            return "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Value: " + this.Value.ToString() + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine ;
+            return "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Value: " + this.Value.ToString() + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine + Environment.NewLine ;
         }
 
         //Updates the GUID with the Node in which the mouse its placed. Used to connect nodes.
         public void nodePBox_MouseClick(object sender, MouseEventArgs e)
         {
-            /*if (Form1.bUsingConnector == false)
-            {
-                Console.WriteLine(Input.Count + "   " + Output.Count);
-            }*/
-            if (Connector.TailMouseOverGuid > 0)
+            if (Connector.TailMouseOverGuid != Guid.Empty)
             {
                 Connector.HeadOverGuid = GUID;
                 if (e.Button == MouseButtons.Right)
@@ -80,7 +81,7 @@ namespace HYDRA.Nodes.NodeTypes
                 Connector.TailMouseOverGuid = GUID;
                 //MessageBox.Show("Stablished TAIL");
             }
-            Console.WriteLine(Input.Count + "   " + Output.Count);
+            
         }
     }
 }

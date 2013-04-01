@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace HYDRA.Nodes
 {
@@ -39,11 +40,21 @@ namespace HYDRA.Nodes
         private Guid _headNodeGuid;
         public Guid HeadNodeGuid { get { return _headNodeGuid; } set { _headNodeGuid = value; } }
 
-        public Connector(Guid Tail, Guid Head)
+        public Connector(Guid Tail, Guid Head, Graphics panelGraphics)
         {
             this._tailNodeGuid = Tail;
             this._headNodeGuid = Head;
+            Draw(panelGraphics);
             ClearConnectors();
+        }
+
+        public void Draw(Graphics panelGraphics)
+        {
+            System.Drawing.Pen myPen;
+            myPen = new System.Drawing.Pen(System.Drawing.Color.DodgerBlue,4f);
+            panelGraphics.DrawLine(myPen, Form1.AllNodes[TailNodeGuid].Location.X+25, Form1.AllNodes[TailNodeGuid].Location.Y+25, Form1.AllNodes[HeadNodeGuid].Location.X+25, Form1.AllNodes[HeadNodeGuid].Location.Y+25);
+            myPen.Dispose();
+            panelGraphics.Dispose();
         }
 
         private void ClearConnectors()

@@ -34,7 +34,7 @@ namespace HYDRA.Nodes
         public List<Connector> Output = new List<Connector>();
 
         //Node Dimensions
-        protected Int32 Height = 48;
+        protected Int32 Height = 54;
         protected Int32 Width = 48;
 
         //Name of the node

@@ -160,6 +160,9 @@ namespace HYDRA
 
         private void graphPanel_MouseClick(object sender, MouseEventArgs e)
         {
+            //Make the center of the node appear on mouse position.
+            var _nodePlacementPos = new Point(e.Location.X - 25, e.Location.Y - 25);
+
             //Connector Tool
             if (ConnectorToolButton.Checked)
             {             
@@ -170,19 +173,18 @@ namespace HYDRA
             if (AdditionToolButton.Checked)
             {
                 var _newAdditionNode = new AdditionNode(Guid.NewGuid(), this.graphPanel); //New Node.
-                _newAdditionNode.Draw(e.Location); //Draw it on mouse location.
+                _newAdditionNode.Draw(_nodePlacementPos); //Draw it on mouse location.
                 logTextBox.Text += _newAdditionNode.Log(); //Deploy log into the bottom textlog.
                 _LogicNodes.Add(_newAdditionNode); //Add to a node List.
-
-                //AllNodes.Add(_newAdditionNode.GUID, _newAdditionNode); //Add to dictionary.
+                AllNodes.Add(_newAdditionNode.GUID, _newAdditionNode); //Add to dictionary.
                 return;
             }
 
             //Constant Node
             if (ConstantToolButton.Checked)
             {
-                var _newConstantNode = new ConstantNode(Guid.NewGuid(), this.graphPanel, r.Next(100));
-                _newConstantNode.Draw(e.Location);
+                var _newConstantNode = new ConstantNode(Guid.NewGuid(), this.graphPanel, r.Next(1,100));
+                _newConstantNode.Draw(_nodePlacementPos);
                 logTextBox.Text += _newConstantNode.Log();
                 AllNodes.Add(_newConstantNode.GUID, _newConstantNode);
                 return;

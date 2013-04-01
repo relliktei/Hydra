@@ -40,20 +40,29 @@ namespace HYDRA.Nodes.NodeTypes
             nodePBox.Image = HYDRA.Properties.Resources.Addition;
             nodePBox.Width = this.Width;
             nodePBox.Height = this.Height;
+            nodePBox.BackColor = Color.Gray;
             nodePBox.Location = this.Location;
             nodePBox.MouseClick +=new MouseEventHandler(nodePBox_MouseClick);
-            Panel.Controls.Add(nodePBox);
-
+            
             //Label that will display the result/value of the Node.
             var _valueLabel = new Label(); //Value Label
+            _valueLabel.Width = this.Width;
+            _valueLabel.Height = 13;
+            _valueLabel.BackColor = Color.Gray;
             _valueLabel.Font = new Font (_valueLabel.Font, FontStyle.Bold);
             _valueLabel.Text = this.Value + "";
-            _valueLabel.Location = new Point(this.Location.X, this.Location.Y + 50);
-            _valueLabel.ForeColor = System.Drawing.Color.Green;
+            _valueLabel.Location = new Point(this.Location.X, this.Location.Y+48);
+            _valueLabel.ForeColor = System.Drawing.Color.Gold;
+
+            //Add Node And Label
+            Panel.Controls.Add(nodePBox);
             Panel.Controls.Add(_valueLabel);
+            Panel.Controls[((_valueLabel) as Label).TabIndex].BringToFront();
+        
             ValueLabel = _valueLabel;
-            _valueLabel.Show();
+            
             nodePBox.Show();
+            _valueLabel.Show();
             base.Draw(this.Location);
         }
 
@@ -66,11 +75,13 @@ namespace HYDRA.Nodes.NodeTypes
             {
                 for (int i = 0; i < Input.Count; i++)
                 {
+                    //MessageBox.Show(Form1.AllNodes[Input[i].TailNodeGuid].Value.ToString());
                     var _floatValue = Form1.AllNodes[Input[i].TailNodeGuid].Value;
                     Sum += _floatValue;
                 }
                 Console.WriteLine("Log: " + this.Name + "|| Processed an addition with " + Input.Count + " input elements the result was " + Sum);
-                
+
+                this.Value = Sum;
                 this.ValueLabel.Text = Sum + "";
             }
             return 1f;
@@ -89,10 +100,13 @@ namespace HYDRA.Nodes.NodeTypes
                 Connector.HeadOverGuid = GUID;
                 if (e.Button == MouseButtons.Right)
                 {
-                    Output.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid));
+                    Output.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid, (Panel.CreateGraphics()) as Graphics));
+                    var _last = Output.Last();
                     return;
                 }
-                Input.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid));
+                Input.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid, (Panel.CreateGraphics()) as Graphics)); //Add the connection to the node Input list.
+                //Input.Last().Draw((Panel.CreateGraphics()) as Graphics, new Point(0, 0), new Point(415, 190)); //Draw the Connector Line
+
                 Console.WriteLine("Log: " + this.Name + "|| Input count: " + Input.Count + " || Output count: " + Output.Count);
             }
             else

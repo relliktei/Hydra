@@ -85,9 +85,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\AdditionNode.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Constant.jpg" />
   </ItemGroup>
   <ItemGroup>

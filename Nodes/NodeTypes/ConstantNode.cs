@@ -36,26 +36,34 @@ namespace HYDRA.Nodes.NodeTypes
         {
             if(Location.X != 0 || Location.Y != 0)
                 this.Location = Location;
-            //Create a PictureBox object which will hold the Node visuals.
+
             var nodePBox = new PictureBox();
-            //Event used to GET the GUID from the clicked node, used to make the proper connections.
-            nodePBox.MouseClick += new MouseEventHandler(nodePBox_MouseClick);
-            //General PBox properties.
             nodePBox.Image = HYDRA.Properties.Resources.Constant;
             nodePBox.Width = this.Width;
             nodePBox.Height = this.Height;
+            nodePBox.BackColor = Color.Gray;
             nodePBox.Location = this.Location;
-            //Add the new Pbox Object to the Parent form Panel control.
-            Panel.Controls.Add(nodePBox);
+            nodePBox.MouseClick += new MouseEventHandler(nodePBox_MouseClick);
 
-            //Label that will display the value of the Node.
+            //Label that will display the result/value of the Node.
             var _valueLabel = new Label(); //Value Label
+            _valueLabel.Width = this.Width;
+            _valueLabel.Height = 13;
+            _valueLabel.BackColor = Color.Gray;
+            _valueLabel.Font = new Font(_valueLabel.Font, FontStyle.Bold);
             _valueLabel.Text = this.Value + "";
-            _valueLabel.Location = new Point(this.Location.X, this.Location.Y + 50);
+            _valueLabel.Location = new Point(this.Location.X, this.Location.Y + 48);
+            _valueLabel.ForeColor = System.Drawing.Color.Orange;
+
+            //Add Node And Label
+            Panel.Controls.Add(nodePBox);
             Panel.Controls.Add(_valueLabel);
+            Panel.Controls[((_valueLabel) as Label).TabIndex].BringToFront();
+
             ValueLabel = _valueLabel;
-            _valueLabel.Show();
+
             nodePBox.Show();
+            _valueLabel.Show();
             base.Draw(this.Location);
         }
 
@@ -72,9 +80,9 @@ namespace HYDRA.Nodes.NodeTypes
                 Connector.HeadOverGuid = GUID;
                 if (e.Button == MouseButtons.Right)
                 {
-                    Output.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid));
+                    Output.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid, (Panel.CreateGraphics()) as Graphics));
                 }
-                Input.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid));
+                Input.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid, (Panel.CreateGraphics()) as Graphics));
             }
             else
             {

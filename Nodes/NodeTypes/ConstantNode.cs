@@ -69,7 +69,7 @@ namespace HYDRA.Nodes.NodeTypes
 
         public override string Log()
         {
-            return "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Value: " + this.Value.ToString() + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine + Environment.NewLine ;
+            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
         }
 
         //Updates the GUID with the Node in which the mouse its placed. Used to connect nodes.

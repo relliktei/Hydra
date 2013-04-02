@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\AMI.ico</ApplicationIcon>
+    <ApplicationIcon>Hydra.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -107,7 +107,8 @@
     <None Include="Resources\AMI.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AMI.ico" />
+    <Content Include="Hydra.ico" />
+    <None Include="Resources\Hydra.ico" />
     <None Include="Resources\Substraction_Hoover.jpg" />
     <None Include="Resources\Substraction.jpg" />
   </ItemGroup>

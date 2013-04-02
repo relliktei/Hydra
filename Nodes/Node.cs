@@ -56,7 +56,7 @@ namespace HYDRA.Nodes
         private float _value;
         public float Value { get { return _value; } set { _value = value; } }
 
-        //ToolTip
+        //ToolTip handler
         protected ToolTip _toolTip = new ToolTip();
 
         //Constructor
@@ -107,6 +107,7 @@ namespace HYDRA.Nodes
             _valueLabel.Show();
         }
 
+        //Provides on Hover tooltip information about the node.
         private void nodeMouseHover(object sender, EventArgs e)
         {
             _toolTip.Show(this.Name + "\nInput count: " + Input.Count + " \nOutput count: " + Output.Count + "\nValue: " + Value, ValueLabel, 1700);

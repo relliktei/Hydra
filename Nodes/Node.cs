@@ -27,7 +27,7 @@ namespace HYDRA.Nodes
     {
         //GUID - Global Unique Identifer used to map our nodes.
         private Guid _guid;
-        public Guid GUID { get { return _guid; } set { _guid = value; } }     
+        public Guid GUID { get { return _guid; } set { _guid = value; } }
 
         //Input & Output connectors
         public List<Connector> Input = new List<Connector>();
@@ -72,7 +72,7 @@ namespace HYDRA.Nodes
             //Override logic on child nodes.
         }
 
-        public void Draw(Point Location,Image image)
+        public void Draw(Point Location, Image image)
         {
             if (Location.X != 0 || Location.Y != 0)
                 this.Location = Location;
@@ -83,9 +83,10 @@ namespace HYDRA.Nodes
             nodePBox.Height = this.Height;
             nodePBox.BackColor = Color.Gray;
             nodePBox.Location = this.Location;
+            //Node Events
             nodePBox.MouseClick += new MouseEventHandler(nodeMouseClick);
             nodePBox.MouseHover += nodeMouseHover;
-            
+
             //Label that will display the result/value of the Node.
             var _valueLabel = new Label(); //Value Label
             _valueLabel.Width = this.Width;
@@ -99,6 +100,7 @@ namespace HYDRA.Nodes
             //Add Node And Label
             Panel.Controls.Add(nodePBox);
             Panel.Controls.Add(_valueLabel);
+            //Bring the label to the front so its properly displayed.
             Panel.Controls[((_valueLabel) as Label).TabIndex].BringToFront();
 
             ValueLabel = _valueLabel;
@@ -110,7 +112,8 @@ namespace HYDRA.Nodes
         //Provides on Hover tooltip information about the node.
         private void nodeMouseHover(object sender, EventArgs e)
         {
-            _toolTip.Show(this.Name + "\nInput count: " + Input.Count + " \nOutput count: " + Output.Count + "\nValue: " + Value, ValueLabel, 1700);
+            //_toolTip.InitialDelay = 0;
+            //_toolTip.Show(this.Name + "\nInput count: " + Input.Count + " \nOutput count: " + Output.Count + "\nValue: " + Value, ValueLabel, 1700);
         }
 
         //Updates the GUID with the Node in which the mouse its placed. Used to connect nodes.
@@ -119,22 +122,20 @@ namespace HYDRA.Nodes
             if (Connector.TailMouseOverGuid != Guid.Empty)
             {
                 Connector.HeadOverGuid = GUID;
+
                 if (e.Button == MouseButtons.Right)
                 {
                     Output.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid, (Panel.CreateGraphics()) as Graphics));
-                    var _last = Output.Last();
                     return;
                 }
-                Input.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid, (Panel.CreateGraphics()) as Graphics)); //Add the connection to the node Input list.
-                //Input.Last().Draw((Panel.CreateGraphics()) as Graphics, new Point(0, 0), new Point(415, 190)); //Draw the Connector Line
+                Input.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid, (Panel.CreateGraphics()) as Graphics)); //Add the connection to the destination node Input list.
 
+                //Debug
                 Console.WriteLine("Log: " + this.Name + "|| Input count: " + Input.Count + " || Output count: " + Output.Count);
+                return;
             }
-            else
-            {
-                Connector.TailMouseOverGuid = GUID;
-                //MessageBox.Show("Stablished TAIL");
-            }
+            Connector.TailMouseOverGuid = GUID;
+            //MessageBox.Show("Stablished TAIL");
         }
 
         //Logging

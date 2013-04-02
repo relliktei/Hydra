@@ -51,7 +51,7 @@ namespace HYDRA.Nodes
         public void Draw(Graphics panelGraphics)
         {
             System.Drawing.Pen myPen;
-            myPen = new System.Drawing.Pen(System.Drawing.Color.DodgerBlue,4f);
+            myPen = new System.Drawing.Pen(System.Drawing.Color.DodgerBlue,3f);
             myPen.EndCap = System.Drawing.Drawing2D.LineCap.ArrowAnchor;
             panelGraphics.DrawLine(myPen, Form1.AllNodes[TailNodeGuid].Location.X+25, Form1.AllNodes[TailNodeGuid].Location.Y+25, Form1.AllNodes[HeadNodeGuid].Location.X+25, Form1.AllNodes[HeadNodeGuid].Location.Y+25);
             myPen.Dispose();

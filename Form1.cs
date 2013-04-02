@@ -47,7 +47,6 @@ namespace HYDRA
         #region Addition_Button
         private void AdditionToolButton_Click(object sender, EventArgs e)
         {
-            bUsingConnector = false;
             switch (AdditionToolButton.Checked)
             {
                 case true:
@@ -84,7 +83,6 @@ namespace HYDRA
         #region Constant_Button
         private void ConstantToolButton_Click(object sender, EventArgs e)
         {
-            bUsingConnector = false;
             switch (ConstantToolButton.Checked)
             {
                 case true:
@@ -119,8 +117,6 @@ namespace HYDRA
 
         //Connector Button
         #region Connector_Button
-        public static bool bUsingConnector = false;
-   
         private void ConnectorToolButton_Click(object sender, EventArgs e)
         {
             switch (ConnectorToolButton.Checked)
@@ -134,9 +130,7 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-
                     ConnectorToolButton.Checked = true;
-                    bUsingConnector = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
             }           
@@ -157,7 +151,6 @@ namespace HYDRA
         //Draws || Interact with the graph panel.
         #region Graph_Panel
         Random r = new Random();
-
         private void graphPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //Make the center of the node appear on mouse position.
@@ -207,7 +200,6 @@ namespace HYDRA
         #region Substraction Button
         private void SubstractionToolButton_Click(object sender, EventArgs e)
         {
-            bUsingConnector = false;
             switch (SubstractionToolButton.Checked)
             {
                 case true:

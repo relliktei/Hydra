@@ -36,10 +36,6 @@ namespace HYDRA.Nodes.NodeTypes
             base.Draw(Location, HYDRA.Properties.Resources.Addition);
         }
 
-      
-
-   
-
         public override float Process()
         {
             //We concatenate the different input values in here:
@@ -64,9 +60,6 @@ namespace HYDRA.Nodes.NodeTypes
         public override string Log()
         {
             return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
-        }
-
-        
-       
+        }           
     }
 }

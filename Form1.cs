@@ -179,6 +179,17 @@ namespace HYDRA
                 AllNodes.Add(_newAdditionNode.GUID, _newAdditionNode); //Add to dictionary.
                 return;
             }
+            
+            //Substraction Node
+            if (SubstractionToolButton.Checked)
+            {
+                var _newSubstractionNode = new SubstractionNode(Guid.NewGuid(), this.graphPanel); //New Node.
+                _newSubstractionNode.Draw(_nodePlacementPos); //Draw it on mouse location.
+                logTextBox.Text += _newSubstractionNode.Log(); //Deploy log into the bottom textlog.
+                _LogicNodes.Add(_newSubstractionNode); //Add to a node List.
+                AllNodes.Add(_newSubstractionNode.GUID, _newSubstractionNode); //Add to dictionary.
+                return;
+            }
 
             //Constant Node
             if (ConstantToolButton.Checked)
@@ -189,6 +200,41 @@ namespace HYDRA
                 AllNodes.Add(_newConstantNode.GUID, _newConstantNode);
                 return;
             }
+        }
+        #endregion
+
+        //Substraction Button
+        #region Substraction Button
+        private void SubstractionToolButton_Click(object sender, EventArgs e)
+        {
+            bUsingConnector = false;
+            switch (SubstractionToolButton.Checked)
+            {
+                case true:
+                    //Tool remains checked until you select another tool.
+                    break;
+
+                case false:
+                    if (lastSelectedTool.Count > 0)
+                    {
+                        lastSelectedTool[0].Checked = false;
+                        lastSelectedTool.RemoveAt(0);
+                    }
+
+                    SubstractionToolButton.Checked = true;
+                    lastSelectedTool.Add((sender) as ToolStripButton);
+                    break;
+            }        
+        }
+
+        private void SubstractionToolButton_MouseEnter(object sender, EventArgs e)
+        {
+            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Substraction_Hoover;
+        }
+
+        private void SubstractionToolButton_MouseLeave(object sender, EventArgs e)
+        {
+            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Substraction;
         }
         #endregion
     }

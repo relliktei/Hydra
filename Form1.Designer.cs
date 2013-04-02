@@ -36,6 +36,7 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.ConstantToolButton = new System.Windows.Forms.ToolStripButton();
             this.AdditionToolButton = new System.Windows.Forms.ToolStripButton();
+            this.SubstractionToolButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ConnectorToolButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -94,6 +95,7 @@
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ConstantToolButton,
             this.AdditionToolButton,
+            this.SubstractionToolButton,
             this.toolStripSeparator2,
             this.ConnectorToolButton,
             this.toolStripSeparator1,
@@ -130,6 +132,18 @@
             this.AdditionToolButton.Click += new System.EventHandler(this.AdditionToolButton_Click);
             this.AdditionToolButton.MouseEnter += new System.EventHandler(this.AdditionToolButton_MouseEnter);
             this.AdditionToolButton.MouseLeave += new System.EventHandler(this.AdditionToolButton_MouseLeave);
+            // 
+            // SubstractionToolButton
+            // 
+            this.SubstractionToolButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SubstractionToolButton.Image = global::HYDRA.Properties.Resources.Substraction;
+            this.SubstractionToolButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SubstractionToolButton.Name = "SubstractionToolButton";
+            this.SubstractionToolButton.Size = new System.Drawing.Size(36, 36);
+            this.SubstractionToolButton.Text = "Substraction";
+            this.SubstractionToolButton.Click += new System.EventHandler(this.SubstractionToolButton_Click);
+            this.SubstractionToolButton.MouseEnter += new System.EventHandler(this.SubstractionToolButton_MouseEnter);
+            this.SubstractionToolButton.MouseLeave += new System.EventHandler(this.SubstractionToolButton_MouseLeave);
             // 
             // toolStripSeparator2
             // 
@@ -207,6 +221,7 @@
         private System.Windows.Forms.ToolStripButton ConnectorToolButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripButton SubstractionToolButton;
     }
 }
 

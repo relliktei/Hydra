@@ -20,6 +20,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using HYDRA.Nodes;
 
 namespace HYDRA.Nodes
 {
@@ -27,11 +28,18 @@ namespace HYDRA.Nodes
     {
         //GUID - Global Unique Identifer used to map our nodes.
         private Guid _guid;
-        public Guid GUID { get { return _guid; } set { _guid = value; } }
+        public Guid Guid { get { return _guid; } set { _guid = value; } }
 
         //Input & Output connectors
         public List<Connector> Input = new List<Connector>();
         public List<Connector> Output = new List<Connector>();
+
+        //Node Menu
+        private NodeMenu NodeMenu;
+
+        //Node VarWatch ListView
+        private ListView _varwatch;
+        public ListView VarWatch { get { return _varwatch; } set { _varwatch = value; } }
 
         //Node Dimensions
         protected Int32 Height = 39;
@@ -60,10 +68,12 @@ namespace HYDRA.Nodes
         protected ToolTip _toolTip = new ToolTip();
 
         //Constructor
-        public Node(Guid id, Control panel)
+        public Node(Guid id, Control panel, ListView varwatch)
         {
-            this.GUID = id;
+            this.Guid = id;
             this.Panel = panel;
+            this.VarWatch = varwatch;
+            this.NodeMenu = new NodeMenu(this);    
         }
 
         //Draw node
@@ -122,15 +132,17 @@ namespace HYDRA.Nodes
             if (e.Button == MouseButtons.Right)
             {
                 //Modify Value (FOR TESTING PURPOSES)
-                Random r = new Random();
-                Value = r.Next(20, 100);
-                ValueLabel.Text = Value + "";
+                //Random r = new Random();
+                //Value = r.Next(20, 100);
+                //ValueLabel.Text = Value + "";
+                NodeMenu.Show(this.Panel,this.Location,ToolStripDropDownDirection.Right);
                 return;
             }
 
-            else if (Connector.TailMouseOverGuid != Guid.Empty)
+            //TODO: ADD PROPER CHECK FOR MOUSE CLICKS 
+            if (Connector.TailMouseOverGuid != Guid.Empty)
             {
-                Connector.HeadOverGuid = GUID;
+                Connector.HeadOverGuid = Guid;
 
                 Input.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid, (Panel.CreateGraphics()) as Graphics)); //Add the connection to the destination node Input list.
 
@@ -138,7 +150,7 @@ namespace HYDRA.Nodes
                 Console.WriteLine("Log: " + this.Name + "|| Input count: " + Input.Count + " || Output count: " + Output.Count);
                 return;
             }
-            Connector.TailMouseOverGuid = GUID;
+            Connector.TailMouseOverGuid = Guid;
             //MessageBox.Show("Stablished TAIL");
         }
 

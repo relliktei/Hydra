@@ -30,8 +30,8 @@ namespace HYDRA.Nodes.NodeTypes
 {
     public class AverageNode : Node
     {
-        public AverageNode(Guid id, Control panel)
-            : base(id, panel)
+        public AverageNode(Guid id, Control panel, ListView varwatch)
+            : base(id, panel, varwatch)
         {
             this.Name = "Average";
         }
@@ -49,7 +49,7 @@ namespace HYDRA.Nodes.NodeTypes
 
         public override string Log()
         {
-            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
+            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.Guid + Environment.NewLine;
         }
 
 

@@ -36,11 +36,9 @@ namespace HYDRA
 
         //Used to store logic nodes.
         private List<Node> _LogicNodes = new List<Node>();
-
         //Store all nodes using GUID as key and ONode as value.
         public static Dictionary<Guid, Node> AllNodes = new Dictionary<Guid, Node>();
-
-        //Used as a stack for tool selection menu
+        //Used as a 1 element stack for tool selection menu.
         private List<ToolStripButton> lastSelectedTool = new List<ToolStripButton>();
 
         //Addition Button
@@ -178,56 +176,54 @@ namespace HYDRA
             //Addition Node
             if (AdditionToolButton.Checked)
             {
-                var _newAdditionNode = new AdditionNode(Guid.NewGuid(), this.graphPanel); //New Node.
+                var _newAdditionNode = new AdditionNode(Guid.NewGuid(), this.graphPanel, this.listVarWatch); //New Node.
                 _newAdditionNode.Draw(_nodePlacementPos); //Draw it on mouse location.
-                logTextBox.Text += _newAdditionNode.Log(); //Deploy log into the bottom textlog.
+                ConsoleLogTextBox.Text += _newAdditionNode.Log(); //Deploy log into the bottom textlog.
                 _LogicNodes.Add(_newAdditionNode); //Add to a node List.
-                AllNodes.Add(_newAdditionNode.GUID, _newAdditionNode); //Add to dictionary.
-                return;
+                AllNodes.Add(_newAdditionNode.Guid, _newAdditionNode); //Add to dictionary.
             }
 
             //Multiplication Node
             if (MultiplicationToolButton.Checked)
             {
-                var _newMultiplicationNode = new MultiplicationNode(Guid.NewGuid(), this.graphPanel); //New Node.
+                var _newMultiplicationNode = new MultiplicationNode(Guid.NewGuid(), this.graphPanel, this.listVarWatch); //New Node.
                 _newMultiplicationNode.Draw(_nodePlacementPos); //Draw it on mouse location.
-                logTextBox.Text += _newMultiplicationNode.Log(); //Deploy log into the bottom textlog.
+                ConsoleLogTextBox.Text += _newMultiplicationNode.Log(); //Deploy log into the bottom textlog.
                 _LogicNodes.Add(_newMultiplicationNode); //Add to a node List.
-                AllNodes.Add(_newMultiplicationNode.GUID, _newMultiplicationNode); //Add to dictionary.
-                return;
+                AllNodes.Add(_newMultiplicationNode.Guid, _newMultiplicationNode); //Add to dictionary.
             }
             
             //Substraction Node
             if (SubstractionToolButton.Checked)
             {
-                var _newSubstractionNode = new SubstractionNode(Guid.NewGuid(), this.graphPanel); //New Node.
+                var _newSubstractionNode = new SubstractionNode(Guid.NewGuid(), this.graphPanel, this.listVarWatch); //New Node.
                 _newSubstractionNode.Draw(_nodePlacementPos); //Draw it on mouse location.
-                logTextBox.Text += _newSubstractionNode.Log(); //Deploy log into the bottom textlog.
+                ConsoleLogTextBox.Text += _newSubstractionNode.Log(); //Deploy log into the bottom textlog.
                 _LogicNodes.Add(_newSubstractionNode); //Add to a node List.
-                AllNodes.Add(_newSubstractionNode.GUID, _newSubstractionNode); //Add to dictionary.
-                return;
+                AllNodes.Add(_newSubstractionNode.Guid, _newSubstractionNode); //Add to dictionary.
             }
 
             //Division Node
             if (DivisionToolButton.Checked)
             {
-                var _newDivisionNode = new DivisionNode(Guid.NewGuid(), this.graphPanel); //New Node.
+                var _newDivisionNode = new DivisionNode(Guid.NewGuid(), this.graphPanel, this.listVarWatch); //New Node.
                 _newDivisionNode.Draw(_nodePlacementPos); //Draw it on mouse location.
-                logTextBox.Text += _newDivisionNode.Log(); //Deploy log into the bottom textlog.
+                ConsoleLogTextBox.Text += _newDivisionNode.Log(); //Deploy log into the bottom textlog.
                 _LogicNodes.Add(_newDivisionNode); //Add to a node List.
-                AllNodes.Add(_newDivisionNode.GUID, _newDivisionNode); //Add to dictionary.
-                return;
+                AllNodes.Add(_newDivisionNode.Guid, _newDivisionNode); //Add to dictionary.
             }
 
             //Constant Node
             if (ConstantToolButton.Checked)
             {
-                var _newConstantNode = new ConstantNode(Guid.NewGuid(), this.graphPanel, r.Next(20,100));
+                var _newConstantNode = new ConstantNode(Guid.NewGuid(), this.graphPanel, r.Next(20, 100), this.listVarWatch);
                 _newConstantNode.Draw(_nodePlacementPos);
-                logTextBox.Text += _newConstantNode.Log();
-                AllNodes.Add(_newConstantNode.GUID, _newConstantNode);
-                return;
+                ConsoleLogTextBox.Text += _newConstantNode.Log();   
+                AllNodes.Add(_newConstantNode.Guid, _newConstantNode);
             }
+            //Scroll Console Log
+            ConsoleLogTextBox.SelectionStart = ConsoleLogTextBox.TextLength;
+            ConsoleLogTextBox.ScrollToCaret();
         }
         #endregion
 

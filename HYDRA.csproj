@@ -76,6 +76,9 @@
     <Compile Include="Nodes\NodeTypes\Arithmetic\SlopeNode.cs" />
     <Compile Include="Nodes\NodeTypes\Arithmetic\StandardDeviationNode.cs" />
     <Compile Include="Nodes\NodeTypes\Arithmetic\SubstractionNode.cs" />
+    <Compile Include="Nodes\NodeMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

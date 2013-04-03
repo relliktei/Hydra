@@ -25,8 +25,8 @@ namespace HYDRA.Nodes.NodeTypes
 {
     public class ConstantNode : Node
     {
-        public ConstantNode(Guid id, Control panel, float Value)
-            : base(id, panel)
+        public ConstantNode(Guid id, Control panel, float Value, ListView varwatch)
+            : base(id, panel, varwatch)
         {
             this.Value = Value;
             this.Name = "Constant";
@@ -39,7 +39,7 @@ namespace HYDRA.Nodes.NodeTypes
 
         public override string Log()
         {
-            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
+            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.Guid + Environment.NewLine;
         }
 
        

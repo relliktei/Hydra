@@ -208,6 +208,17 @@ namespace HYDRA
                 return;
             }
 
+            //Division Node
+            if (DivisionToolButton.Checked)
+            {
+                var _newDivisionNode = new DivisionNode(Guid.NewGuid(), this.graphPanel); //New Node.
+                _newDivisionNode.Draw(_nodePlacementPos); //Draw it on mouse location.
+                logTextBox.Text += _newDivisionNode.Log(); //Deploy log into the bottom textlog.
+                _LogicNodes.Add(_newDivisionNode); //Add to a node List.
+                AllNodes.Add(_newDivisionNode.GUID, _newDivisionNode); //Add to dictionary.
+                return;
+            }
+
             //Constant Node
             if (ConstantToolButton.Checked)
             {
@@ -261,6 +272,30 @@ namespace HYDRA
             foreach (Node a in _LogicNodes)
             {
                 a.Process();
+            }
+        }
+        #endregion
+
+        //Division Button
+        #region Division Button
+        private void DivisionToolButton_Click(object sender, EventArgs e)
+        {
+            switch (DivisionToolButton.Checked)
+            {
+                case true:
+                    //Tool remains checked until you select another tool.
+                    break;
+
+                case false:
+                    if (lastSelectedTool.Count > 0)
+                    {
+                        lastSelectedTool[0].Checked = false;
+                        lastSelectedTool.RemoveAt(0);
+                    }
+
+                    DivisionToolButton.Checked = true;
+                    lastSelectedTool.Add((sender) as ToolStripButton);
+                    break;
             }
         }
         #endregion

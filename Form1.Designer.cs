@@ -38,6 +38,7 @@
             this.AdditionToolButton = new System.Windows.Forms.ToolStripButton();
             this.SubstractionToolButton = new System.Windows.Forms.ToolStripButton();
             this.MultiplicationToolButton = new System.Windows.Forms.ToolStripButton();
+            this.DivisionToolButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ConnectorToolButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -98,6 +99,7 @@
             this.AdditionToolButton,
             this.SubstractionToolButton,
             this.MultiplicationToolButton,
+            this.DivisionToolButton,
             this.toolStripSeparator2,
             this.ConnectorToolButton,
             this.toolStripSeparator1,
@@ -156,6 +158,16 @@
             this.MultiplicationToolButton.Size = new System.Drawing.Size(36, 36);
             this.MultiplicationToolButton.Text = "Multiplication";
             this.MultiplicationToolButton.Click += new System.EventHandler(this.MultiplicationToolButton_Click);
+            // 
+            // DivisionToolButton
+            // 
+            this.DivisionToolButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DivisionToolButton.Image = global::HYDRA.Properties.Resources.Division;
+            this.DivisionToolButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DivisionToolButton.Name = "DivisionToolButton";
+            this.DivisionToolButton.Size = new System.Drawing.Size(36, 36);
+            this.DivisionToolButton.Text = "Division";
+            this.DivisionToolButton.Click += new System.EventHandler(this.DivisionToolButton_Click);
             // 
             // toolStripSeparator2
             // 
@@ -237,6 +249,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton SubstractionToolButton;
         private System.Windows.Forms.ToolStripButton MultiplicationToolButton;
+        private System.Windows.Forms.ToolStripButton DivisionToolButton;
     }
 }
 

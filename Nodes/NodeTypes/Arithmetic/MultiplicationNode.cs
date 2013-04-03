@@ -51,7 +51,7 @@ namespace HYDRA.Nodes.NodeTypes
                     else
                         Result *= _floatValue;
                 }
-                Console.WriteLine("Log: " + this.Name + "|| Processed an addition with " + Input.Count + " input elements the result was " + Result);
+                Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
 
                 this.Value = Result;
                 this.ValueLabel.Text = Result + "";

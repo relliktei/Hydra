@@ -21,11 +21,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-
-////////////////////////////////////////////////////////////////////////////
-//                    NOT IMPLEMENTED                                     //
-//                  AUTO GENERATED CLASS!                                 //
-////////////////////////////////////////////////////////////////////////////
 namespace HYDRA.Nodes.NodeTypes
 {
     public class DivisionNode : Node
@@ -43,7 +38,24 @@ namespace HYDRA.Nodes.NodeTypes
 
         public override float Process()
         {
-            //Implement
+            float Result = 0;
+
+            if (Input.Count == 2)
+            {
+                for (int i = 0; i < Input.Count; i++)
+                {
+                    //MessageBox.Show(Form1.AllNodes[Input[i].TailNodeGuid].Value.ToString());
+                    var _floatValue = Form1.AllNodes[Input[i].TailNodeGuid].Value;
+                    if (Result == 0)
+                        Result = _floatValue;
+                    else
+                        Result /= _floatValue;
+                }
+                Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
+
+                this.Value = Result;
+                this.ValueLabel.Text = Result + "";
+            }
             return 1f;
         }
 

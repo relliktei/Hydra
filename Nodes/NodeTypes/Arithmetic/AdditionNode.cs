@@ -39,7 +39,7 @@ namespace HYDRA.Nodes.NodeTypes
         public override float Process()
         {
             //We concatenate the different input values in here:
-            float Sum = 0;
+            float Result = 0;
 
             if (Input.Count == 2)
             {
@@ -47,12 +47,12 @@ namespace HYDRA.Nodes.NodeTypes
                 {
                     //MessageBox.Show(Form1.AllNodes[Input[i].TailNodeGuid].Value.ToString());
                     var _floatValue = Form1.AllNodes[Input[i].TailNodeGuid].Value;
-                    Sum += _floatValue;
+                    Result += _floatValue;
                 }
-                Console.WriteLine("Log: " + this.Name + "|| Processed an addition with " + Input.Count + " input elements the result was " + Sum);
+                Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
 
-                this.Value = Sum;
-                this.ValueLabel.Text = Sum + "";
+                this.Value = Result;
+                this.ValueLabel.Text = Result + "";
             }
             return 1f;
         }

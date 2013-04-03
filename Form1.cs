@@ -137,14 +137,27 @@ namespace HYDRA
         }
         #endregion
 
-        //Execute Button
-        #region Execute Button
-        private void ExecuteToolButton_MouseClick(object sender, EventArgs e)
+        //Multiplication Button
+        #region Multiplication Button
+        private void MultiplicationToolButton_Click(object sender, EventArgs e)
         {
-            foreach (Node a in _LogicNodes)
+            switch (MultiplicationToolButton.Checked)
             {
-                a.Process();
-            }
+                case true:
+                    //Tool remains checked until you select another tool.
+                    break;
+
+                case false:
+                    if (lastSelectedTool.Count > 0)
+                    {
+                        lastSelectedTool[0].Checked = false;
+                        lastSelectedTool.RemoveAt(0);
+                    }
+
+                    MultiplicationToolButton.Checked = true;
+                    lastSelectedTool.Add((sender) as ToolStripButton);
+                    break;
+            }        
         }
         #endregion
 
@@ -172,6 +185,17 @@ namespace HYDRA
                 AllNodes.Add(_newAdditionNode.GUID, _newAdditionNode); //Add to dictionary.
                 return;
             }
+
+            //Multiplication Node
+            if (MultiplicationToolButton.Checked)
+            {
+                var _newMultiplicationNode = new MultiplicationNode(Guid.NewGuid(), this.graphPanel); //New Node.
+                _newMultiplicationNode.Draw(_nodePlacementPos); //Draw it on mouse location.
+                logTextBox.Text += _newMultiplicationNode.Log(); //Deploy log into the bottom textlog.
+                _LogicNodes.Add(_newMultiplicationNode); //Add to a node List.
+                AllNodes.Add(_newMultiplicationNode.GUID, _newMultiplicationNode); //Add to dictionary.
+                return;
+            }
             
             //Substraction Node
             if (SubstractionToolButton.Checked)
@@ -187,7 +211,7 @@ namespace HYDRA
             //Constant Node
             if (ConstantToolButton.Checked)
             {
-                var _newConstantNode = new ConstantNode(Guid.NewGuid(), this.graphPanel, r.Next(1,100));
+                var _newConstantNode = new ConstantNode(Guid.NewGuid(), this.graphPanel, r.Next(20,100));
                 _newConstantNode.Draw(_nodePlacementPos);
                 logTextBox.Text += _newConstantNode.Log();
                 AllNodes.Add(_newConstantNode.GUID, _newConstantNode);
@@ -227,6 +251,17 @@ namespace HYDRA
         private void SubstractionToolButton_MouseLeave(object sender, EventArgs e)
         {
             ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Substraction;
+        }
+        #endregion
+
+        //Execute Button
+        #region Execute Button
+        private void ExecuteToolButton_MouseClick(object sender, EventArgs e)
+        {
+            foreach (Node a in _LogicNodes)
+            {
+                a.Process();
+            }
         }
         #endregion
     }

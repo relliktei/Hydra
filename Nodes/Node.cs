@@ -119,15 +119,19 @@ namespace HYDRA.Nodes
         //Updates the GUID with the Node in which the mouse its placed. Used to connect nodes.
         private void nodeMouseClick(object sender, MouseEventArgs e)
         {
-            if (Connector.TailMouseOverGuid != Guid.Empty)
+            if (e.Button == MouseButtons.Right)
+            {
+                //Modify Value (FOR TESTING PURPOSES)
+                Random r = new Random();
+                Value = r.Next(20, 100);
+                ValueLabel.Text = Value + "";
+                return;
+            }
+
+            else if (Connector.TailMouseOverGuid != Guid.Empty)
             {
                 Connector.HeadOverGuid = GUID;
 
-                if (e.Button == MouseButtons.Right)
-                {
-                    Output.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid, (Panel.CreateGraphics()) as Graphics));
-                    return;
-                }
                 Input.Add(new Connector(Connector.TailMouseOverGuid, Connector.HeadOverGuid, (Panel.CreateGraphics()) as Graphics)); //Add the connection to the destination node Input list.
 
                 //Debug

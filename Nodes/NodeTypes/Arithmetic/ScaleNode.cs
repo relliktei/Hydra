@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2013 Iker Ruiz Arnauda
+// Copyright (C) 2013 Iker Ruiz Arnauda
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,39 +21,29 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
+
+////////////////////////////////////////////////////////////////////////////
+//                    NOT IMPLEMENTED                                     //
+//                  AUTO GENERATED CLASS!                                 //
+////////////////////////////////////////////////////////////////////////////
 namespace HYDRA.Nodes.NodeTypes
 {
-    public class SubstractionNode : Node
+    public class ScaleNode : Node
     {
-        public SubstractionNode(Guid id, Control panel)
+        public ScaleNode(Guid id, Control panel)
             : base(id, panel)
         {
-            this.Name = "Substraction";
+            this.Name = "Scale";
         }
 
         public override void Draw(Point Location)
         {
-            base.Draw(Location, HYDRA.Properties.Resources.Substraction);
+            base.Draw(Location, HYDRA.Properties.Resources.Scale);
         }
 
         public override float Process()
         {
-            //We concatenate the different input values in here:
-            float Sum = 0;
-
-            if (Input.Count >= 2)
-            {
-                for (int i = 0; i < Input.Count; i++)
-                {
-                    //MessageBox.Show(Form1.AllNodes[Input[i].TailNodeGuid].Value.ToString());
-                    var _floatValue = Form1.AllNodes[Input[i].TailNodeGuid].Value;
-                    Sum -= _floatValue;
-                }
-                Console.WriteLine("Log: " + this.Name + "|| Processed an addition with " + Input.Count + " input elements the result was " + Sum);
-
-                this.Value = Sum;
-                this.ValueLabel.Text = Sum + "";
-            }
+            //Implement
             return 1f;
         }
 

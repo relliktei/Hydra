@@ -57,9 +57,25 @@
     </Compile>
     <Compile Include="Nodes\Connector.cs" />
     <Compile Include="Nodes\Node.cs" />
-    <Compile Include="Nodes\NodeTypes\AdditionNode.cs" />
-    <Compile Include="Nodes\NodeTypes\ConstantNode.cs" />
-    <Compile Include="Nodes\NodeTypes\SubstractionNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\AdditionNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\AverageNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\ConstantNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\DivisionNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\FormulaNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\HysteresisNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\MaximumNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\MaxValueNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\MinimumNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\MinValueNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\MultipleScaleNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\MultiplicationNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\NegationNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\PonderedAverageNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\PowerNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\ScaleNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\SlopeNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\StandardDeviationNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\SubstractionNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -108,9 +124,42 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Hydra.ico" />
+    <Content Include="Resources\Arithmetic\Addition.jpg" />
+    <Content Include="Resources\Arithmetic\Average.jpg" />
+    <Content Include="Resources\Arithmetic\Constant.jpg" />
+    <Content Include="Resources\Arithmetic\Division.jpg" />
+    <Content Include="Resources\Arithmetic\Formula.jpg" />
+    <Content Include="Resources\Arithmetic\Hysteresis.jpg" />
+    <Content Include="Resources\Arithmetic\Maximum.jpg" />
+    <Content Include="Resources\Arithmetic\MaxValue.jpg" />
+    <Content Include="Resources\Arithmetic\Minimum.jpg" />
+    <Content Include="Resources\Arithmetic\MinValue.jpg" />
+    <Content Include="Resources\Arithmetic\MultipleScale.jpg" />
+    <Content Include="Resources\Arithmetic\Multiplication.jpg" />
+    <Content Include="Resources\Arithmetic\Negate.jpg" />
+    <Content Include="Resources\Arithmetic\PonderedAverage.jpg" />
+    <Content Include="Resources\Arithmetic\Power.jpg" />
+    <Content Include="Resources\Arithmetic\Scale.jpg" />
+    <Content Include="Resources\Arithmetic\Slope.jpg" />
+    <Content Include="Resources\Arithmetic\StandardDeviation.jpg" />
+    <Content Include="Resources\Arithmetic\Substraction.jpg" />
     <None Include="Resources\Hydra.ico" />
     <None Include="Resources\Substraction_Hoover.jpg" />
     <None Include="Resources\Substraction.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Nodes\NodeTypes\Advanced\" />
+    <Folder Include="Nodes\NodeTypes\Bits\" />
+    <Folder Include="Nodes\NodeTypes\Boolean\" />
+    <Folder Include="Nodes\NodeTypes\Comparison\" />
+    <Folder Include="Nodes\NodeTypes\Composites\" />
+    <Folder Include="Nodes\NodeTypes\Filter\" />
+    <Folder Include="Nodes\NodeTypes\Fuzzy\" />
+    <Folder Include="Nodes\NodeTypes\Offsets\" />
+    <Folder Include="Nodes\NodeTypes\Selectors\" />
+    <Folder Include="Nodes\NodeTypes\Tables\" />
+    <Folder Include="Nodes\NodeTypes\Time\" />
+    <Folder Include="Nodes\NodeTypes\Transfer\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

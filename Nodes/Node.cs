@@ -34,8 +34,8 @@ namespace HYDRA.Nodes
         public List<Connector> Output = new List<Connector>();
 
         //Node Dimensions
-        protected Int32 Height = 54;
-        protected Int32 Width = 48;
+        protected Int32 Height = 39;
+        protected Int32 Width = 33;
 
         //Name of the node
         private string _name;
@@ -94,7 +94,7 @@ namespace HYDRA.Nodes
             _valueLabel.BackColor = Color.Gray;
             _valueLabel.Font = new Font(_valueLabel.Font, FontStyle.Bold);
             _valueLabel.Text = this.Value.ToString();
-            _valueLabel.Location = new Point(this.Location.X, this.Location.Y + 48);
+            _valueLabel.Location = new Point(this.Location.X, this.Location.Y + 33);
             _valueLabel.ForeColor = System.Drawing.Color.Gold;
 
             //Add Node And Label

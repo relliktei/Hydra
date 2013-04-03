@@ -118,31 +118,88 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Addition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Addition_OLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Addition.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Addition_Hoover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Addition_Hoover_OLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Addition_Hoover.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Connector" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Connector.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Constant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Constant_OLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Constant.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Constant_Hoover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Constant_Hoover_OLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Constant_Hoover.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="execute" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\execute.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Substraction" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Substraction_OLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Substraction.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Substraction_Hoover" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="Substraction_Hoover_OLD" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Substraction_Hoover.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Hydra" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Hydra.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Addition" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\addition.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Average" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\average.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Constant" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\constant.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Division" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\division.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Formula" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\formula.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Hysteresis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\hysteresis.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Maximum" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\maximum.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MaxValue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\maxvalue.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Minimum" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\minimum.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MinValue" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\minvalue.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="MultipleScale" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\multiplescale.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Multiplication" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\multiplication.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Negation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\negate.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PonderedAverage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\ponderedaverage.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Power" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\power.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Scale" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\scale.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Slope" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\slope.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="StandardDeviation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\standarddeviation.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Substraction" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\arithmetic\substraction.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

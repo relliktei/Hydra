@@ -69,7 +69,7 @@ namespace HYDRA
         //Addition button image change on mouse enter.
         private void AdditionToolButton_MouseEnter(object sender, EventArgs e)
         {
-            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Addition_Hoover;
+            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Addition;
         }
 
         //Addition button image change on mouse leave.
@@ -105,7 +105,7 @@ namespace HYDRA
         //Constant button image change on mouse enter.
         private void ConstantToolButton_MouseEnter(object sender, EventArgs e)
         {
-            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Constant_Hoover;
+            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Constant;
         }
 
         //Constant button image change on mouse enter.
@@ -221,7 +221,7 @@ namespace HYDRA
 
         private void SubstractionToolButton_MouseEnter(object sender, EventArgs e)
         {
-            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Substraction_Hoover;
+            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Substraction;
         }
 
         private void SubstractionToolButton_MouseLeave(object sender, EventArgs e)

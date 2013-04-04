@@ -268,6 +268,8 @@ namespace HYDRA
             foreach (Node a in _LogicNodes)
             {
                 a.Process();
+                try { listVarWatch.FindItemWithText(a.Guid.ToString()).SubItems[1].Text = a.Value.ToString(); }
+                catch { }
             }
         }
         #endregion

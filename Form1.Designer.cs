@@ -45,11 +45,12 @@
             this.ExecuteToolButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.listVarWatch = new System.Windows.Forms.ListView();
+            this.Var = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelVarWatch = new System.Windows.Forms.Label();
             this.labelLogConsole = new System.Windows.Forms.Label();
             this.labelDrawPanel = new System.Windows.Forms.Label();
-            this.Var = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -60,7 +61,7 @@
             this.graphPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.graphPanel.Location = new System.Drawing.Point(11, 62);
             this.graphPanel.Name = "graphPanel";
-            this.graphPanel.Size = new System.Drawing.Size(870, 396);
+            this.graphPanel.Size = new System.Drawing.Size(708, 396);
             this.graphPanel.TabIndex = 0;
             this.graphPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphPanel_MouseClick);
             // 
@@ -220,17 +221,28 @@
             this.listVarWatch.BackColor = System.Drawing.Color.WhiteSmoke;
             this.listVarWatch.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Var,
-            this.Value});
+            this.Value,
+            this.Id});
             this.listVarWatch.GridLines = true;
             this.listVarWatch.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listVarWatch.Location = new System.Drawing.Point(887, 62);
+            this.listVarWatch.Location = new System.Drawing.Point(725, 62);
             this.listVarWatch.MultiSelect = false;
             this.listVarWatch.Name = "listVarWatch";
             this.listVarWatch.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.listVarWatch.Size = new System.Drawing.Size(191, 396);
+            this.listVarWatch.Size = new System.Drawing.Size(365, 396);
             this.listVarWatch.TabIndex = 2;
             this.listVarWatch.UseCompatibleStateImageBehavior = false;
             this.listVarWatch.View = System.Windows.Forms.View.Details;
+            // 
+            // Var
+            // 
+            this.Var.Text = "Var";
+            this.Var.Width = 86;
+            // 
+            // Value
+            // 
+            this.Value.Text = "Value";
+            this.Value.Width = 63;
             // 
             // labelVarWatch
             // 
@@ -262,15 +274,10 @@
             this.labelDrawPanel.TabIndex = 5;
             this.labelDrawPanel.Text = "Draw Panel";
             // 
-            // Var
+            // Id
             // 
-            this.Var.Text = "Var";
-            this.Var.Width = 87;
-            // 
-            // Value
-            // 
-            this.Value.Text = "Value";
-            this.Value.Width = 102;
+            this.Id.Text = "Id";
+            this.Id.Width = 212;
             // 
             // Form1
             // 
@@ -323,6 +330,7 @@
         private System.Windows.Forms.ListView listVarWatch;
         private System.Windows.Forms.ColumnHeader Var;
         private System.Windows.Forms.ColumnHeader Value;
+        private System.Windows.Forms.ColumnHeader Id;
     }
 }
 

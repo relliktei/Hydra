@@ -53,8 +53,11 @@ namespace HYDRA.Nodes.NodeTypes
 
                 this.Value = Result;
                 this.ValueLabel.Text = Result + "";
+
+                return Result;
             }
-            return 1f;
+            else
+                return 0f;
         }
 
         public override string Log()

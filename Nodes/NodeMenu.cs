@@ -18,8 +18,8 @@ namespace HYDRA.Nodes
 
         private void onWatchClick(object sender, EventArgs e)
         {
-            node.VarWatch.Items.Add(node.Name);
-            node.VarWatch.Items[0].SubItems.Add(node.Value.ToString());
+            string[] value_guid = {node.Value.ToString(), node.Guid.ToString() };
+            node.VarWatch.Items.Add(node.Name).SubItems.AddRange(value_guid);
         }
     }
 }

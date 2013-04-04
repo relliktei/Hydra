@@ -82,7 +82,7 @@ namespace HYDRA.Nodes
             //Override logic on child nodes.
         }
 
-        public void Draw(Point Location, Image image)
+        public virtual void Draw(Point Location, Image image)
         {
             if (Location.X != 0 || Location.Y != 0)
                 this.Location = Location;

@@ -18,25 +18,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
 
-namespace HYDRA.Nodes.NodeTypes
+
+namespace HydraLib.Nodes.NodeTypes
 {
-    public class DivisionNode : Node
+    public class MultiplicationNode : Node
     {
-        public DivisionNode(Guid id, Control panel)
-            : base(id, panel)
+        public MultiplicationNode(Guid id)
+            : base(id)
         {
-            this.Name = "Division";
+            this.Name = "Multiplication";
         }
 
-        public override void Draw(Point Location)
-        {
-            base.Draw(Location, HYDRA.Properties.Resources.Division);
-        }
 
-        public override float Process()
+
+        public override float Process(Dictionary<Guid, Node> allNodes)
         {
             float Result = 0;
 
@@ -45,24 +41,22 @@ namespace HYDRA.Nodes.NodeTypes
                 for (int i = 0; i < Input.Count; i++)
                 {
                     //MessageBox.Show(Form1.AllNodes[Input[i].TailNodeGuid].Value.ToString());
-                    var _floatValue = Form1.AllNodes[Input[i].TailNodeGuid].Value;
+                    var _floatValue = allNodes[Input[i].TailNodeGuid].Value;
                     if (Result == 0)
                         Result = _floatValue;
                     else
-                        Result /= _floatValue;
+                        Result *= _floatValue;
                 }
                 Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
 
                 this.Value = Result;
-                this.ValueLabel.Text = Result + "";
+                return Result;
+               // this.ValueLabel.Text = Result + "";
             }
             return 1f;
         }
 
-        public override string Log()
-        {
-            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
-        }
+      
 
 
     }

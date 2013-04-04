@@ -1,4 +1,4 @@
-// Copyright (C) 2013 Iker Ruiz Arnauda
+﻿// Copyright (C) 2013 Iker Ruiz Arnauda
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,25 +18,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
 
-namespace HYDRA.Nodes.NodeTypes
+
+namespace HydraLib.Nodes.NodeTypes
 {
-    public class MultiplicationNode : Node
+    public class SubstractionNode : Node
     {
-        public MultiplicationNode(Guid id, Control panel)
-            : base(id, panel)
+        public SubstractionNode(Guid id)
+            : base(id)
         {
-            this.Name = "Multiplication";
+            this.Name = "Substraction";
         }
 
-        public override void Draw(Point Location)
-        {
-            base.Draw(Location, HYDRA.Properties.Resources.Multiplication);
-        }
 
-        public override float Process()
+
+        public override float Process(Dictionary<Guid, Node> allNodes)
         {
             float Result = 0;
 
@@ -45,24 +41,22 @@ namespace HYDRA.Nodes.NodeTypes
                 for (int i = 0; i < Input.Count; i++)
                 {
                     //MessageBox.Show(Form1.AllNodes[Input[i].TailNodeGuid].Value.ToString());
-                    var _floatValue = Form1.AllNodes[Input[i].TailNodeGuid].Value;
+                    var _floatValue = allNodes[Input[i].TailNodeGuid].Value;
                     if (Result == 0)
                         Result = _floatValue;
                     else
-                        Result *= _floatValue;
+                        Result -= _floatValue;
                 }
-                Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
+                Console.WriteLine("Log: " + this.Name + "|| Processed an addition with " + Input.Count + " input elements the result was " + Result);
 
                 this.Value = Result;
-                this.ValueLabel.Text = Result + "";
+                return Result;
+                //this.ValueLabel.Text = Result + "";
             }
             return 1f;
         }
 
-        public override string Log()
-        {
-            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
-        }
+       
 
 
     }

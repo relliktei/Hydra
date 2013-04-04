@@ -18,26 +18,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
 
-namespace HYDRA.Nodes.NodeTypes
+
+namespace HydraLib.Nodes.NodeTypes
 {
-    public class SubstractionNode : Node
+    public class AdditionNode : Node
     {
-        public SubstractionNode(Guid id, Control panel)
-            : base(id, panel)
+        public AdditionNode(Guid id)
+            : base(id)
         {
-            this.Name = "Substraction";
+            this.Name = "Addition";
         }
 
-        public override void Draw(Point Location)
-        {
-            base.Draw(Location, HYDRA.Properties.Resources.Substraction);
-        }
 
-        public override float Process()
+
+        public override float Process(Dictionary<Guid, Node> allNodes)
         {
+            //We concatenate the different input values in here:
             float Result = 0;
 
             if (Input.Count == 2)
@@ -45,26 +42,18 @@ namespace HYDRA.Nodes.NodeTypes
                 for (int i = 0; i < Input.Count; i++)
                 {
                     //MessageBox.Show(Form1.AllNodes[Input[i].TailNodeGuid].Value.ToString());
-                    var _floatValue = Form1.AllNodes[Input[i].TailNodeGuid].Value;
-                    if (Result == 0)
-                        Result = _floatValue;
-                    else
-                        Result -= _floatValue;
+                    var _floatValue = allNodes[Input[i].TailNodeGuid].Value;
+                    Result += _floatValue;
                 }
-                Console.WriteLine("Log: " + this.Name + "|| Processed an addition with " + Input.Count + " input elements the result was " + Result);
+                Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
 
                 this.Value = Result;
-                this.ValueLabel.Text = Result + "";
+                return Result;
+                //this.ValueLabel.Text = Result + "";
             }
             return 1f;
         }
 
-        public override string Log()
-        {
-            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
-        }
-
-
+               
     }
 }
-

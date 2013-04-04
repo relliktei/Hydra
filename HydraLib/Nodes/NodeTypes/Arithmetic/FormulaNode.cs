@@ -18,28 +18,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
+
 
 
 ////////////////////////////////////////////////////////////////////////////
 //                    NOT IMPLEMENTED                                     //
 //                  AUTO GENERATED CLASS!                                 //
 ////////////////////////////////////////////////////////////////////////////
-namespace HYDRA.Nodes.NodeTypes
+namespace HydraLib.Nodes.NodeTypes
 {
-    public class AverageNode : Node
+    public class FormulaNode : Node
     {
-        public AverageNode(Guid id, Control panel)
-            : base(id, panel)
+        public FormulaNode(Guid id)
+            : base(id)
         {
-            this.Name = "Average";
+            this.Name = "Formula";
         }
 
-        public override void Draw(Point Location)
-        {
-            base.Draw(Location, HYDRA.Properties.Resources.Average);
-        }
+
 
         public override float Process()
         {
@@ -47,10 +43,7 @@ namespace HYDRA.Nodes.NodeTypes
             return 1f;
         }
 
-        public override string Log()
-        {
-            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
-        }
+      
 
 
     }

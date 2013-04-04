@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2013 Iker Ruiz Arnauda
+// Copyright (C) 2013 Iker Ruiz Arnauda
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,30 +18,33 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
 
-namespace HYDRA.Nodes.NodeTypes
+
+
+////////////////////////////////////////////////////////////////////////////
+//                    NOT IMPLEMENTED                                     //
+//                  AUTO GENERATED CLASS!                                 //
+////////////////////////////////////////////////////////////////////////////
+namespace HydraLib.Nodes.NodeTypes
 {
-    public class ConstantNode : Node
+    public class AverageNode : Node
     {
-        public ConstantNode(Guid id, Control panel, float Value)
-            : base(id, panel)
+        public AverageNode(Guid id)
+            : base(id)
         {
-            this.Value = Value;
-            this.Name = "Constant";
-        }
-
-        public override void Draw(Point Location)
-        {
-            base.Draw(Location, HYDRA.Properties.Resources.Constant);
-        }
-
-        public override string Log()
-        {
-            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
+            this.Name = "Average";
         }
 
        
+        public override float Process()
+        {
+            //Implement
+            return 1f;
+        }
+
+       
+
+
     }
 }
+

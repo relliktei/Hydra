@@ -12,6 +12,7 @@ namespace HYDRA
 {
     public class DrawableNode
     {
+        //The real node
         private Node _node;
 
       
@@ -31,6 +32,12 @@ namespace HYDRA
         //ToolTip handler
         protected ToolTip _toolTip = new ToolTip();
 
+
+        /// <summary>
+        /// Pass it a type like AdditionNode and the panel to draw in.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="panel"></param>
         public DrawableNode(Node node,Control panel)
         {
             _panel = panel;
@@ -122,6 +129,11 @@ namespace HYDRA
 
         public Guid GUID { get { return this._node.GUID; } }
 
+
+        /// <summary>
+        /// We pass Process() along to _node, and set the label to the result.
+        /// </summary>
+        /// <param name="AllNodes"></param>
         internal void Process(Dictionary<Guid, Node> AllNodes)
         {
             this.ValueLabel.Text = this._node.Process(AllNodes).ToString();

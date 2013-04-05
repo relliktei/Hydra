@@ -31,7 +31,11 @@ namespace HydraLib.Nodes.NodeTypes
         }
 
 
-
+        /// <summary>
+        /// We pass Allnodes in so the Node doesnt need any static refrence to all the nodes.
+        /// </summary>
+        /// <param name="allNodes"></param>
+        /// <returns></returns>
         public override float Process(Dictionary<Guid, Node> allNodes)
         {
             //We concatenate the different input values in here:
@@ -48,6 +52,7 @@ namespace HydraLib.Nodes.NodeTypes
                 Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
 
                 this.Value = Result;
+                // Return the result, so DrawableNode which called this Process(), can update its display label
                 return Result;
                 //this.ValueLabel.Text = Result + "";
             }

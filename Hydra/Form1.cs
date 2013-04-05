@@ -33,6 +33,9 @@ namespace HYDRA
         public Form1()
         {
             InitializeComponent();
+
+            //WiP - Add all Node types to a combo box using reflection, save needing a new button for each type right now, or adding them by hand.
+            // Not currently active.
             foreach (var x in FindSubClassesOf<Node>())
             {
                 toolsComboBox.Items.Add(x.Name);
@@ -45,9 +48,9 @@ namespace HYDRA
         private List<DrawableNode> _LogicNodes = new List<DrawableNode>();
 
         //Store all nodes using GUID as key and ONode as value.
-        //This really shouldnt be static, as we can only have one instance of the dll currently. - Lotus
+        
+        //Todo should be only one list, requires soem more refactoring.
         private Dictionary<Guid, Node> AllNodes = new Dictionary<Guid, Node>();
-
         private Dictionary<Guid, DrawableNode> AllDrawableNodes = new Dictionary<Guid, DrawableNode>();
 
         //Used as a stack for tool selection menu
@@ -188,10 +191,10 @@ namespace HYDRA
             //Addition Node
             if (AdditionToolButton.Checked)
             {
-                var _newAdditionNode = new DrawableNode(new AdditionNode(Guid.NewGuid()),graphPanel); //New Node.
+                var _newAdditionNode = new DrawableNode(new AdditionNode(Guid.NewGuid()),graphPanel); //Creates a new drawable node and passes it an additionnode + the graphpanel
                 _newAdditionNode.Draw(_nodePlacementPos); //Draw it on mouse location.
                 logTextBox.Text += _newAdditionNode.Log(); //Deploy log into the bottom textlog.
-                addNode(_newAdditionNode, true);
+                addNode(_newAdditionNode, true); // Adds the node to all our lists
                 return;
             }
 
@@ -308,7 +311,11 @@ namespace HYDRA
 
 
 
-
+        /// <summary>
+        /// Helper function to add a node to appropriate lists
+        /// </summary>
+        /// <param name="node">The Drawable node to add</param>
+        /// <param name="isLogic">True if this is a logic node</param>
         private void addNode(DrawableNode node, bool isLogic)
         {
             AllDrawableNodes.Add(node.GUID, node);
@@ -319,9 +326,13 @@ namespace HYDRA
         }
 
 
-        //Tool List
+      
 
-
+        /// <summary>
+        /// Helper function to get all super types of a class in the assembly, WiP as the Nodes are now outside the HYDRA assembly and inside HydraLib.
+        /// </summary>
+        /// <typeparam name="TBaseType"></typeparam>
+        /// <returns></returns>
         public IEnumerable<Type> FindSubClassesOf<TBaseType>()
         {
             var baseType = typeof(TBaseType);

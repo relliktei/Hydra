@@ -50,10 +50,6 @@ namespace HydraLib.Nodes
             this.GUID = id;
         }
 
- 
-
-     
-
         //Logging
         public virtual String Log()
         {

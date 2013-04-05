@@ -12,9 +12,19 @@ namespace HYDRA
 {
     public class DrawableNode
     {
+        //Event handlers to pass clicks etc to main form
+        public delegate void NodeClickedHandler(DrawableNode sender, MouseEventArgs e);
+        public event NodeClickedHandler onNodeClick;
         //The real node
         private Node _node;
 
+        //Helpers to access node data
+        public Node GetNode() { return _node; }
+
+        public string Name { get { return _node.Name; } set { _node.Name = value; } }
+        public float Value { get { return _node.Value; } set { _node.Value = value; } }
+        public List<Connector> Input { get { return _node.Input; } set { _node.Input = value; } }
+        public List<Connector> Output { get { return _node.Output; } set { _node.Output = value; } }
       
         //Node Dimensions
         protected Int32 Height = 39;
@@ -85,6 +95,11 @@ namespace HYDRA
             _valueLabel.Show();
         }
 
+        /// <summary>
+        /// Uses reflection to get the nodes image, we use the name as its the same as the image name luckily -Lotus
+        /// </summary>
+        /// <param name="p">name of the node ie Addition</param>
+        /// <returns>the image to use</returns>
         private Image getNodeImage(string p)
         {
             ResourceManager rm = Resources.ResourceManager;
@@ -102,32 +117,17 @@ namespace HYDRA
         //Updates the GUID with the Node in which the mouse its placed. Used to connect nodes.
         private void nodeMouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                //Modify Value (FOR TESTING PURPOSES)
-                Random r = new Random();
-                this._node.Value = r.Next(20, 100);
-                ValueLabel.Text = this._node.Value + "";
-                return;
-            }
+            //Fire the event form1 is subscribed to, send it the mouseevent, plus this drawable node.
+            if (onNodeClick != null)
+                onNodeClick(this, e);
+            return;
 
-            else if (Connector.TailMouseOverGuid != Guid.Empty)
-            {
-                Connector.HeadOverGuid = this._node.GUID;
-
-                this._node.Input.Add(new DrawAbleConnector(Connector.TailMouseOverGuid, Connector.HeadOverGuid)); //Add the connection to the destination node Input list.
-
-                //Debug
-                Console.WriteLine("Log: " + this._node.Name + "|| Input count: " + this._node.Input.Count + " || Output count: " + this._node.Output.Count);
-                return;
-            }
-            Connector.TailMouseOverGuid = this._node.GUID;
-            //MessageBox.Show("Stablished TAIL");
+           
         }
 
 
 
-        public Guid GUID { get { return this._node.GUID; } }
+        public Guid GUID { get { return this._node.GUID; } set { _node.GUID = value; } }
 
 
         /// <summary>
@@ -139,6 +139,6 @@ namespace HYDRA
             this.ValueLabel.Text = this._node.Process(AllNodes).ToString();
         }
 
-        public Node GetNode() { return _node; }
+        
     }
 }

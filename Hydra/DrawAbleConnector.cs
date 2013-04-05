@@ -9,10 +9,16 @@ namespace HYDRA
 {
     public class DrawAbleConnector : Connector
     {
+        
+        private System.Windows.Forms.Panel graphPanel;
+
         public DrawAbleConnector(Guid Tail,Guid Head) : base(Tail,Head)
         {
             
+            
         }
+
+        
 
         public void Draw(Graphics panelGraphics,Dictionary<Guid, DrawableNode> allNodes)
         {

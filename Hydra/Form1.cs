@@ -322,7 +322,34 @@ namespace HYDRA
             AllNodes.Add(node.GUID, node.GetNode());
             if(isLogic)
                 _LogicNodes.Add(node); //Add to a node List.
+
+            node.onNodeClick += node_onNodeClick; // Grab the onclick event, and send to node_onNodeClick
             
+        }
+
+        void node_onNodeClick(DrawableNode sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                //Modify Value (FOR TESTING PURPOSES)
+                Random r = new Random();
+                sender.Value = r.Next(20, 100);
+                sender.ValueLabel.Text = sender.Value.ToString();
+                return;
+            }
+
+            else if (Connector.TailMouseOverGuid != Guid.Empty)
+            {
+                Connector.HeadOverGuid = sender.GUID;
+                DrawAbleConnector con = new DrawAbleConnector(Connector.TailMouseOverGuid, Connector.HeadOverGuid);
+                sender.Input.Add(con); //Add the connection to the destination node Input list.
+                con.Draw(graphPanel.CreateGraphics(),AllDrawableNodes);//Draw the connector
+                //Debug
+                Console.WriteLine("Log: " + sender.Name + "|| Input count: " + sender.Input.Count + " || Output count: " + sender.Output.Count);
+                return;
+            }
+            Connector.TailMouseOverGuid = sender.GUID;
+            //MessageBox.Show("Stablished TAIL");
         }
 
 

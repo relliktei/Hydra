@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6E9168B9-1FDC-41A2-A81C-67B4A78CEB61}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HydraLib</RootNamespace>
+    <AssemblyName>HydraLib</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HydraLib.cs" />
+    <Compile Include="Nodes\Connector.cs" />
+    <Compile Include="Nodes\Node.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\AdditionNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\AverageNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\ConstantNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\DivisionNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\FormulaNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\HysteresisNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\MaximumNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\MaxValueNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\MinimumNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\MinValueNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\MultipleScaleNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\MultiplicationNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\NegationNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\PonderedAverageNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\PowerNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\ScaleNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\SlopeNode.cs" />
+    <None Include="Nodes\NodeTypes\Arithmetic\StandardDeviationNode.cs" />
+    <Compile Include="Nodes\NodeTypes\Arithmetic\SubstractionNode.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Nodes\NodeTypes\Advanced\" />
+    <Folder Include="Nodes\NodeTypes\Bits\" />
+    <Folder Include="Nodes\NodeTypes\Boolean\" />
+    <Folder Include="Nodes\NodeTypes\Comparison\" />
+    <Folder Include="Nodes\NodeTypes\Composites\" />
+    <Folder Include="Nodes\NodeTypes\Filter\" />
+    <Folder Include="Nodes\NodeTypes\Fuzzy\" />
+    <Folder Include="Nodes\NodeTypes\Offsets\" />
+    <Folder Include="Nodes\NodeTypes\Selectors\" />
+    <Folder Include="Nodes\NodeTypes\Tables\" />
+    <Folder Include="Nodes\NodeTypes\Time\" />
+    <Folder Include="Nodes\NodeTypes\Transfer\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

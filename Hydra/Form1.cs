@@ -30,19 +30,6 @@ namespace HYDRA
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-
-            //WiP - Add all Node types to a combo box using reflection, save needing a new button for each type right now, or adding them by hand.
-            // Not currently active.
-            foreach (var x in FindSubClassesOf<Node>())
-            {
-                toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(x, x.Name));
-            }
-            toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(null, "No Tool"));
-        }
- 
         //Used to store logic nodes.
         private List<DrawableNode> _LogicNodes = new List<DrawableNode>();
 
@@ -53,8 +40,27 @@ namespace HYDRA
 
         //Used as a stack for tool selection menu
         private List<ToolStripButton> lastSelectedTool = new List<ToolStripButton>();
-       
+
+        //Stores the TYPE of the node that its being drawed/selected
         private Type _selectedNodeType;
+
+        //Context menu for drawPanel, this is used to add nodes into the drawPanel.
+        private ContextMenu drawPanelCtxMenu;
+
+        public Form1()
+        {
+            InitializeComponent();
+            drawPanelCtxMenu = new ContextMenu();
+            fillDrawPanelCtxMenu();
+
+            //WiP - Add all Node types to a combo box using reflection, save needing a new button for each type right now, or adding them by hand.
+            // Not currently active.
+            foreach (var x in FindSubClassesOf<Node>())
+            {
+                toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(x, x.Name));
+            }
+            toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(null, "No Tool"));
+        }
 
         //Connector Button
         #region Connector_Button
@@ -98,23 +104,37 @@ namespace HYDRA
         private void drawPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //Make the center of the node appear on mouse position.
-            var _nodePlacementPos = new Point(e.Location.X - 25, e.Location.Y - 25);
+            var _placementPos = new Point(e.Location.X - 25, e.Location.Y - 25);
 
+            //Context Menu
+            if (e.Button == MouseButtons.Right)
+                drawPanelCtxMenu.Show(this,_placementPos,LeftRightAlignment.Right);
+        
             //Connector Tool
             if (ConnectorToolButton.Checked)
             {
                 return;
             }
+
+            //Node Drawing
             if (_selectedNodeType != null)
             {
                 var node = new DrawableNode(getNode(), drawPanel, listVarWatch);
-                node.Draw(_nodePlacementPos);
+                node.Draw(_placementPos);
                 ConsoleLogTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
                 addNode(node, true); // Adds the node to all our lists
                 return;
             }
         }
         #endregion
+
+        private void fillDrawPanelCtxMenu()
+        {
+            foreach (var x in FindSubClassesOf<Node>())
+            {
+                drawPanelCtxMenu.MenuItems.Add(x.Name);
+            }
+        }
 
         /// <summary>
         /// Helper function to add a node to appropriate lists

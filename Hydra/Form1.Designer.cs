@@ -45,6 +45,7 @@
             this.ExecuteToolButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolsComboBox = new System.Windows.Forms.ComboBox();
+            this.detailsPanel = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -66,12 +67,12 @@
             this.logTextBox.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.logTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logTextBox.ForeColor = System.Drawing.Color.White;
-            this.logTextBox.Location = new System.Drawing.Point(776, 42);
+            this.logTextBox.Location = new System.Drawing.Point(776, 230);
             this.logTextBox.Multiline = true;
             this.logTextBox.Name = "logTextBox";
             this.logTextBox.ReadOnly = true;
             this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.logTextBox.Size = new System.Drawing.Size(314, 499);
+            this.logTextBox.Size = new System.Drawing.Size(314, 311);
             this.logTextBox.TabIndex = 1;
             // 
             // statusStrip1
@@ -219,11 +220,19 @@
             this.toolsComboBox.TabIndex = 3;
             this.toolsComboBox.SelectedIndexChanged += new System.EventHandler(this.toolsComboBox_SelectedIndexChanged);
             // 
+            // detailsPanel
+            // 
+            this.detailsPanel.Location = new System.Drawing.Point(776, 43);
+            this.detailsPanel.Name = "detailsPanel";
+            this.detailsPanel.Size = new System.Drawing.Size(314, 181);
+            this.detailsPanel.TabIndex = 4;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1090, 566);
+            this.Controls.Add(this.detailsPanel);
             this.Controls.Add(this.toolsComboBox);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.logTextBox);
@@ -262,6 +271,7 @@
         private System.Windows.Forms.ToolStripButton MultiplicationToolButton;
         private System.Windows.Forms.ToolStripButton DivisionToolButton;
         private System.Windows.Forms.ComboBox toolsComboBox;
+        private System.Windows.Forms.Panel detailsPanel;
     }
 }
 

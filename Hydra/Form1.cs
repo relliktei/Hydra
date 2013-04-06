@@ -339,18 +339,16 @@ namespace HYDRA
             
         }
 
+        /// <summary>
+        /// Handles event for when a Node is clicked on in the graphPanel
+        /// </summary>
+        /// <param name="sender">The clicked on node</param>
+        /// <param name="e">MouseEventArgs</param>
         void node_onNodeClick(DrawableNode sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-            {
-                //Modify Value (FOR TESTING PURPOSES)
-                Random r = new Random();
-                sender.Value = r.Next(20, 100);
-                sender.ValueLabel.Text = sender.Value.ToString();
-                return;
-            }
-
-            else if (Connector.TailMouseOverGuid != Guid.Empty)
+           
+          
+            if (Connector.TailMouseOverGuid != Guid.Empty)
             {
                 Connector.HeadOverGuid = sender.GUID;
                 DrawAbleConnector con = new DrawAbleConnector(Connector.TailMouseOverGuid, Connector.HeadOverGuid);

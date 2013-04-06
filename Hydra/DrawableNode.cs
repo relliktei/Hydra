@@ -22,7 +22,7 @@ namespace HYDRA
         public Node GetNode() { return _node; }
 
         public string Name { get { return _node.Name; } set { _node.Name = value; } }
-        public float Value { get { return _node.Value; } set { _node.Value = value; } }
+        public float Value { get { return _node.Value; } set { _node.Value = value; ValueLabel.Text = value+""; } }
         public List<Connector> Input { get { return _node.Input; } set { _node.Input = value; } }
         public List<Connector> Output { get { return _node.Output; } set { _node.Output = value; } }
       
@@ -43,6 +43,7 @@ namespace HYDRA
         protected ToolTip _toolTip = new ToolTip();
 
 
+        PictureBox _nodePBox;
         /// <summary>
         /// Pass it a type like AdditionNode and the panel to draw in.
         /// </summary>
@@ -52,6 +53,11 @@ namespace HYDRA
         {
             _panel = panel;
             _node = node;
+            //Start to move more logic out of draw so it can be recalled to update the visible node without adding more events etc - Lotus
+            _nodePBox = new PictureBox();
+            _nodePBox.MouseClick += new MouseEventHandler(nodeMouseClick);
+            _nodePBox.MouseHover += nodeMouseHover;
+            _nodePBox.ContextMenu = buildContextMenu();
         }
 
         /// <summary>
@@ -67,15 +73,13 @@ namespace HYDRA
             if (Location != null && Location.X != 0 || Location.Y != 0)
                 this.Location = Location;
 
-            var nodePBox = new PictureBox();
-            nodePBox.Image = getNodeImage(_node.Name); ;
-            nodePBox.Width = this.Width;
-            nodePBox.Height = this.Height;
-            nodePBox.BackColor = Color.Gray;
-            nodePBox.Location = this.Location;
+
+            _nodePBox.Image = getNodeImage(_node.Name); ;
+            _nodePBox.Width = this.Width;
+            _nodePBox.Height = this.Height;
+            _nodePBox.BackColor = Color.Gray;
+            _nodePBox.Location = this.Location;
             //Node Events
-            nodePBox.MouseClick += new MouseEventHandler(nodeMouseClick);
-            nodePBox.MouseHover += nodeMouseHover;
 
             //Label that will display the result/value of the Node.
             var _valueLabel = new Label(); //Value Label
@@ -88,15 +92,30 @@ namespace HYDRA
             _valueLabel.ForeColor = System.Drawing.Color.Gold;
 
             //Add Node And Label
-            Panel.Controls.Add(nodePBox);
+            Panel.Controls.Add(_nodePBox);
             Panel.Controls.Add(_valueLabel);
             //Bring the label to the front so its properly displayed.
             Panel.Controls[((_valueLabel) as Label).TabIndex].BringToFront();
 
             ValueLabel = _valueLabel;
 
-            nodePBox.Show();
+            _nodePBox.Show();
             _valueLabel.Show();
+        }
+
+        private ContextMenu buildContextMenu()
+        {
+            ContextMenu m = new ContextMenu();
+            MenuItem changeval = new MenuItem("Set Value", new EventHandler(setValueClick));
+            m.MenuItems.Add(changeval);
+            return m;
+        }
+
+        private void setValueClick(object sender, EventArgs e)
+        {
+            InputBox b = new InputBox();
+            if (b.ShowDialog() == DialogResult.OK)
+                this.Value = b.GetInputValue();
         }
 
         /// <summary>
@@ -124,6 +143,10 @@ namespace HYDRA
             //Fire the event form1 is subscribed to, send it the mouseevent, plus this drawable node.
             if (onNodeClick != null)
                 onNodeClick(this, e);
+
+
+      
+
             return;
 
            

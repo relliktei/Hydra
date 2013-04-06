@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.graphPanel = new System.Windows.Forms.Panel();
-            this.ConsoleLogTextBox = new System.Windows.Forms.TextBox();
+            this.logTextBox = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -44,14 +44,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExecuteToolButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripToolSelectorComboBox = new System.Windows.Forms.ToolStripComboBox();
-            this.listVarWatch = new System.Windows.Forms.ListView();
-            this.Var = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.labelVarWatch = new System.Windows.Forms.Label();
-            this.labelLogConsole = new System.Windows.Forms.Label();
-            this.labelDrawPanel = new System.Windows.Forms.Label();
+            this.toolsComboBox = new System.Windows.Forms.ComboBox();
+            this.detailsPanel = new System.Windows.Forms.Panel();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -60,32 +54,32 @@
             // 
             this.graphPanel.BackColor = System.Drawing.Color.White;
             this.graphPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.graphPanel.Location = new System.Drawing.Point(11, 62);
+            this.graphPanel.Location = new System.Drawing.Point(11, 42);
             this.graphPanel.Name = "graphPanel";
-            this.graphPanel.Size = new System.Drawing.Size(708, 396);
+            this.graphPanel.Size = new System.Drawing.Size(758, 499);
             this.graphPanel.TabIndex = 0;
             this.graphPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphPanel_MouseClick);
             // 
-            // ConsoleLogTextBox
+            // logTextBox
             // 
-            this.ConsoleLogTextBox.BackColor = System.Drawing.Color.SteelBlue;
-            this.ConsoleLogTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ConsoleLogTextBox.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.ConsoleLogTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ConsoleLogTextBox.ForeColor = System.Drawing.Color.White;
-            this.ConsoleLogTextBox.Location = new System.Drawing.Point(12, 488);
-            this.ConsoleLogTextBox.Multiline = true;
-            this.ConsoleLogTextBox.Name = "ConsoleLogTextBox";
-            this.ConsoleLogTextBox.ReadOnly = true;
-            this.ConsoleLogTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.ConsoleLogTextBox.Size = new System.Drawing.Size(1066, 147);
-            this.ConsoleLogTextBox.TabIndex = 1;
+            this.logTextBox.BackColor = System.Drawing.Color.SteelBlue;
+            this.logTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logTextBox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.logTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logTextBox.ForeColor = System.Drawing.Color.White;
+            this.logTextBox.Location = new System.Drawing.Point(776, 230);
+            this.logTextBox.Multiline = true;
+            this.logTextBox.Name = "logTextBox";
+            this.logTextBox.ReadOnly = true;
+            this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.logTextBox.Size = new System.Drawing.Size(314, 311);
+            this.logTextBox.TabIndex = 1;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 652);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 544);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1090, 22);
             this.statusStrip1.TabIndex = 0;
@@ -112,8 +106,7 @@
             this.ConnectorToolButton,
             this.toolStripSeparator1,
             this.ExecuteToolButton,
-            this.toolStripSeparator3,
-            this.toolStripToolSelectorComboBox});
+            this.toolStripSeparator3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -218,87 +211,31 @@
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
             this.toolStripSeparator3.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
             // 
-            // toolStripToolSelectorComboBox
+            // toolsComboBox
             // 
-            this.toolStripToolSelectorComboBox.Name = "toolStripToolSelectorComboBox";
-            this.toolStripToolSelectorComboBox.Size = new System.Drawing.Size(121, 39);
-            this.toolStripToolSelectorComboBox.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
-            this.toolStripToolSelectorComboBox.SelectedIndexChanged += new System.EventHandler(this.toolsComboBox_SelectedIndexChanged);
+            this.toolsComboBox.FormattingEnabled = true;
+            this.toolsComboBox.Location = new System.Drawing.Point(280, 12);
+            this.toolsComboBox.Name = "toolsComboBox";
+            this.toolsComboBox.Size = new System.Drawing.Size(121, 21);
+            this.toolsComboBox.TabIndex = 3;
+            this.toolsComboBox.SelectedIndexChanged += new System.EventHandler(this.toolsComboBox_SelectedIndexChanged);
             // 
-            // listVarWatch
+            // detailsPanel
             // 
-            this.listVarWatch.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.listVarWatch.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Var,
-            this.Value,
-            this.Id});
-            this.listVarWatch.GridLines = true;
-            this.listVarWatch.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listVarWatch.Location = new System.Drawing.Point(725, 62);
-            this.listVarWatch.MultiSelect = false;
-            this.listVarWatch.Name = "listVarWatch";
-            this.listVarWatch.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.listVarWatch.Size = new System.Drawing.Size(365, 396);
-            this.listVarWatch.TabIndex = 2;
-            this.listVarWatch.UseCompatibleStateImageBehavior = false;
-            this.listVarWatch.View = System.Windows.Forms.View.Details;
-            // 
-            // Var
-            // 
-            this.Var.Text = "Var";
-            this.Var.Width = 86;
-            // 
-            // Value
-            // 
-            this.Value.Text = "Value";
-            this.Value.Width = 63;
-            // 
-            // Id
-            // 
-            this.Id.Text = "Id";
-            this.Id.Width = 212;
-            // 
-            // labelVarWatch
-            // 
-            this.labelVarWatch.AutoSize = true;
-            this.labelVarWatch.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVarWatch.Location = new System.Drawing.Point(888, 46);
-            this.labelVarWatch.Name = "labelVarWatch";
-            this.labelVarWatch.Size = new System.Drawing.Size(67, 13);
-            this.labelVarWatch.TabIndex = 3;
-            this.labelVarWatch.Text = "Var Watch";
-            // 
-            // labelLogConsole
-            // 
-            this.labelLogConsole.AutoSize = true;
-            this.labelLogConsole.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLogConsole.Location = new System.Drawing.Point(12, 472);
-            this.labelLogConsole.Name = "labelLogConsole";
-            this.labelLogConsole.Size = new System.Drawing.Size(77, 13);
-            this.labelLogConsole.TabIndex = 4;
-            this.labelLogConsole.Text = "Log Console";
-            // 
-            // labelDrawPanel
-            // 
-            this.labelDrawPanel.AutoSize = true;
-            this.labelDrawPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDrawPanel.Location = new System.Drawing.Point(12, 46);
-            this.labelDrawPanel.Name = "labelDrawPanel";
-            this.labelDrawPanel.Size = new System.Drawing.Size(72, 13);
-            this.labelDrawPanel.TabIndex = 5;
-            this.labelDrawPanel.Text = "Draw Panel";
+            this.detailsPanel.Location = new System.Drawing.Point(776, 43);
+            this.detailsPanel.Name = "detailsPanel";
+            this.detailsPanel.Size = new System.Drawing.Size(314, 181);
+            this.detailsPanel.TabIndex = 4;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1090, 674);
-            this.Controls.Add(this.listVarWatch);
-            this.Controls.Add(this.labelDrawPanel);
-            this.Controls.Add(this.labelLogConsole);
-            this.Controls.Add(this.labelVarWatch);
+            this.ClientSize = new System.Drawing.Size(1090, 566);
+            this.Controls.Add(this.detailsPanel);
+            this.Controls.Add(this.toolsComboBox);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.ConsoleLogTextBox);
+            this.Controls.Add(this.logTextBox);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.graphPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -323,7 +260,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton AdditionToolButton;
         private System.Windows.Forms.Panel graphPanel;
-        private System.Windows.Forms.TextBox ConsoleLogTextBox;
+        private System.Windows.Forms.TextBox logTextBox;
         private System.Windows.Forms.ToolStripButton ConstantToolButton;
         private System.Windows.Forms.ToolStripButton ExecuteToolButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -333,13 +270,8 @@
         private System.Windows.Forms.ToolStripButton SubstractionToolButton;
         private System.Windows.Forms.ToolStripButton MultiplicationToolButton;
         private System.Windows.Forms.ToolStripButton DivisionToolButton;
-        private System.Windows.Forms.Label labelVarWatch;
-        private System.Windows.Forms.Label labelLogConsole;
-        private System.Windows.Forms.Label labelDrawPanel;
-        private System.Windows.Forms.ListView listVarWatch;
-        private System.Windows.Forms.ColumnHeader Var;
-        private System.Windows.Forms.ColumnHeader Value;
-        private System.Windows.Forms.ColumnHeader Id;
-        private System.Windows.Forms.ToolStripComboBox toolStripToolSelectorComboBox;
+        private System.Windows.Forms.ComboBox toolsComboBox;
+        private System.Windows.Forms.Panel detailsPanel;
     }
 }
+

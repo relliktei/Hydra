@@ -38,19 +38,16 @@ namespace HYDRA
             // Not currently active.
             foreach (var x in FindSubClassesOf<Node>())
             {
-
-                toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(x, x.Name));
-                
+                toolsComboBox.Items.Add(new ComboBoxObject(x, x.Name));
             }
-            toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(null, "No Tool"));
+            toolsComboBox.Items.Add(new ComboBoxObject(null, "No Tool"));
         }
 
         //Used to store logic nodes.
         private List<DrawableNode> _LogicNodes = new List<DrawableNode>();
 
         //Store all nodes using GUID as key and ONode as value.
-        
-        //Todo should be only one list, requires soem more refactoring.
+        //Todo: should be only one list, requires some more refactoring.
         private Dictionary<Guid, Node> AllNodes = new Dictionary<Guid, Node>();
         private Dictionary<Guid, DrawableNode> AllDrawableNodes = new Dictionary<Guid, DrawableNode>();
 
@@ -76,11 +73,11 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-                    _selectedNodeType = typeof(AdditionNode);
+
                     AdditionToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
-            }        
+            }
         }
 
         //Addition button image change on mouse enter.
@@ -112,11 +109,11 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-                    _selectedNodeType = typeof(ConstantNode);
+
                     ConstantToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
-            }        
+            }
         }
 
         //Constant button image change on mouse enter.
@@ -147,11 +144,10 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-                    _selectedNodeType = null;
                     ConnectorToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
-            }           
+            }
         }
         #endregion
 
@@ -171,17 +167,17 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-                    _selectedNodeType = typeof(MultiplicationNode);
+
                     MultiplicationToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
-            }        
+            }
         }
         #endregion
 
         //Draws || Interact with the graph panel.
         #region Graph_Panel
-        
+        Random r = new Random();
         private void graphPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //Make the center of the node appear on mouse position.
@@ -189,14 +185,14 @@ namespace HYDRA
 
             //Connector Tool
             if (ConnectorToolButton.Checked)
-            {             
+            {
                 return;
             }
             if (_selectedNodeType != null)
             {
-                var node = new DrawableNode(getNode(), graphPanel,listVarWatch);
+                var node = new DrawableNode(getNode(), graphPanel);
                 node.Draw(_nodePlacementPos);
-                ConsoleLogTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
+                logTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
                 addNode(node, true); // Adds the node to all our lists
                 return;
             }
@@ -269,11 +265,11 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-                    _selectedNodeType = typeof(SubstractionNode);
+
                     SubstractionToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
-            }        
+            }
         }
 
         private void SubstractionToolButton_MouseEnter(object sender, EventArgs e)
@@ -294,8 +290,6 @@ namespace HYDRA
             foreach (DrawableNode a in _LogicNodes)
             {
                 a.Process(AllNodes);
-                try { listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = a.Value.ToString(); }
-                catch { }
             }
         }
         #endregion
@@ -316,15 +310,13 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-                    _selectedNodeType = typeof(DivisionNode);
+
                     DivisionToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
             }
         }
         #endregion
-
-
 
         /// <summary>
         /// Helper function to add a node to appropriate lists
@@ -335,30 +327,25 @@ namespace HYDRA
         {
             AllDrawableNodes.Add(node.GUID, node);
             AllNodes.Add(node.GUID, node.GetNode());
-            if(isLogic)
+            if (isLogic)
                 _LogicNodes.Add(node); //Add to a node List.
 
             node.onNodeClick += node_onNodeClick; // Grab the onclick event, and send to node_onNodeClick
-            
         }
 
         /// <summary>
-        /// Handles event for when a Node is clicked on in the graphPanel.
+        /// Handles event for when a Node is clicked on in the graphPanel
         /// </summary>
         /// <param name="sender">The clicked on node</param>
         /// <param name="e">MouseEventArgs</param>
         void node_onNodeClick(DrawableNode sender, MouseEventArgs e)
         {
-            //Return if not using Connector tool, and not left clicking.
-            if (!ConnectorToolButton.Checked || e.Button != System.Windows.Forms.MouseButtons.Left)
-                return;
-
             if (Connector.TailMouseOverGuid != Guid.Empty)
             {
                 Connector.HeadOverGuid = sender.GUID;
                 DrawAbleConnector con = new DrawAbleConnector(Connector.TailMouseOverGuid, Connector.HeadOverGuid);
                 sender.Input.Add(con); //Add the connection to the destination node Input list.
-                con.Draw(graphPanel.CreateGraphics(),AllDrawableNodes);//Draw the connector
+                con.Draw(graphPanel.CreateGraphics(), AllDrawableNodes);//Draw the connector
                 //Debug
                 Console.WriteLine("Log: " + sender.Name + "|| Input count: " + sender.Input.Count + " || Output count: " + sender.Output.Count);
                 return;
@@ -366,9 +353,6 @@ namespace HYDRA
             Connector.TailMouseOverGuid = sender.GUID;
             //MessageBox.Show("Stablished TAIL");
         }
-
-
-      
 
         /// <summary>
         /// Helper function to get all super types of a class in the assembly
@@ -383,8 +367,6 @@ namespace HYDRA
             return assembly.GetTypes().Where(t => t.IsSubclassOf(baseType));
         }
 
-        
-
         /// <summary>
         /// Sets the current tool type to the currently selected node type
         /// </summary>
@@ -392,7 +374,7 @@ namespace HYDRA
         /// <param name="e"></param>
         private void toolsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBoxObject a = (ComboBoxObject)toolStripToolSelectorComboBox.SelectedItem;
+            ComboBoxObject a = (ComboBoxObject)toolsComboBox.SelectedItem;
             _selectedNodeType = a._nodeType;
         }
 
@@ -402,7 +384,7 @@ namespace HYDRA
         /// <returns></returns>
         public Node getNode()
         {
-            return (Node)Activator.CreateInstance(_selectedNodeType,new object[] {Guid.NewGuid()});
+            return (Node)Activator.CreateInstance(_selectedNodeType, new object[] { Guid.NewGuid() });
         }
     }
 }

@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="HydraLib.cs" />
     <Compile Include="Nodes\Connector.cs" />
-    <Compile Include="Nodes\INode.cs" />
     <Compile Include="Nodes\Node.cs" />
     <Compile Include="Nodes\NodeTypes\Arithmetic\AdditionNode.cs" />
     <None Include="Nodes\NodeTypes\Arithmetic\AverageNode.cs" />

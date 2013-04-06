@@ -30,7 +30,6 @@ namespace HydraLib.Nodes.NodeTypes
             this.Name = "Addition";
         }
 
-
         /// <summary>
         /// We pass Allnodes in so the Node doesnt need any static refrence to all the nodes.
         /// </summary>
@@ -41,7 +40,7 @@ namespace HydraLib.Nodes.NodeTypes
             //We concatenate the different input values in here:
             float Result = 0;
 
-            if (Input.Count == 2)
+            if (Input.Count >= 2)
             {
                 for (int i = 0; i < Input.Count; i++)
                 {

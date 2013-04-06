@@ -217,6 +217,7 @@
             this.toolsComboBox.Name = "toolsComboBox";
             this.toolsComboBox.Size = new System.Drawing.Size(121, 21);
             this.toolsComboBox.TabIndex = 3;
+            this.toolsComboBox.SelectedIndexChanged += new System.EventHandler(this.toolsComboBox_SelectedIndexChanged);
             // 
             // Form1
             // 

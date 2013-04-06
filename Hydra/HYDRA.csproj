@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComboBoxObject.cs" />
     <Compile Include="DrawAbleConnector.cs" />
     <Compile Include="DrawableNode.cs" />
     <Compile Include="Form1.cs">

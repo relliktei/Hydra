@@ -54,6 +54,10 @@ namespace HYDRA
             _node = node;
         }
 
+        /// <summary>
+        /// Todo probably should call _node.Log() here as well
+        /// </summary>
+        /// <returns></returns>
         public string Log()
         {
             return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this._node.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this._node.GUID + Environment.NewLine;

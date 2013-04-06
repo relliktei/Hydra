@@ -24,6 +24,12 @@ namespace HydraLib.Nodes.NodeTypes
 {
     public class ConstantNode : Node
     {
+        public ConstantNode(Guid id)
+        :base(id)
+        {
+            this.Value = 0;
+            this.Name = "Constant";
+        }
         public ConstantNode(Guid id, float Value)
             : base(id)
         {

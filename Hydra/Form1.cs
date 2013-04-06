@@ -38,10 +38,11 @@ namespace HYDRA
             // Not currently active.
             foreach (var x in FindSubClassesOf<Node>())
             {
-                toolsComboBox.Items.Add(x.Name);
+                
+                toolsComboBox.Items.Add(new ComboBoxObject(x,x.Name));
                 
             }
-            toolsComboBox.Items.Add("No Tool");
+            toolsComboBox.Items.Add(new ComboBoxObject(null, "No Tool"));
         }
 
         //Used to store logic nodes.
@@ -55,6 +56,9 @@ namespace HYDRA
 
         //Used as a stack for tool selection menu
         private List<ToolStripButton> lastSelectedTool = new List<ToolStripButton>();
+
+        //Unsure what the plan was with above stack
+        private Type _selectedNodeType;
 
         //Addition Button
         #region Addition_Button
@@ -187,8 +191,16 @@ namespace HYDRA
             {             
                 return;
             }
+            if (_selectedNodeType != null)
+            {
+                var node = new DrawableNode(getNode(), graphPanel);
+                node.Draw(_nodePlacementPos);
+                logTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
+                addNode(node, true); // Adds the node to all our lists
+                return;
+            }
 
-            //Addition Node
+            /*//Addition Node
             if (AdditionToolButton.Checked)
             {
                 var _newAdditionNode = new DrawableNode(new AdditionNode(Guid.NewGuid()),graphPanel); //Creates a new drawable node and passes it an additionnode + the graphpanel
@@ -236,7 +248,7 @@ namespace HYDRA
                 logTextBox.Text += _newConstantNode.Log();
                 addNode(_newConstantNode,false);
                 return;
-            }
+            }*/
         }
         #endregion
 
@@ -356,7 +368,7 @@ namespace HYDRA
       
 
         /// <summary>
-        /// Helper function to get all super types of a class in the assembly, WiP as the Nodes are now outside the HYDRA assembly and inside HydraLib.
+        /// Helper function to get all super types of a class in the assembly
         /// </summary>
         /// <typeparam name="TBaseType"></typeparam>
         /// <returns></returns>
@@ -366,6 +378,29 @@ namespace HYDRA
             var assembly = baseType.Assembly;
 
             return assembly.GetTypes().Where(t => t.IsSubclassOf(baseType));
+        }
+
+        
+
+        /// <summary>
+        /// Sets the current tool type to the currently selected node type
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBoxObject a = (ComboBoxObject)toolsComboBox.SelectedItem;
+            _selectedNodeType = a._nodeType;
+        }
+
+        /// <summary>
+        /// Creates a new node instance of the given type, calling the Nodes default constructor with a new GUID
+        /// </summary>
+        /// <returns></returns>
+        public Node getNode()
+        {
+
+            return (Node)Activator.CreateInstance(_selectedNodeType,new object[] {Guid.NewGuid()});
         }
     }
 }

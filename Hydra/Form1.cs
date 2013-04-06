@@ -42,7 +42,7 @@ namespace HYDRA
             }
             toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(null, "No Tool"));
         }
-
+ 
         //Used to store logic nodes.
         private List<DrawableNode> _LogicNodes = new List<DrawableNode>();
 

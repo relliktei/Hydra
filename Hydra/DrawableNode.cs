@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace HYDRA
 {
-    public class DrawableNode
+    public class DrawableNode : INode
     {
         //Event handlers to pass clicks etc to main form
         public delegate void NodeClickedHandler(DrawableNode sender, MouseEventArgs e);
@@ -23,9 +23,14 @@ namespace HYDRA
 
         public string Name { get { return _node.Name; } set { _node.Name = value; } }
         public float Value { get { return _node.Value; } set { _node.Value = value; ValueLabel.Text = value+""; } }
+        public Guid GUID { get { return this._node.GUID; } set { _node.GUID = value; } }
         public List<Connector> Input { get { return _node.Input; } set { _node.Input = value; } }
         public List<Connector> Output { get { return _node.Output; } set { _node.Output = value; } }
-      
+
+        //Node VarWatch ListView
+        private ListView _varwatch;
+        public ListView VarWatch { get { return _varwatch; } set { _varwatch = value; } }
+
         //Node Dimensions
         protected Int32 Height = 39;
         protected Int32 Width = 33;
@@ -42,28 +47,25 @@ namespace HYDRA
         //ToolTip handler
         protected ToolTip _toolTip = new ToolTip();
 
-
-        PictureBox _nodePBox;
+        //The picturebox used to draw the nodes image
+        private PictureBox _nodePBox;
         /// <summary>
         /// Pass it a type like AdditionNode and the panel to draw in.
         /// </summary>
         /// <param name="node"></param>
         /// <param name="panel"></param>
-        public DrawableNode(Node node,Control panel)
+        public DrawableNode(Node node,Control panel, ListView varwatch)
         {
             _panel = panel;
             _node = node;
+            this.VarWatch = varwatch;
             //Start to move more logic out of draw so it can be recalled to update the visible node without adding more events etc - Lotus
             _nodePBox = new PictureBox();
             _nodePBox.MouseClick += new MouseEventHandler(nodeMouseClick);
             _nodePBox.MouseHover += nodeMouseHover;
             _nodePBox.ContextMenu = buildContextMenu();
         }
-
-        /// <summary>
-        /// Todo probably should call _node.Log() here as well
-        /// </summary>
-        /// <returns></returns>
+ 
         public string Log()
         {
             return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this._node.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this._node.GUID + Environment.NewLine;
@@ -107,10 +109,17 @@ namespace HYDRA
         {
             ContextMenu m = new ContextMenu();
             MenuItem changeval = new MenuItem("Set Value", new EventHandler(setValueClick));
+            MenuItem watch =new MenuItem("Add Watch",new EventHandler(onWatchClick));
+            m.MenuItems.Add(watch);
             m.MenuItems.Add(changeval);
             return m;
         }
 
+        private void onWatchClick(object sender, EventArgs e)
+        {
+            string[] value_guid = { this.Value.ToString(), this.GUID.ToString() };
+            this.VarWatch.Items.Add(this.Name).SubItems.AddRange(value_guid);
+        }
         private void setValueClick(object sender, EventArgs e)
         {
             InputBox b = new InputBox();
@@ -143,27 +152,18 @@ namespace HYDRA
             //Fire the event form1 is subscribed to, send it the mouseevent, plus this drawable node.
             if (onNodeClick != null)
                 onNodeClick(this, e);
-
-
-      
-
-            return;
-
-           
+            return;   
         }
-
-
-
-        public Guid GUID { get { return this._node.GUID; } set { _node.GUID = value; } }
-
 
         /// <summary>
         /// We pass Process() along to _node, and set the label to the result.
         /// </summary>
         /// <param name="AllNodes"></param>
-        internal void Process(Dictionary<Guid, Node> AllNodes)
+        public float Process(Dictionary<Guid, Node> AllNodes)
         {
-            this.ValueLabel.Text = this._node.Process(AllNodes).ToString();
+            float result = this._node.Process(AllNodes);
+            this.ValueLabel.Text = result.ToString();
+            return result;
         }
 
         

@@ -21,7 +21,7 @@ using System.Text;
 
 namespace HydraLib.Nodes
 {
-    public class Node
+    public class Node : INode
     {
         //GUID - Global Unique Identifer used to map our nodes.
         private Guid _guid;

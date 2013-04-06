@@ -30,7 +30,6 @@ namespace HydraLib.Nodes.NodeTypes
             this.Name = "Addition";
         }
 
-
         /// <summary>
         /// We pass Allnodes in so the Node doesnt need any static refrence to all the nodes.
         /// </summary>

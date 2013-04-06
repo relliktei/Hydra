@@ -31,17 +31,12 @@ namespace HydraLib.Nodes.NodeTypes
             this.Value = 0;
             this.Name = "Constant";
         }
+
         public ConstantNode(Guid id, float Value)
             : base(id)
         {
             this.Value = Value;
             this.Name = "Constant";
-        }
-
-      
-
-     
-
-       
+        }     
     }
 }

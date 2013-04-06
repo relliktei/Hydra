@@ -31,18 +31,13 @@ namespace HydraLib.Nodes
         public List<Connector> Input = new List<Connector>();
         public List<Connector> Output = new List<Connector>();
 
-
-
         //Name of the node
         private string _name;
         public string Name { get { return _name; } set { _name = value; } }
 
-
         //Value
         private float _value;
         public float Value { get { return _value; } set { _value = value; } }
-
-
 
         //Constructor
         public Node(Guid id)
@@ -61,9 +56,7 @@ namespace HydraLib.Nodes
         public virtual float Process(Dictionary<Guid, Node> allNodes)
         {
             //Override logic on child nodes.
-            return 0f;
-        }
-
-       
+            return Value;
+        }      
     }
 }

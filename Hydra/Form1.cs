@@ -38,9 +38,7 @@ namespace HYDRA
             // Not currently active.
             foreach (var x in FindSubClassesOf<Node>())
             {
-
                 toolsComboBox.Items.Add(new ComboBoxObject(x, x.Name));
-
             }
             toolsComboBox.Items.Add(new ComboBoxObject(null, "No Tool"));
         }
@@ -49,8 +47,7 @@ namespace HYDRA
         private List<DrawableNode> _LogicNodes = new List<DrawableNode>();
 
         //Store all nodes using GUID as key and ONode as value.
-
-        //Todo should be only one list, requires soem more refactoring.
+        //Todo: should be only one list, requires some more refactoring.
         private Dictionary<Guid, Node> AllNodes = new Dictionary<Guid, Node>();
         private Dictionary<Guid, DrawableNode> AllDrawableNodes = new Dictionary<Guid, DrawableNode>();
 

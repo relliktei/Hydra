@@ -12,20 +12,24 @@ namespace HYDRA
 {
     public class DrawableNode
     {
-        //Event handlers to pass clicks etc to main form
+        //Event handlers to pass click events to main form
         public delegate void NodeClickedHandler(DrawableNode sender, MouseEventArgs e);
         public event NodeClickedHandler onNodeClick;
+
         //The real node
         private Node _node;
+
+        //Global Unique Identifer from the real node.
+        public Guid GUID { get { return this._node.GUID; } set { _node.GUID = value; } }
 
         //Helpers to access node data
         public Node GetNode() { return _node; }
 
         public string Name { get { return _node.Name; } set { _node.Name = value; } }
-        public float Value { get { return _node.Value; } set { _node.Value = value; ValueLabel.Text = value+""; } }
+        public float Value { get { return _node.Value; } set { _node.Value = value; ValueLabel.Text = value + ""; } }
         public List<Connector> Input { get { return _node.Input; } set { _node.Input = value; } }
         public List<Connector> Output { get { return _node.Output; } set { _node.Output = value; } }
-      
+
         //Node Dimensions
         protected Int32 Height = 39;
         protected Int32 Width = 33;
@@ -42,14 +46,15 @@ namespace HYDRA
         //ToolTip handler
         protected ToolTip _toolTip = new ToolTip();
 
-
+        //Pbox that holds the node "inside"
         PictureBox _nodePBox;
+
         /// <summary>
         /// Pass it a type like AdditionNode and the panel to draw in.
         /// </summary>
         /// <param name="node"></param>
         /// <param name="panel"></param>
-        public DrawableNode(Node node,Control panel)
+        public DrawableNode(Node node, Control panel)
         {
             _panel = panel;
             _node = node;
@@ -61,18 +66,19 @@ namespace HYDRA
         }
 
         /// <summary>
-        /// Todo probably should call _node.Log() here as well
+        /// Todo: probably should call _node.Log() here as well
+        /// Todo: Implement proper Logger class in order to attach a logger to each node. Keeping record of node operations and error handling.
         /// </summary>
         /// <returns></returns>
         public string Log()
         {
             return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this._node.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this._node.GUID + Environment.NewLine;
-        }   
+        }
+
         public void Draw(Point Location)
         {
             if (Location != null && Location.X != 0 || Location.Y != 0)
                 this.Location = Location;
-
 
             _nodePBox.Image = getNodeImage(_node.Name); ;
             _nodePBox.Width = this.Width;
@@ -103,6 +109,7 @@ namespace HYDRA
             _valueLabel.Show();
         }
 
+        //Context menu for node
         private ContextMenu buildContextMenu()
         {
             ContextMenu m = new ContextMenu();
@@ -111,6 +118,7 @@ namespace HYDRA
             return m;
         }
 
+        //Set Value
         private void setValueClick(object sender, EventArgs e)
         {
             InputBox b = new InputBox();
@@ -130,32 +138,22 @@ namespace HYDRA
             return myImage;
         }
 
-        //Provides on Hover tooltip information about the node.
+        //Provides on Hover tooltip information about the node. KINDA ANNOYING Lotus ;) - Iker
         private void nodeMouseHover(object sender, EventArgs e)
         {
             //_toolTip.InitialDelay = 0;
             //_toolTip.Show(this.Name + "\nInput count: " + Input.Count + " \nOutput count: " + Output.Count + "\nValue: " + Value, ValueLabel, 1700);
         }
 
-        //Updates the GUID with the Node in which the mouse its placed. Used to connect nodes.
+        //Todo: Implement proper variable values watcher in a ListView.
         private void nodeMouseClick(object sender, MouseEventArgs e)
         {
             //Fire the event form1 is subscribed to, send it the mouseevent, plus this drawable node.
             if (onNodeClick != null)
                 onNodeClick(this, e);
 
-
-      
-
             return;
-
-           
         }
-
-
-
-        public Guid GUID { get { return this._node.GUID; } set { _node.GUID = value; } }
-
 
         /// <summary>
         /// We pass Process() along to _node, and set the label to the result.
@@ -165,7 +163,5 @@ namespace HYDRA
         {
             this.ValueLabel.Text = this._node.Process(AllNodes).ToString();
         }
-
-        
     }
 }

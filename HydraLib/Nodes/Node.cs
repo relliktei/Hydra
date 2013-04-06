@@ -57,6 +57,6 @@ namespace HydraLib.Nodes
         {
             //Override logic on child nodes.
             return Value;
-        }      
+        }
     }
 }

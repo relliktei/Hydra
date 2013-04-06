@@ -9,18 +9,14 @@ namespace HYDRA
 {
     public class DrawAbleConnector : Connector
     {
-        
+
         private System.Windows.Forms.Panel graphPanel;
 
-        public DrawAbleConnector(Guid Tail,Guid Head) : base(Tail,Head)
-        {
-            
-            
-        }
+        public DrawAbleConnector(Guid Tail, Guid Head)
+            : base(Tail, Head)
+        { }
 
-        
-
-        public void Draw(Graphics panelGraphics,Dictionary<Guid, DrawableNode> allNodes)
+        public void Draw(Graphics panelGraphics, Dictionary<Guid, DrawableNode> allNodes)
         {
             System.Drawing.Pen myPen;
             myPen = new System.Drawing.Pen(System.Drawing.Color.DodgerBlue, 3f);

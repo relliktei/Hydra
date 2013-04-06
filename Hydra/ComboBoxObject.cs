@@ -28,12 +28,10 @@ namespace HYDRA
         /// <param name="label">Label text</param>
         public ComboBoxObject(Type node, string label)
         {
-            
             this._nodeType = node;
             this._text = label;
         }
 
-        
         public override string ToString()
         {
             return _text;

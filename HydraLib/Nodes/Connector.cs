@@ -48,8 +48,6 @@ namespace HydraLib.Nodes
             ClearConnectors();
         }
 
-      
-
         private void ClearConnectors()
         {
             TailMouseOverGuid = Guid.Empty;

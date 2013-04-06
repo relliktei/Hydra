@@ -73,26 +73,6 @@ namespace HYDRA.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Addition_Hoover_OLD {
-            get {
-                object obj = ResourceManager.GetObject("Addition_Hoover_OLD", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Addition_OLD {
-            get {
-                object obj = ResourceManager.GetObject("Addition_OLD", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Average {
             get {
                 object obj = ResourceManager.GetObject("Average", resourceCulture);
@@ -116,26 +96,6 @@ namespace HYDRA.Properties {
         internal static System.Drawing.Bitmap Constant {
             get {
                 object obj = ResourceManager.GetObject("Constant", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Constant_Hoover_OLD {
-            get {
-                object obj = ResourceManager.GetObject("Constant_Hoover_OLD", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Constant_OLD {
-            get {
-                object obj = ResourceManager.GetObject("Constant_OLD", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -316,26 +276,6 @@ namespace HYDRA.Properties {
         internal static System.Drawing.Bitmap Substraction {
             get {
                 object obj = ResourceManager.GetObject("Substraction", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Substraction_Hoover_OLD {
-            get {
-                object obj = ResourceManager.GetObject("Substraction_Hoover_OLD", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Substraction_OLD {
-            get {
-                object obj = ResourceManager.GetObject("Substraction_OLD", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

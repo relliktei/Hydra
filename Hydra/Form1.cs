@@ -95,7 +95,7 @@ namespace HYDRA
         //Draws || Interact with the graph panel.
         #region Graph_Panel
         Random r = new Random();
-        private void graphPanel_MouseClick(object sender, MouseEventArgs e)
+        private void drawPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //Make the center of the node appear on mouse position.
             var _nodePlacementPos = new Point(e.Location.X - 25, e.Location.Y - 25);
@@ -107,7 +107,7 @@ namespace HYDRA
             }
             if (_selectedNodeType != null)
             {
-                var node = new DrawableNode(getNode(), graphPanel, listVarWatch);
+                var node = new DrawableNode(getNode(), drawPanel, listVarWatch);
                 node.Draw(_nodePlacementPos);
                 ConsoleLogTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
                 addNode(node, true); // Adds the node to all our lists
@@ -146,7 +146,7 @@ namespace HYDRA
                 Connector.HeadOverGuid = sender.GUID;
                 DrawAbleConnector con = new DrawAbleConnector(Connector.TailMouseOverGuid, Connector.HeadOverGuid);
                 sender.Input.Add(con); //Add the connection to the destination node Input list.
-                con.Draw(graphPanel.CreateGraphics(), AllDrawableNodes);//Draw the connector
+                con.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);//Draw the connector
                 //Debug
                 Console.WriteLine("Log: " + sender.Name + "|| Input count: " + sender.Input.Count + " || Output count: " + sender.Output.Count);
                 return;

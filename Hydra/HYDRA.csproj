@@ -93,22 +93,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Constant.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\execute.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Connector.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Addition.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Addition_Hoover.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Constant_Hoover.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AMI.ico" />
@@ -135,8 +123,6 @@
     <Content Include="Resources\Arithmetic\StandardDeviation.jpg" />
     <Content Include="Resources\Arithmetic\Substraction.jpg" />
     <None Include="Resources\Hydra.ico" />
-    <None Include="Resources\Substraction_Hoover.jpg" />
-    <None Include="Resources\Substraction.jpg" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

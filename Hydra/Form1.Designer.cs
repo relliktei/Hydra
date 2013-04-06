@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.graphPanel = new System.Windows.Forms.Panel();
+            this.drawPanel = new System.Windows.Forms.Panel();
             this.ConsoleLogTextBox = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -51,15 +51,15 @@
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // graphPanel
+            // drawPanel
             // 
-            this.graphPanel.BackColor = System.Drawing.Color.White;
-            this.graphPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.graphPanel.Location = new System.Drawing.Point(11, 62);
-            this.graphPanel.Name = "graphPanel";
-            this.graphPanel.Size = new System.Drawing.Size(708, 396);
-            this.graphPanel.TabIndex = 0;
-            this.graphPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.graphPanel_MouseClick);
+            this.drawPanel.BackColor = System.Drawing.Color.White;
+            this.drawPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.drawPanel.Location = new System.Drawing.Point(11, 62);
+            this.drawPanel.Name = "drawPanel";
+            this.drawPanel.Size = new System.Drawing.Size(708, 396);
+            this.drawPanel.TabIndex = 0;
+            this.drawPanel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.drawPanel_MouseClick);
             // 
             // ConsoleLogTextBox
             // 
@@ -234,7 +234,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.ConsoleLogTextBox);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.graphPanel);
+            this.Controls.Add(this.drawPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -255,7 +255,7 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.Panel graphPanel;
+        private System.Windows.Forms.Panel drawPanel;
         private System.Windows.Forms.TextBox ConsoleLogTextBox;
         private System.Windows.Forms.ToolStripButton ExecuteToolButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;

@@ -22,6 +22,10 @@ namespace HYDRA
         //Global Unique Identifer from the real node.
         public Guid GUID { get { return this._node.GUID; } set { _node.GUID = value; } }
 
+        //Node VarWatch ListView
+        private ListView _varwatch;
+        public ListView VarWatch { get { return _varwatch; } set { _varwatch = value; } }
+
         //Helpers to access node data
         public Node GetNode() { return _node; }
 
@@ -54,10 +58,11 @@ namespace HYDRA
         /// </summary>
         /// <param name="node"></param>
         /// <param name="panel"></param>
-        public DrawableNode(Node node, Control panel)
+        public DrawableNode(Node node, Control panel, ListView varwatch)
         {
             _panel = panel;
             _node = node;
+            _varwatch = varwatch;
             //Start to move more logic out of draw so it can be recalled to update the visible node without adding more events etc - Lotus
             _nodePBox = new PictureBox();
             _nodePBox.MouseClick += new MouseEventHandler(nodeMouseClick);
@@ -112,10 +117,18 @@ namespace HYDRA
         //Context menu for node
         private ContextMenu buildContextMenu()
         {
-            ContextMenu m = new ContextMenu();
-            MenuItem changeval = new MenuItem("Set Value", new EventHandler(setValueClick));
-            m.MenuItems.Add(changeval);
-            return m;
+           ContextMenu m = new ContextMenu();
+             MenuItem changeval = new MenuItem("Set Value", new EventHandler(setValueClick));
+            MenuItem watch =new MenuItem("Add Watch",new EventHandler(onWatchClick));
+            m.MenuItems.Add(watch);
+             m.MenuItems.Add(changeval);
+             return m;
+        }
+
+        private void onWatchClick(object sender, EventArgs e)
+        {
+            string[] value_guid = { this.Value.ToString(), this.GUID.ToString() };
+            this.VarWatch.Items.Add(this.Name).SubItems.AddRange(value_guid);
         }
 
         //Set Value

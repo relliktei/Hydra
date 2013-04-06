@@ -38,9 +38,9 @@ namespace HYDRA
             // Not currently active.
             foreach (var x in FindSubClassesOf<Node>())
             {
-                toolsComboBox.Items.Add(new ComboBoxObject(x, x.Name));
+                toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(x, x.Name));
             }
-            toolsComboBox.Items.Add(new ComboBoxObject(null, "No Tool"));
+            toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(null, "No Tool"));
         }
 
         //Used to store logic nodes.
@@ -54,7 +54,7 @@ namespace HYDRA
         //Used as a stack for tool selection menu
         private List<ToolStripButton> lastSelectedTool = new List<ToolStripButton>();
 
-        //Unsure what the plan was with above stack
+        
         private Type _selectedNodeType;
 
         //Addition Button
@@ -73,7 +73,7 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-
+                    _selectedNodeType = typeof(AdditionNode);
                     AdditionToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
@@ -109,7 +109,7 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-
+                    _selectedNodeType = typeof(ConstantNode);
                     ConstantToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
@@ -144,6 +144,7 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
+                    _selectedNodeType = null;
                     ConnectorToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
@@ -167,7 +168,7 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-
+                    _selectedNodeType = typeof(MultiplicationNode);
                     MultiplicationToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
@@ -190,9 +191,9 @@ namespace HYDRA
             }
             if (_selectedNodeType != null)
             {
-                var node = new DrawableNode(getNode(), graphPanel);
+                var node = new DrawableNode(getNode(), graphPanel,listVarWatch);
                 node.Draw(_nodePlacementPos);
-                logTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
+                ConsoleLogTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
                 addNode(node, true); // Adds the node to all our lists
                 return;
             }
@@ -265,7 +266,7 @@ namespace HYDRA
                         lastSelectedTool[0].Checked = false;
                         lastSelectedTool.RemoveAt(0);
                     }
-
+                    _selectedNodeType = typeof(SubstractionNode);
                     SubstractionToolButton.Checked = true;
                     lastSelectedTool.Add((sender) as ToolStripButton);
                     break;
@@ -290,6 +291,8 @@ namespace HYDRA
             foreach (DrawableNode a in _LogicNodes)
             {
                 a.Process(AllNodes);
+                try { listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = a.Value.ToString(); }
+                catch { }
             }
         }
         #endregion
@@ -340,6 +343,9 @@ namespace HYDRA
         /// <param name="e">MouseEventArgs</param>
         void node_onNodeClick(DrawableNode sender, MouseEventArgs e)
         {
+            //Return if not using Connector tool, and not left clicking.
+            if (!ConnectorToolButton.Checked || e.Button != System.Windows.Forms.MouseButtons.Left)
+                return;
             if (Connector.TailMouseOverGuid != Guid.Empty)
             {
                 Connector.HeadOverGuid = sender.GUID;
@@ -374,7 +380,7 @@ namespace HYDRA
         /// <param name="e"></param>
         private void toolsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ComboBoxObject a = (ComboBoxObject)toolsComboBox.SelectedItem;
+            ComboBoxObject a = (ComboBoxObject)toolStripToolSelectorComboBox.SelectedItem;
             _selectedNodeType = a._nodeType;
         }
 

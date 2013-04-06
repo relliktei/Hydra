@@ -37,6 +37,7 @@ namespace HYDRA
         //Node Dimensions
         protected Int32 Height = 39;
         protected Int32 Width = 33;
+
         //Value visual label
         public Label ValueLabel;
 
@@ -54,10 +55,11 @@ namespace HYDRA
         PictureBox _nodePBox;
 
         /// <summary>
-        /// Pass it a type like AdditionNode and the panel to draw in.
+        /// Pass it a type like AdditionNode, the panel to draw in and a ListView that will display nodes values.
         /// </summary>
         /// <param name="node"></param>
-        /// <param name="panel"></param>
+        /// <param name="Panel"></param>
+        /// <param name="ListView"></param>
         public DrawableNode(Node node, Control panel, ListView varwatch)
         {
             _panel = panel;
@@ -117,14 +119,15 @@ namespace HYDRA
         //Context menu for node
         private ContextMenu buildContextMenu()
         {
-           ContextMenu m = new ContextMenu();
-             MenuItem changeval = new MenuItem("Set Value", new EventHandler(setValueClick));
-            MenuItem watch =new MenuItem("Add Watch",new EventHandler(onWatchClick));
+            ContextMenu m = new ContextMenu();
+            MenuItem changeval = new MenuItem("Set Value", new EventHandler(setValueClick));
+            MenuItem watch = new MenuItem("Add Watch", new EventHandler(onWatchClick));
             m.MenuItems.Add(watch);
-             m.MenuItems.Add(changeval);
-             return m;
+            m.MenuItems.Add(changeval);
+            return m;
         }
 
+        //Add node to the watchVariableList
         private void onWatchClick(object sender, EventArgs e)
         {
             string[] value_guid = { this.Value.ToString(), this.GUID.ToString() };

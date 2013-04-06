@@ -34,11 +34,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.ConstantToolButton = new System.Windows.Forms.ToolStripButton();
-            this.AdditionToolButton = new System.Windows.Forms.ToolStripButton();
-            this.SubstractionToolButton = new System.Windows.Forms.ToolStripButton();
-            this.MultiplicationToolButton = new System.Windows.Forms.ToolStripButton();
-            this.DivisionToolButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.ConnectorToolButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -103,11 +98,6 @@
             this.toolStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ConstantToolButton,
-            this.AdditionToolButton,
-            this.SubstractionToolButton,
-            this.MultiplicationToolButton,
-            this.DivisionToolButton,
             this.toolStripSeparator2,
             this.ConnectorToolButton,
             this.toolStripSeparator1,
@@ -121,62 +111,6 @@
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
-            // 
-            // ConstantToolButton
-            // 
-            this.ConstantToolButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ConstantToolButton.Image = global::HYDRA.Properties.Resources.Constant;
-            this.ConstantToolButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.ConstantToolButton.Name = "ConstantToolButton";
-            this.ConstantToolButton.Size = new System.Drawing.Size(36, 36);
-            this.ConstantToolButton.Text = "Constant";
-            this.ConstantToolButton.Click += new System.EventHandler(this.ConstantToolButton_Click);
-            this.ConstantToolButton.MouseEnter += new System.EventHandler(this.ConstantToolButton_MouseEnter);
-            this.ConstantToolButton.MouseLeave += new System.EventHandler(this.ConstantToolButton_MouseLeave);
-            // 
-            // AdditionToolButton
-            // 
-            this.AdditionToolButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.AdditionToolButton.Image = global::HYDRA.Properties.Resources.Addition;
-            this.AdditionToolButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.AdditionToolButton.Name = "AdditionToolButton";
-            this.AdditionToolButton.Size = new System.Drawing.Size(36, 36);
-            this.AdditionToolButton.Text = "Addition";
-            this.AdditionToolButton.Click += new System.EventHandler(this.AdditionToolButton_Click);
-            this.AdditionToolButton.MouseEnter += new System.EventHandler(this.AdditionToolButton_MouseEnter);
-            this.AdditionToolButton.MouseLeave += new System.EventHandler(this.AdditionToolButton_MouseLeave);
-            // 
-            // SubstractionToolButton
-            // 
-            this.SubstractionToolButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SubstractionToolButton.Image = global::HYDRA.Properties.Resources.Substraction;
-            this.SubstractionToolButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.SubstractionToolButton.Name = "SubstractionToolButton";
-            this.SubstractionToolButton.Size = new System.Drawing.Size(36, 36);
-            this.SubstractionToolButton.Text = "Substraction";
-            this.SubstractionToolButton.Click += new System.EventHandler(this.SubstractionToolButton_Click);
-            this.SubstractionToolButton.MouseEnter += new System.EventHandler(this.SubstractionToolButton_MouseEnter);
-            this.SubstractionToolButton.MouseLeave += new System.EventHandler(this.SubstractionToolButton_MouseLeave);
-            // 
-            // MultiplicationToolButton
-            // 
-            this.MultiplicationToolButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.MultiplicationToolButton.Image = global::HYDRA.Properties.Resources.Multiplication;
-            this.MultiplicationToolButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.MultiplicationToolButton.Name = "MultiplicationToolButton";
-            this.MultiplicationToolButton.Size = new System.Drawing.Size(36, 36);
-            this.MultiplicationToolButton.Text = "Multiplication";
-            this.MultiplicationToolButton.Click += new System.EventHandler(this.MultiplicationToolButton_Click);
-            // 
-            // DivisionToolButton
-            // 
-            this.DivisionToolButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DivisionToolButton.Image = global::HYDRA.Properties.Resources.Division;
-            this.DivisionToolButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DivisionToolButton.Name = "DivisionToolButton";
-            this.DivisionToolButton.Size = new System.Drawing.Size(36, 36);
-            this.DivisionToolButton.Text = "Division";
-            this.DivisionToolButton.Click += new System.EventHandler(this.DivisionToolButton_Click);
             // 
             // toolStripSeparator2
             // 
@@ -321,18 +255,13 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton AdditionToolButton;
         private System.Windows.Forms.Panel graphPanel;
         private System.Windows.Forms.TextBox ConsoleLogTextBox;
-        private System.Windows.Forms.ToolStripButton ConstantToolButton;
         private System.Windows.Forms.ToolStripButton ExecuteToolButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton ConnectorToolButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripButton SubstractionToolButton;
-        private System.Windows.Forms.ToolStripButton MultiplicationToolButton;
-        private System.Windows.Forms.ToolStripButton DivisionToolButton;
         private System.Windows.Forms.Label labelVarWatch;
         private System.Windows.Forms.Label labelLogConsole;
         private System.Windows.Forms.Label labelDrawPanel;

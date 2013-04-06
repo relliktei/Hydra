@@ -53,81 +53,8 @@ namespace HYDRA
 
         //Used as a stack for tool selection menu
         private List<ToolStripButton> lastSelectedTool = new List<ToolStripButton>();
-
-        
+       
         private Type _selectedNodeType;
-
-        //Addition Button
-        #region Addition_Button
-        private void AdditionToolButton_Click(object sender, EventArgs e)
-        {
-            switch (AdditionToolButton.Checked)
-            {
-                case true:
-                    //Tool remains checked until you select another tool.
-                    break;
-
-                case false:
-                    if (lastSelectedTool.Count > 0)
-                    {
-                        lastSelectedTool[0].Checked = false;
-                        lastSelectedTool.RemoveAt(0);
-                    }
-                    _selectedNodeType = typeof(AdditionNode);
-                    AdditionToolButton.Checked = true;
-                    lastSelectedTool.Add((sender) as ToolStripButton);
-                    break;
-            }
-        }
-
-        //Addition button image change on mouse enter.
-        private void AdditionToolButton_MouseEnter(object sender, EventArgs e)
-        {
-            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Addition;
-        }
-
-        //Addition button image change on mouse leave.
-        private void AdditionToolButton_MouseLeave(object sender, EventArgs e)
-        {
-            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Addition;
-        }
-        #endregion
-
-        //Constant Button
-        #region Constant_Button
-        private void ConstantToolButton_Click(object sender, EventArgs e)
-        {
-            switch (ConstantToolButton.Checked)
-            {
-                case true:
-                    //Tool remains checked until you select another tool.
-                    break;
-
-                case false:
-                    if (lastSelectedTool.Count > 0)
-                    {
-                        lastSelectedTool[0].Checked = false;
-                        lastSelectedTool.RemoveAt(0);
-                    }
-                    _selectedNodeType = typeof(ConstantNode);
-                    ConstantToolButton.Checked = true;
-                    lastSelectedTool.Add((sender) as ToolStripButton);
-                    break;
-            }
-        }
-
-        //Constant button image change on mouse enter.
-        private void ConstantToolButton_MouseEnter(object sender, EventArgs e)
-        {
-            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Constant;
-        }
-
-        //Constant button image change on mouse enter.
-        private void ConstantToolButton_MouseLeave(object sender, EventArgs e)
-        {
-            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Constant;
-        }
-        #endregion
 
         //Connector Button
         #region Connector_Button
@@ -152,26 +79,15 @@ namespace HYDRA
         }
         #endregion
 
-        //Multiplication Button
-        #region Multiplication Button
-        private void MultiplicationToolButton_Click(object sender, EventArgs e)
+        //Execute Button
+        #region Execute Button
+        private void ExecuteToolButton_MouseClick(object sender, EventArgs e)
         {
-            switch (MultiplicationToolButton.Checked)
+            foreach (DrawableNode a in _LogicNodes)
             {
-                case true:
-                    //Tool remains checked until you select another tool.
-                    break;
-
-                case false:
-                    if (lastSelectedTool.Count > 0)
-                    {
-                        lastSelectedTool[0].Checked = false;
-                        lastSelectedTool.RemoveAt(0);
-                    }
-                    _selectedNodeType = typeof(MultiplicationNode);
-                    MultiplicationToolButton.Checked = true;
-                    lastSelectedTool.Add((sender) as ToolStripButton);
-                    break;
+                a.Process(AllNodes);
+                try { listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = a.Value.ToString(); }
+                catch { }
             }
         }
         #endregion
@@ -191,132 +107,11 @@ namespace HYDRA
             }
             if (_selectedNodeType != null)
             {
-                var node = new DrawableNode(getNode(), graphPanel,listVarWatch);
+                var node = new DrawableNode(getNode(), graphPanel, listVarWatch);
                 node.Draw(_nodePlacementPos);
                 ConsoleLogTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
                 addNode(node, true); // Adds the node to all our lists
                 return;
-            }
-
-            /*//Addition Node
-            if (AdditionToolButton.Checked)
-            {
-                var _newAdditionNode = new DrawableNode(new AdditionNode(Guid.NewGuid()),graphPanel); //Creates a new drawable node and passes it an additionnode + the graphpanel
-                _newAdditionNode.Draw(_nodePlacementPos); //Draw it on mouse location.
-                logTextBox.Text += _newAdditionNode.Log(); //Deploy log into the bottom textlog.
-                addNode(_newAdditionNode, true); // Adds the node to all our lists
-                return;
-            }
-
-            //Multiplication Node
-            if (MultiplicationToolButton.Checked)
-            {
-                var _newMultiplicationNode = new DrawableNode(new MultiplicationNode(Guid.NewGuid()), graphPanel); //New Node.
-                _newMultiplicationNode.Draw(_nodePlacementPos); //Draw it on mouse location.
-                logTextBox.Text += _newMultiplicationNode.Log(); //Deploy log into the bottom textlog.
-                addNode(_newMultiplicationNode, true);
-                return;
-            }
-            
-            //Substraction Node
-            if (SubstractionToolButton.Checked)
-            {
-                var _newSubstractionNode = new DrawableNode(new SubstractionNode(Guid.NewGuid()), graphPanel); //New Node.
-                _newSubstractionNode.Draw(_nodePlacementPos); //Draw it on mouse location.
-                logTextBox.Text += _newSubstractionNode.Log(); //Deploy log into the bottom textlog.
-                addNode(_newSubstractionNode, true);
-                return;
-            }
-
-            //Division Node
-            if (DivisionToolButton.Checked)
-            {
-                var _newDivisionNode = new DrawableNode(new DivisionNode(Guid.NewGuid()), graphPanel); //New Node.
-                _newDivisionNode.Draw(_nodePlacementPos); //Draw it on mouse location.
-                logTextBox.Text += _newDivisionNode.Log(); //Deploy log into the bottom textlog.
-                addNode(_newDivisionNode, true);
-                return;
-            }
-
-            //Constant Node
-            if (ConstantToolButton.Checked)
-            {
-                var _newConstantNode = new DrawableNode(new ConstantNode(Guid.NewGuid(), r.Next(20, 100)), graphPanel); //New Node.
-                _newConstantNode.Draw(_nodePlacementPos);
-                logTextBox.Text += _newConstantNode.Log();
-                addNode(_newConstantNode,false);
-                return;
-            }*/
-        }
-        #endregion
-
-        //Substraction Button
-        #region Substraction Button
-        private void SubstractionToolButton_Click(object sender, EventArgs e)
-        {
-            switch (SubstractionToolButton.Checked)
-            {
-                case true:
-                    //Tool remains checked until you select another tool.
-                    break;
-
-                case false:
-                    if (lastSelectedTool.Count > 0)
-                    {
-                        lastSelectedTool[0].Checked = false;
-                        lastSelectedTool.RemoveAt(0);
-                    }
-                    _selectedNodeType = typeof(SubstractionNode);
-                    SubstractionToolButton.Checked = true;
-                    lastSelectedTool.Add((sender) as ToolStripButton);
-                    break;
-            }
-        }
-
-        private void SubstractionToolButton_MouseEnter(object sender, EventArgs e)
-        {
-            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Substraction;
-        }
-
-        private void SubstractionToolButton_MouseLeave(object sender, EventArgs e)
-        {
-            ((sender) as ToolStripButton).Image = HYDRA.Properties.Resources.Substraction;
-        }
-        #endregion
-
-        //Execute Button
-        #region Execute Button
-        private void ExecuteToolButton_MouseClick(object sender, EventArgs e)
-        {
-            foreach (DrawableNode a in _LogicNodes)
-            {
-                a.Process(AllNodes);
-                try { listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = a.Value.ToString(); }
-                catch { }
-            }
-        }
-        #endregion
-
-        //Division Button
-        #region Division Button
-        private void DivisionToolButton_Click(object sender, EventArgs e)
-        {
-            switch (DivisionToolButton.Checked)
-            {
-                case true:
-                    //Tool remains checked until you select another tool.
-                    break;
-
-                case false:
-                    if (lastSelectedTool.Count > 0)
-                    {
-                        lastSelectedTool[0].Checked = false;
-                        lastSelectedTool.RemoveAt(0);
-                    }
-
-                    DivisionToolButton.Checked = true;
-                    lastSelectedTool.Add((sender) as ToolStripButton);
-                    break;
             }
         }
         #endregion

@@ -53,11 +53,8 @@ namespace HydraLib.Nodes.NodeTypes
                 this.Value = Result;
                 // Return the result, so DrawableNode which called this Process(), can update its display label
                 return Result;
-                //this.ValueLabel.Text = Result + "";
             }
-            return 1f;
-        }
-
-               
+            return 0f;
+        }             
     }
 }

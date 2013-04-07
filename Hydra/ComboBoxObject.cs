@@ -19,24 +19,22 @@ namespace HYDRA
         /// <summary>
         /// Nodes name, displayed in combobox thanks to ToString() override
         /// </summary>
-        private String _text;
+        public String _name;
 
         /// <summary>
         /// Takes a node type like ConstantNode or AdditionNode and a label
         /// </summary>
         /// <param name="node">Node type</param>
-        /// <param name="label">Label text</param>
-        public ComboBoxObject(Type node, string label)
-        {
-            
+        /// <param name="name">Name</param>
+        public ComboBoxObject(Type node, string name)
+        {           
             this._nodeType = node;
-            this._text = label;
+            this._name = name;
         }
-
-        
+      
         public override string ToString()
         {
-            return _text;
+            return _name;
         }
     }
 }

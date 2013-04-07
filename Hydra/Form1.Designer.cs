@@ -39,7 +39,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.ExecuteToolButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripToolSelectorComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.listVarWatch = new System.Windows.Forms.ListView();
             this.Var = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -102,8 +101,7 @@
             this.ConnectorToolButton,
             this.toolStripSeparator1,
             this.ExecuteToolButton,
-            this.toolStripSeparator3,
-            this.toolStripToolSelectorComboBox});
+            this.toolStripSeparator3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -151,13 +149,6 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 39);
             this.toolStripSeparator3.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
-            // 
-            // toolStripToolSelectorComboBox
-            // 
-            this.toolStripToolSelectorComboBox.Name = "toolStripToolSelectorComboBox";
-            this.toolStripToolSelectorComboBox.Size = new System.Drawing.Size(121, 39);
-            this.toolStripToolSelectorComboBox.TextDirection = System.Windows.Forms.ToolStripTextDirection.Vertical90;
-            this.toolStripToolSelectorComboBox.SelectedIndexChanged += new System.EventHandler(this.toolsComboBox_SelectedIndexChanged);
             // 
             // listVarWatch
             // 
@@ -269,6 +260,5 @@
         private System.Windows.Forms.ColumnHeader Var;
         private System.Windows.Forms.ColumnHeader Value;
         private System.Windows.Forms.ColumnHeader Id;
-        private System.Windows.Forms.ToolStripComboBox toolStripToolSelectorComboBox;
     }
 }

@@ -47,19 +47,13 @@ namespace HYDRA
         //Context menu for drawPanel, this is used to add nodes into the drawPanel.
         private ContextMenu drawPanelCtxMenu;
 
+        //List used to link the ContextMenu selected item with the proper Node Type the user wants to use.
+        private List<ComboBoxObject> usuableNodeList = new List<ComboBoxObject>();
+
         public Form1()
         {
             InitializeComponent();
-            drawPanelCtxMenu = new ContextMenu();
-            fillDrawPanelCtxMenu();
-
-            //WiP - Add all Node types to a combo box using reflection, save needing a new button for each type right now, or adding them by hand.
-            // Not currently active.
-            foreach (var x in FindSubClassesOf<Node>())
-            {
-                toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(x, x.Name));
-            }
-            toolStripToolSelectorComboBox.Items.Add(new ComboBoxObject(null, "No Tool"));
+            CreateDrawPanelCtxMenu();
         }
 
         //Connector Button
@@ -128,11 +122,17 @@ namespace HYDRA
         }
         #endregion
 
-        private void fillDrawPanelCtxMenu()
+        /// <summary>
+        /// Helper function to create the drawPanel Context Menu
+        /// Also fills the usuableNodeList which we will use to link the CtxMenu selection with the proper type of Object the user wants to draw.
+        /// </summary>
+        private void CreateDrawPanelCtxMenu()
         {
-            foreach (var x in FindSubClassesOf<Node>())
+            drawPanelCtxMenu = new ContextMenu();
+            foreach (var nodeSubClass in FindSubClassesOf<Node>())
             {
-                drawPanelCtxMenu.MenuItems.Add(x.Name);
+                usuableNodeList.Add(new ComboBoxObject(nodeSubClass, nodeSubClass.Name));
+                drawPanelCtxMenu.MenuItems.Add(new MenuItem(nodeSubClass.Name, DrawPanelCtxMenu_SelectedtItemChanged));
             }
         }
 
@@ -189,13 +189,17 @@ namespace HYDRA
         }
 
         /// <summary>
-        /// Sets the current tool type to the currently selected node type
+        /// Sets the current type to the currently selected node type from the drawPanelContexMenu
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void toolsComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void DrawPanelCtxMenu_SelectedtItemChanged(object sender, EventArgs e)
         {
-            ComboBoxObject a = (ComboBoxObject)toolStripToolSelectorComboBox.SelectedItem;
+            //We find the index of the selected node over the ContextMenu in our usuableNodeList.
+            var index = usuableNodeList.FindIndex(_nodeInList => _nodeInList._name.Equals((sender as MenuItem).Text, StringComparison.Ordinal));
+            //Define the Object using our list.
+            ComboBoxObject a = (ComboBoxObject)usuableNodeList[index];
+            //Set the selected NodeType from the selected Object.
             _selectedNodeType = a._nodeType;
         }
 

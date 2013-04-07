@@ -37,7 +37,7 @@ namespace HydraLib.Nodes.NodeTypes
 
 
 
-        public override float Process()
+        public override float Process(Dictionary<Guid, Node> allNodes)
         {
             //Implement
             return 1f;

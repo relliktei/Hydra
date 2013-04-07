@@ -35,8 +35,8 @@ namespace HydraLib.Nodes.NodeTypes
             this.Name = "Average";
         }
 
-       
-        public override float Process()
+
+        public override float Process(Dictionary<Guid, Node> allNodes)
         {
             //Implement
             return 1f;

@@ -22,9 +22,11 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Resources;
 
 using HydraLib.Nodes;
 using HydraLib.Nodes.NodeTypes;
+using HYDRA.Properties;
 
 namespace HYDRA
 {
@@ -45,7 +47,7 @@ namespace HYDRA
         private Type _selectedNodeType;
 
         //Context menu for drawPanel, this is used to add nodes into the drawPanel.
-        private ContextMenu drawPanelCtxMenu;
+        private ToolStripDropDownMenu drawPanelCtxMenu;
 
         //List used to link the ContextMenu selected item with the proper Node Type the user wants to use.
         private List<ComboBoxObject> usuableNodeList = new List<ComboBoxObject>();
@@ -63,7 +65,7 @@ namespace HYDRA
             switch (ConnectorToolButton.Checked)
             {
                 case true:
-                        ConnectorToolButton.Checked = false;
+                    ConnectorToolButton.Checked = false;
                     break;
                 case false:
                     if (lastSelectedTool.Count > 0)
@@ -99,11 +101,11 @@ namespace HYDRA
         {
             //Make the center of the node appear on mouse position.
             var _placementPos = new Point(e.Location.X - 25, e.Location.Y - 25);
-            
+
             //Context Menu
             if (e.Button == MouseButtons.Right)
             {
-                drawPanelCtxMenu.Show(this, _placementPos, LeftRightAlignment.Right);
+                drawPanelCtxMenu.Show(this, _placementPos);
             }
             else if (e.Button == MouseButtons.Left)
             {
@@ -126,11 +128,19 @@ namespace HYDRA
         /// </summary>
         private void CreateDrawPanelCtxMenu()
         {
-            drawPanelCtxMenu = new ContextMenu();
+            drawPanelCtxMenu = new ToolStripDropDownMenu();
+            ResourceManager rm = Resources.ResourceManager; //Used to gran the node Image..
+
             foreach (var nodeSubClass in FindSubClassesOf<Node>())
             {
+                //Todo: For some reasson nodes are being added as "AdditionNode" , "SubstractionNode" , etc... Instead of haveing them just with the node plain name "Addition" "Substraction"..
+                //There for in order to grab the correct image I need to trim the name and remove the "Node" part..
+                //So yeah, we need to make this right at osme point.
+                string _removeTheWordNode = nodeSubClass.Name.Replace("Node", null);
+                Bitmap _nodeImage = (Bitmap)rm.GetObject(_removeTheWordNode);
+
                 usuableNodeList.Add(new ComboBoxObject(nodeSubClass, nodeSubClass.Name));
-                drawPanelCtxMenu.MenuItems.Add(new MenuItem(nodeSubClass.Name, DrawPanelCtxMenu_SelectedtItemChanged));
+                drawPanelCtxMenu.Items.Add(nodeSubClass.Name, _nodeImage, DrawPanelCtxMenu_SelectedtItemChanged);
             }
         }
 
@@ -196,7 +206,7 @@ namespace HYDRA
         private void DrawPanelCtxMenu_SelectedtItemChanged(object sender, EventArgs e)
         {
             //We find the index of the selected node over the ContextMenu in our usuableNodeList.
-            var index = usuableNodeList.FindIndex(_nodeInList => _nodeInList._name.Equals((sender as MenuItem).Text, StringComparison.Ordinal));
+            var index = usuableNodeList.FindIndex(_nodeInList => _nodeInList._name.Equals((sender as ToolStripItem).Text, StringComparison.Ordinal));
             //Define the Object using our list.
             ComboBoxObject a = (ComboBoxObject)usuableNodeList[index];
             //Set the selected NodeType from the selected Object.

@@ -14,14 +14,11 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+using HydraLib.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
-using System.Drawing;
-
-
 ////////////////////////////////////////////////////////////////////////////
 //                    NOT IMPLEMENTED                                     //
 //                  AUTO GENERATED CLASS!                                 //
@@ -30,29 +27,18 @@ namespace HYDRA.Nodes.NodeTypes
 {
     public class ScaleNode : Node
     {
-        public ScaleNode(Guid id, Control panel)
-            : base(id, panel)
+        public ScaleNode(Guid id)
+            : base(id)
         {
             this.Name = "Scale";
         }
 
-        public override void Draw(Point Location)
-        {
-            base.Draw(Location, HYDRA.Properties.Resources.Scale);
-        }
 
-        public override float Process()
+
+        public override float Process(Dictionary<Guid, Node> allNodes)
         {
             //Implement
             return 1f;
         }
-
-        public override string Log()
-        {
-            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this.GUID + Environment.NewLine;
-        }
-
-
     }
 }
-

@@ -122,6 +122,7 @@
     <Content Include="Resources\Arithmetic\Slope.jpg" />
     <Content Include="Resources\Arithmetic\StandardDeviation.jpg" />
     <Content Include="Resources\Arithmetic\Substraction.jpg" />
+    <None Include="Resources\NodePlacement.png" />
     <None Include="Resources\Hydra.ico" />
   </ItemGroup>
   <ItemGroup />

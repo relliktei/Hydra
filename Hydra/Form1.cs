@@ -100,7 +100,7 @@ namespace HYDRA
         private void drawPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //Make the center of the node appear on mouse position.
-            var _placementPos = new Point(e.Location.X - 25, e.Location.Y - 25);
+            var _placementPos = new Point(e.Location.X -15, e.Location.Y -15);
 
             //Context Menu
             if (e.Button == MouseButtons.Right)
@@ -116,6 +116,8 @@ namespace HYDRA
                     node.Draw(_placementPos);
                     ConsoleLogTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
                     addNode(node, true); // Adds the node to all our lists
+                    this.Cursor = DefaultCursor; // Switch back to arrow cursor
+                    _selectedNodeType = null; // Null Node selection
                     return;
                 }
             }
@@ -133,14 +135,23 @@ namespace HYDRA
 
             foreach (var nodeSubClass in FindSubClassesOf<Node>())
             {
-                //Todo: For some reasson nodes are being added as "AdditionNode" , "SubstractionNode" , etc... Instead of haveing them just with the node plain name "Addition" "Substraction"..
-                //There for in order to grab the correct image I need to trim the name and remove the "Node" part..
-                //So yeah, we need to make this right at osme point.
-                string _removeTheWordNode = nodeSubClass.Name.Replace("Node", null);
-                Bitmap _nodeImage = (Bitmap)rm.GetObject(_removeTheWordNode);
+                //Todo: Remove ComboBoxObject and apply a new implementation.
 
+                //First we make a list with all the avialable nodes in our program.
                 usuableNodeList.Add(new ComboBoxObject(nodeSubClass, nodeSubClass.Name));
-                drawPanelCtxMenu.Items.Add(nodeSubClass.Name, _nodeImage, DrawPanelCtxMenu_SelectedtItemChanged);
+            }
+
+            //We sort it A-Z
+            usuableNodeList.Sort((x, y) => string.Compare(x._name, y._name));
+
+            //Add it to the CtxMenu in drawPanel
+            foreach (var node in usuableNodeList)
+            {
+                //In order to grab the correct image I need to trim the name and remove the "Node" part because when we find the subclasses they return the name as AdditionNode when we only need "Addition".
+                //So yeah, we need to make this right at osme point.
+                string _removeTheWordNode = node._name.Replace("Node", null);
+                Bitmap _nodeImage = (Bitmap)rm.GetObject(_removeTheWordNode);
+                drawPanelCtxMenu.Items.Add(node._name , _nodeImage, DrawPanelCtxMenu_SelectedtItemChanged);
             }
         }
 
@@ -205,6 +216,11 @@ namespace HYDRA
         /// <param name="e"></param>
         private void DrawPanelCtxMenu_SelectedtItemChanged(object sender, EventArgs e)
         {
+            //Custom cursor to preview the node.
+            Bitmap _nodePlacement = new Bitmap(HYDRA.Properties.Resources.NodePlacement);
+            Cursor cursor = new Cursor(_nodePlacement.GetHicon());
+            this.Cursor = cursor;
+
             //We find the index of the selected node over the ContextMenu in our usuableNodeList.
             var index = usuableNodeList.FindIndex(_nodeInList => _nodeInList._name.Equals((sender as ToolStripItem).Text, StringComparison.Ordinal));
             //Define the Object using our list.

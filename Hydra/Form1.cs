@@ -63,7 +63,7 @@ namespace HYDRA
             switch (ConnectorToolButton.Checked)
             {
                 case true:
-                    //Tool remains checked until you select another tool.
+                        ConnectorToolButton.Checked = false;
                     break;
                 case false:
                     if (lastSelectedTool.Count > 0)
@@ -99,25 +99,29 @@ namespace HYDRA
         {
             //Make the center of the node appear on mouse position.
             var _placementPos = new Point(e.Location.X - 25, e.Location.Y - 25);
-
-            //Context Menu
-            if (e.Button == MouseButtons.Right)
-                drawPanelCtxMenu.Show(this,_placementPos,LeftRightAlignment.Right);
-        
+            
             //Connector Tool
             if (ConnectorToolButton.Checked)
             {
                 return;
             }
 
-            //Node Drawing
-            if (_selectedNodeType != null)
+            //Context Menu
+            if (e.Button == MouseButtons.Right)
             {
-                var node = new DrawableNode(getNode(), drawPanel, listVarWatch);
-                node.Draw(_placementPos);
-                ConsoleLogTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
-                addNode(node, true); // Adds the node to all our lists
-                return;
+                drawPanelCtxMenu.Show(this, _placementPos, LeftRightAlignment.Right);
+            }
+            else
+            {
+                //Node Drawing
+                if (_selectedNodeType != null)
+                {
+                    var node = new DrawableNode(getNode(), drawPanel, listVarWatch);
+                    node.Draw(_placementPos);
+                    ConsoleLogTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
+                    addNode(node, true); // Adds the node to all our lists
+                    return;
+                }
             }
         }
         #endregion

@@ -100,18 +100,12 @@ namespace HYDRA
             //Make the center of the node appear on mouse position.
             var _placementPos = new Point(e.Location.X - 25, e.Location.Y - 25);
             
-            //Connector Tool
-            if (ConnectorToolButton.Checked)
-            {
-                return;
-            }
-
             //Context Menu
             if (e.Button == MouseButtons.Right)
             {
                 drawPanelCtxMenu.Show(this, _placementPos, LeftRightAlignment.Right);
             }
-            else
+            else if (e.Button == MouseButtons.Left)
             {
                 //Node Drawing
                 if (_selectedNodeType != null)
@@ -163,8 +157,9 @@ namespace HYDRA
         void node_onNodeClick(DrawableNode sender, MouseEventArgs e)
         {
             //Return if not using Connector tool, and not left clicking.
-            if (!ConnectorToolButton.Checked || e.Button != System.Windows.Forms.MouseButtons.Left)
+            if (!ConnectorToolButton.Checked || e.Button != MouseButtons.Left)
                 return;
+
             if (Connector.TailMouseOverGuid != Guid.Empty)
             {
                 Connector.HeadOverGuid = sender.GUID;
@@ -175,6 +170,7 @@ namespace HYDRA
                 Console.WriteLine("Log: " + sender.Name + "|| Input count: " + sender.Input.Count + " || Output count: " + sender.Output.Count);
                 return;
             }
+
             Connector.TailMouseOverGuid = sender.GUID;
             //MessageBox.Show("Stablished TAIL");
         }

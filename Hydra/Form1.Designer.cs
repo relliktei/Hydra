@@ -152,7 +152,7 @@
             // 
             // listVarWatch
             // 
-            this.listVarWatch.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.listVarWatch.BackColor = System.Drawing.Color.Gainsboro;
             this.listVarWatch.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.Var,
             this.Value,

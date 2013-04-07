@@ -114,10 +114,17 @@ namespace HYDRA
                 {
                     var node = new DrawableNode(getNode(), drawPanel, listVarWatch);
                     node.Draw(_placementPos);
-                    ConsoleLogTextBox.Text += node.Log(); //Deploy log into the bottom textlog.
-                    addNode(node, true); // Adds the node to all our lists
-                    this.Cursor = DefaultCursor; // Switch back to arrow cursor
-                    _selectedNodeType = null; // Null Node selection
+                    //Deploy log into the bottom textlog.
+                    ConsoleLogTextBox.Text += node.Log(); 
+                    // Adds the node to all our lists
+                    addNode(node, true); 
+                    // Switch back to arrow cursor
+                    this.Cursor = DefaultCursor; 
+                    // Null Node selection
+                    _selectedNodeType = null; 
+                    //Scroll Console Log
+                    ConsoleLogTextBox.SelectionStart = ConsoleLogTextBox.TextLength;
+                    ConsoleLogTextBox.ScrollToCaret();
                     return;
                 }
             }

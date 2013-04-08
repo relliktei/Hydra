@@ -19,24 +19,54 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-////////////////////////////////////////////////////////////////////////////
-//                    NOT IMPLEMENTED                                     //
-//                  AUTO GENERATED CLASS!                                 //
-////////////////////////////////////////////////////////////////////////////
+
 namespace HYDRA.Nodes.NodeTypes
 {
     public class HysteresisNode : Node
     {
+        private float _vOn;
+        public float vOn { get { return _vOn; } set { _vOn = value; } }
+        private float _vOff;
+        public float vOff { get { return _vOff; } set { _vOff = value; } }
+
         public HysteresisNode(Guid id)
             : base(id)
         {
+            this.isBool = true;
+            this.vOn = 10;
+            this.vOff = 5;
             this.Name = "Hysteresis";
         }
 
         public override float Process(Dictionary<Guid, Node> allNodes)
         {
-            //Implement
-            return 1f;
+            //We concatenate the different input values in here:
+            float Result = 0;
+
+            if (Input.Count == 1)
+            {
+
+                var _floatValue = allNodes[Input[0].TailNodeGuid].Value;
+                if (_floatValue > vOn)
+                {
+                    Result = 1;
+                }
+                else if (_floatValue < vOff)
+                {
+                    Result = 0;
+                }
+                else
+                {
+                    Result = 0;
+                }
+
+                Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Convert.ToBoolean(Result));
+
+                this.Value = Result;
+                // Return the result, so DrawableNode which called this Process(), can update its display label
+                return Result;
+            }
+            return 0f;
         }
     }
 }

@@ -98,7 +98,13 @@ namespace HYDRA
             foreach (DrawableNode a in _LogicNodes)
             {
                 a.Process(AllNodes);
-                try { listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = a.Value.ToString(); }
+                try
+                {
+                    if (a.GetNode().isBool)
+                        listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = Convert.ToBoolean(a.Value).ToString();
+                    else
+                        listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = a.Value.ToString();
+                }
                 catch { }
             }
         }
@@ -110,7 +116,7 @@ namespace HYDRA
         private void drawPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //Make the center of the node appear on mouse position.
-            var _placementPos = new Point(e.Location.X -15, e.Location.Y -15);
+            var _placementPos = new Point(e.Location.X - 15, e.Location.Y - 15);
 
             //Context Menu
             if (e.Button == MouseButtons.Right)
@@ -125,13 +131,13 @@ namespace HYDRA
                     var node = new DrawableNode(getNode(), drawPanel, listVarWatch);
                     node.Draw(_placementPos);
                     //Deploy log into the bottom textlog.
-                    ConsoleLogTextBox.Text += node.Log(); 
+                    ConsoleLogTextBox.Text += node.Log();
                     // Adds the node to all our lists
-                    addNode(node, true); 
+                    addNode(node, true);
                     // Switch back to arrow cursor
-                    this.Cursor = DefaultCursor; 
+                    this.Cursor = DefaultCursor;
                     // Null Node selection
-                    _selectedNodeType = null; 
+                    _selectedNodeType = null;
                     //Scroll Console Log
                     ConsoleLogTextBox.SelectionStart = ConsoleLogTextBox.TextLength;
                     ConsoleLogTextBox.ScrollToCaret();
@@ -168,7 +174,7 @@ namespace HYDRA
                 //So yeah, we need to make this right at osme point.
                 string _removeTheWordNode = node._name.Replace("Node", null);
                 Bitmap _nodeImage = (Bitmap)rm.GetObject(_removeTheWordNode);
-                drawPanelCtxMenu.Items.Add(node._name , _nodeImage, DrawPanelCtxMenu_SelectedtItemChanged);
+                drawPanelCtxMenu.Items.Add(node._name, _nodeImage, DrawPanelCtxMenu_SelectedtItemChanged);
             }
         }
 

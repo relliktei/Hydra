@@ -39,6 +39,10 @@ namespace HydraLib.Nodes
         private float _value;
         public float Value { get { return _value; } set { _value = value; } }
 
+        //IsBool
+        private bool _isBool = false;
+        public bool isBool { get { return _isBool; } set { _isBool = value; } }
+
         //Constructor
         public Node(Guid id)
         {

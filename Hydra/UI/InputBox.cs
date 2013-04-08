@@ -28,7 +28,7 @@ namespace HYDRA
 
         internal float GetInputValue()
         {
-            return Convert.ToInt32(textBox1.Text);
+            return System.Convert.ToSingle(textBox1.Text);
         }
     }
 }

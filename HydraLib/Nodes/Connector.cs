@@ -24,6 +24,9 @@ namespace HydraLib.Nodes
 {
     public class Connector
     {
+        //Node objects return their Guid on MouseOver if the connector tool is enabled, we use this to save the source and destination Guids
+        //So we can use it later to stablish the Connector Tail and Head.
+
         //Tail MouseOver GUID
         private static Guid _TailmouseOverGuid;
         public static Guid TailMouseOverGuid { get { return _TailmouseOverGuid; } set { _TailmouseOverGuid = value; } }
@@ -31,6 +34,8 @@ namespace HydraLib.Nodes
         //Head MouseOver GUID
         private static Guid _HeadmouseOverGuid;
         public static Guid HeadOverGuid { get { return _HeadmouseOverGuid; } set { _HeadmouseOverGuid = value; } }
+
+        //The "real" Guids that will be set on the connector:
 
         //Tail - This is the source node of the link.
         private Guid _tailNodeGuid;
@@ -44,7 +49,6 @@ namespace HydraLib.Nodes
         {
             this._tailNodeGuid = Tail;
             this._headNodeGuid = Head;
-            //Draw(panelGraphics);
             ClearConnectors();
         }
 

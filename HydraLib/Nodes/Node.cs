@@ -25,7 +25,7 @@ namespace HydraLib.Nodes
     {
         //GUID - Global Unique Identifer used to map our nodes.
         private Guid _guid;
-        public Guid GUID { get { return _guid; } set { _guid = value; } }
+        public Guid Guid { get { return _guid; } set { _guid = value; } }
 
         //Input & Output connectors
         public List<Connector> Input = new List<Connector>();
@@ -42,7 +42,7 @@ namespace HydraLib.Nodes
         //Constructor
         public Node(Guid id)
         {
-            this.GUID = id;
+            this.Guid = id;
         }
 
         //Logging

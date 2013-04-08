@@ -20,7 +20,7 @@ namespace HYDRA
         private Node _node;
 
         //Global Unique Identifer from the real node.
-        public Guid GUID { get { return this._node.GUID; } set { _node.GUID = value; } }
+        public Guid GUID { get { return this._node.Guid; } set { _node.Guid = value; } }
 
         //Node VarWatch ListView
         private ListView _varwatch;
@@ -79,7 +79,7 @@ namespace HYDRA
         /// <returns></returns>
         public string Log()
         {
-            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this._node.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this._node.GUID + Environment.NewLine;
+            return Environment.NewLine + "<<<New Action>>>" + Environment.NewLine + "Created " + this._node.Name + " node." + Environment.NewLine + "Position: " + this.Location + Environment.NewLine + "Guid: " + this._node.Guid + Environment.NewLine;
         }
 
         public void Draw(Point Location)

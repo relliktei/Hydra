@@ -56,6 +56,7 @@ namespace HYDRA
         {
             InitializeComponent();
             CreateDrawPanelCtxMenu();
+            ExecuteLoop.Interval = 1000;
         }
 
         //Connector Button
@@ -84,6 +85,15 @@ namespace HYDRA
         //Execute Button
         #region Execute Button
         private void ExecuteToolButton_MouseClick(object sender, EventArgs e)
+        {
+            if (ExecuteLoop.Enabled)
+                ExecuteLoop.Enabled = false;
+            else
+                ExecuteLoop.Enabled = true;
+        }
+
+        //Execute.
+        private void timer1_Tick(object sender, EventArgs e)
         {
             foreach (DrawableNode a in _LogicNodes)
             {
@@ -244,5 +254,6 @@ namespace HYDRA
         {
             return (Node)Activator.CreateInstance(_selectedNodeType, new object[] { Guid.NewGuid() });
         }
+
     }
 }

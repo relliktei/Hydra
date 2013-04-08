@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.drawPanel = new System.Windows.Forms.Panel();
             this.ConsoleLogTextBox = new System.Windows.Forms.TextBox();
@@ -46,6 +47,7 @@
             this.labelVarWatch = new System.Windows.Forms.Label();
             this.labelLogConsole = new System.Windows.Forms.Label();
             this.labelDrawPanel = new System.Windows.Forms.Label();
+            this.ExecuteLoop = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -213,6 +215,10 @@
             this.labelDrawPanel.TabIndex = 5;
             this.labelDrawPanel.Text = "Draw Panel";
             // 
+            // ExecuteLoop
+            // 
+            this.ExecuteLoop.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -260,5 +266,6 @@
         private System.Windows.Forms.ColumnHeader Var;
         private System.Windows.Forms.ColumnHeader Value;
         private System.Windows.Forms.ColumnHeader Id;
+        private System.Windows.Forms.Timer ExecuteLoop;
     }
 }

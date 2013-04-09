@@ -33,8 +33,8 @@ namespace HYDRA.Nodes.NodeTypes
             : base(id)
         {
             this.isBool = true;
-            this.vOn = 10;
-            this.vOff = 5;
+            this.vOn = 5;
+            this.vOff = 4;
             this.Name = "Hysteresis";
         }
 

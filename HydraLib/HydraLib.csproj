@@ -62,6 +62,7 @@
     <Compile Include="Nodes\NodeTypes\Arithmetic\SlopeNode.cs" />
     <Compile Include="Nodes\NodeTypes\Arithmetic\StandardDeviationNode.cs" />
     <Compile Include="Nodes\NodeTypes\Arithmetic\SubstractionNode.cs" />
+    <Compile Include="Nodes\NodeTypes\TestDeviceNode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

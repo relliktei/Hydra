@@ -112,7 +112,6 @@ namespace HYDRA
 
         //Draws || Interact with the graph panel.
         #region Graph_Panel
-        Random r = new Random();
         private void drawPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //Make the center of the node appear on mouse position.
@@ -123,6 +122,7 @@ namespace HYDRA
             {
                 drawPanelCtxMenu.Show(this, _placementPos);
             }
+
             else if (e.Button == MouseButtons.Left)
             {
                 //Node Drawing

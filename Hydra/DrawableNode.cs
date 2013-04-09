@@ -87,7 +87,7 @@ namespace HYDRA
             if (Location != null && Location.X != 0 || Location.Y != 0)
                 this.Location = Location;
 
-            _nodePBox.Image = getNodeImage(_node.Name); ;
+            _nodePBox.Image = getNodeImage(_node.Name);
             _nodePBox.Width = this.Width;
             _nodePBox.Height = this.Height;
             _nodePBox.BackColor = Color.Gray;

@@ -30,8 +30,6 @@ namespace HydraLib.Nodes.NodeTypes
             this.Name = "Division";
         }
 
-
-
         public override float Process(Dictionary<Guid, Node> allNodes)
         {
             float Result = 0;

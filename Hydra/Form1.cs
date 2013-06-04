@@ -23,6 +23,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Resources;
+using System.Threading.Tasks;
 
 using HydraLib.Nodes;
 using HydraLib.Nodes.NodeTypes;
@@ -34,6 +35,8 @@ namespace HYDRA
     {
         //Used to store logic nodes.
         private List<DrawableNode> _LogicNodes = new List<DrawableNode>();
+        //Used to store connectors
+        private List<DrawAbleConnector> _DrawAbleConnectors = new List<DrawAbleConnector>();
 
         //Store all nodes using GUID as key and ONode as value.
         //Todo: should be only one list, requires some more refactoring.
@@ -208,6 +211,7 @@ namespace HYDRA
             {
                 Connector.HeadOverGuid = sender.GUID;
                 DrawAbleConnector con = new DrawAbleConnector(Connector.TailMouseOverGuid, Connector.HeadOverGuid);
+                _DrawAbleConnectors.Add(con); //Add the DrawAbleConnector to a Local List
                 sender.Input.Add(con); //Add the connection to the destination node Input list.
                 con.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);//Draw the connector
                 //Debug
@@ -259,6 +263,17 @@ namespace HYDRA
         public Node getNode()
         {
             return (Node)Activator.CreateInstance(_selectedNodeType, new object[] { Guid.NewGuid() });
+        }
+
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+            if (_DrawAbleConnectors.Count > 0)
+            {
+                Parallel.ForEach(_DrawAbleConnectors, connector =>
+                    {
+                        connector.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);
+                    });
+            }
         }
 
     }

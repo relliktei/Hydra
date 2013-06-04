@@ -31,6 +31,7 @@ namespace HYDRA
 
         public string Name { get { return _node.Name; } set { _node.Name = value; } }
         public float Value { get { return _node.Value; } set { _node.Value = value; ValueLabel.Text = value + ""; } }
+
         public List<Connector> Input { get { return _node.Input; } set { _node.Input = value; } }
         public List<Connector> Output { get { return _node.Output; } set { _node.Output = value; } }
 

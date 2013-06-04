@@ -44,7 +44,6 @@ namespace HydraLib.Nodes.NodeTypes
             {
                 for (int i = 0; i < Input.Count; i++)
                 {
-                    //MessageBox.Show(Form1.AllNodes[Input[i].TailNodeGuid].Value.ToString());
                     var _floatValue = allNodes[Input[i].TailNodeGuid].Value;
                     Result += _floatValue;
                 }

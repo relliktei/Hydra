@@ -71,7 +71,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InputBox";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "InputBox";
+            this.Text = "Input";
             this.ResumeLayout(false);
             this.PerformLayout();
 

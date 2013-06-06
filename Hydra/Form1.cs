@@ -173,10 +173,7 @@ namespace HYDRA
             //Add it to the CtxMenu in drawPanel
             foreach (var node in usuableNodeList)
             {
-                //In order to grab the correct image I need to trim the name and remove the "Node" part because when we find the subclasses they return the name as AdditionNode when we only need "Addition".
-                //So yeah, we need to make this right at osme point.
-                string _removeTheWordNode = node._name.Replace("Node", null);
-                Bitmap _nodeImage = (Bitmap)rm.GetObject(_removeTheWordNode);
+                Bitmap _nodeImage = (Bitmap)rm.GetObject(node._name);
                 drawPanelCtxMenu.Items.Add(node._name, _nodeImage, DrawPanelCtxMenu_SelectedtItemChanged);
             }
         }

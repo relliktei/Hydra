@@ -5,9 +5,9 @@ using System.Text;
 
 namespace HydraLib.Nodes.NodeTypes
 {
-    class TestDeviceNode : Node
+    class TestDevice : Node
     {
-        public TestDeviceNode(Guid id)
+        public TestDevice(Guid id)
             : base(id)
         {
             this.Name = "TestDevice";

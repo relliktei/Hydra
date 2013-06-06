@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2013 Iker Ruiz Arnauda
+// Copyright (C) 2013 Iker Ruiz Arnauda
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,38 +22,41 @@ using System.Text;
 
 namespace HydraLib.Nodes.NodeTypes
 {
-    public class AdditionNode : Node
+    public class Division : Node
     {
-        public AdditionNode(Guid id)
+        public Division(Guid id)
             : base(id)
         {
-            this.Name = "Addition";
+            this.Name = "Division";
         }
 
-        /// <summary>
-        /// We pass Allnodes in so the Node doesnt need any static refrence to all the nodes.
-        /// </summary>
-        /// <param name="allNodes"></param>
-        /// <returns></returns>
         public override float Process(Dictionary<Guid, Node> allNodes)
         {
-            //We concatenate the different input values in here:
             float Result = 0;
 
-            if (Input.Count >= 2)
+            if (Input.Count == 2)
             {
                 for (int i = 0; i < Input.Count; i++)
                 {
+                    //MessageBox.Show(Form1.AllNodes[Input[i].TailNodeGuid].Value.ToString());
                     var _floatValue = allNodes[Input[i].TailNodeGuid].Value;
-                    Result += _floatValue;
+                    if (Result == 0)
+                        Result = _floatValue;
+                    else
+                        Result /= _floatValue;
                 }
                 Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
 
                 this.Value = Result;
-                // Return the result, so DrawableNode which called this Process(), can update its display label
                 return Result;
+                // this.ValueLabel.Text = Result + "";
             }
-            return 0f;
-        }             
+            return 1f;
+        }
+
+       
+
+
     }
 }
+

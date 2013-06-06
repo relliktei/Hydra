@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2013 Iker Ruiz Arnauda
+// Copyright (C) 2013 Iker Ruiz Arnauda
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,12 +22,12 @@ using System.Text;
 
 namespace HydraLib.Nodes.NodeTypes
 {
-    public class SubstractionNode : Node
+    public class Multiplication : Node
     {
-        public SubstractionNode(Guid id)
+        public Multiplication(Guid id)
             : base(id)
         {
-            this.Name = "Substraction";
+            this.Name = "Multiplication";
         }
 
 
@@ -45,18 +45,18 @@ namespace HydraLib.Nodes.NodeTypes
                     if (Result == 0)
                         Result = _floatValue;
                     else
-                        Result -= _floatValue;
+                        Result *= _floatValue;
                 }
-                Console.WriteLine("Log: " + this.Name + "|| Processed an addition with " + Input.Count + " input elements the result was " + Result);
+                Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
 
                 this.Value = Result;
                 return Result;
-                //this.ValueLabel.Text = Result + "";
+               // this.ValueLabel.Text = Result + "";
             }
             return 1f;
         }
 
-       
+      
 
 
     }

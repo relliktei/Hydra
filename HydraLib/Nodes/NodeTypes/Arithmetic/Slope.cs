@@ -1,4 +1,4 @@
-﻿// Copyright (C) 2013 Iker Ruiz Arnauda
+// Copyright (C) 2013 Iker Ruiz Arnauda
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -14,29 +14,32 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+using HydraLib.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
-
-namespace HydraLib.Nodes.NodeTypes
+////////////////////////////////////////////////////////////////////////////
+//                    NOT IMPLEMENTED                                     //
+//                  AUTO GENERATED CLASS!                                 //
+////////////////////////////////////////////////////////////////////////////
+namespace HYDRA.Nodes.NodeTypes
 {
-    public class ConstantNode : Node
+    public class Slope : Node
     {
-
-        public ConstantNode(Guid id)
-        :base(id)
-        {
-            this.Value = 0;
-            this.Name = "Constant";
-        }
-
-        public ConstantNode(Guid id, float Value)
+        public Slope(Guid id)
             : base(id)
         {
-            this.Value = Value;
-            this.Name = "Constant";
-        }     
+            this.Name = "Slope";
+        }
+
+
+
+        public override float Process(Dictionary<Guid, Node> allNodes)
+        {
+            //Implement
+            return 1f;
+        }
     }
 }
+

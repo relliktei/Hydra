@@ -14,51 +14,48 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
+using HydraLib.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
-namespace HydraLib.Nodes.NodeTypes
+namespace HYDRA.Nodes.NodeTypes
 {
-    public class MultiplicationNode : Node
+    public class PonderedAverage : Node
     {
-        public MultiplicationNode(Guid id)
+        public PonderedAverage(Guid id)
             : base(id)
         {
-            this.Name = "Multiplication";
+            this.Name = "PonderedAverage";
         }
-
-
 
         public override float Process(Dictionary<Guid, Node> allNodes)
         {
+            //((Input0 * Weight0) + (Input1 * Weight1) + .….) / (Weight0 + Weight1 + .....).
+            //We concatenate the different input values in here:
             float Result = 0;
+            float _weightSum = 0;
 
-            if (Input.Count == 2)
+            if (Input.Count >= 2)
             {
-                for (int i = 0; i < Input.Count; i++)
+                for (int i = 0; i < Input.Count; i+=2)
                 {
-                    //MessageBox.Show(Form1.AllNodes[Input[i].TailNodeGuid].Value.ToString());
-                    var _floatValue = allNodes[Input[i].TailNodeGuid].Value;
-                    if (Result == 0)
-                        Result = _floatValue;
-                    else
-                        Result *= _floatValue;
+                    var _floatValue = allNodes[Input[i].TailNodeGuid].Value * allNodes[Input[i+1].TailNodeGuid].Value; //Input * Weight
+                    _weightSum += allNodes[Input[i + 1].TailNodeGuid].Value; //Concatenate the Weights sum
+                    Result += _floatValue; //This will save the sum of all Input * Weight operation which at the end will be divided by the Weight sum.
                 }
+
+                //Get the pondered average
+                Result /= _weightSum;
+
                 Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
 
                 this.Value = Result;
+                // Return the result, so DrawableNode which called this Process(), can update its display label
                 return Result;
-               // this.ValueLabel.Text = Result + "";
             }
-            return 1f;
+            return 0f;
         }
-
-      
-
-
     }
 }
-

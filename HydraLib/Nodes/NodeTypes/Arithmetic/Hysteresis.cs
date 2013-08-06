@@ -42,7 +42,7 @@ namespace HYDRA.Nodes.NodeTypes
         Random rand = new Random();
         public override float Evaluate()
         {
-            Debug.WriteLine(string.Format("Evaluating node: {0}", this.Name));
+            Debug.WriteLine(string.Format("Evaluating child : {0}", this.Name));
             this.Value = rand.Next(1, 10);
             return 1f;
         }

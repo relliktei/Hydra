@@ -158,7 +158,7 @@ namespace HYDRA
             else if (e.Button == MouseButtons.Left)
             {
                 //Node Drawing
-                if (_selectedNodeType != null && _selectedNodeType != typeof(Composite))
+                if (_selectedNodeType != null /*&& _selectedNodeType != typeof(Composite)*/)
                 {
                     var node = new DrawableNode(getNode(), drawPanel, listVarWatch);
                     Composites.First().Value.AddNode(node.GetNode());
@@ -173,10 +173,6 @@ namespace HYDRA
                     // Null Node selection
                     _selectedNodeType = null;
                     return;
-                }
-                else if (_selectedNodeType == typeof(Composite))
-                {
-                    ConsoleLogTextBox.Text += "---New Composite--" + Environment.NewLine;
                 }
 
                 ConsoleLogTextBox.SelectionStart = ConsoleLogTextBox.TextLength;

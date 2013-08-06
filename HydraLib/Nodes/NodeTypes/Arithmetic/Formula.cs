@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Diagnostics;
 
 
 ////////////////////////////////////////////////////////////////////////////
@@ -35,17 +35,19 @@ namespace HydraLib.Nodes.NodeTypes
             this.Name = "Formula";
         }
 
-
+        Random rand = new Random();
+        public override float Evaluate()
+        {
+            Debug.WriteLine(string.Format("Evaluating node: {0}", this.Name));
+            this.Value = rand.Next();
+            return 1f;
+        }
 
         public override float Process(Dictionary<Guid, Node> allNodes)
         {
             //Implement
             return 1f;
         }
-
-      
-
-
     }
 }
 

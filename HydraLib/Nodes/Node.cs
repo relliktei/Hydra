@@ -21,7 +21,7 @@ using System.Text;
 
 namespace HydraLib.Nodes
 {
-    public class Node
+    public class Node : INode
     {
         //GUID - Global Unique Identifer used to map our nodes.
         private Guid _guid;
@@ -56,11 +56,21 @@ namespace HydraLib.Nodes
             return "";
         }
 
+        public virtual float Evaluate()
+        {
+            return Value;
+        }
+
         //Node Logic
         public virtual float Process(Dictionary<Guid, Node> allNodes)
         {
             //Override logic on child nodes.
             return Value;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

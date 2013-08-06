@@ -7,7 +7,6 @@ namespace HydraLib.Nodes
 {
     public interface INode
     {
-        float Process(Dictionary<Guid, Node> AllNodes);
-        string Log();
+        float Evaluate();
     }
 }

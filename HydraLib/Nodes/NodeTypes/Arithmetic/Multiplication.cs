@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Diagnostics;
 
 namespace HydraLib.Nodes.NodeTypes
 {
@@ -30,7 +30,11 @@ namespace HydraLib.Nodes.NodeTypes
             this.Name = "Multiplication";
         }
 
-
+        public override float Evaluate()
+        {
+            Debug.WriteLine(string.Format("Evaluating node: {0}", this.Name));
+            return 1f;
+        }
 
         public override float Process(Dictionary<Guid, Node> allNodes)
         {

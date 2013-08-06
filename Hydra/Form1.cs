@@ -24,6 +24,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Resources;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using HydraLib.Nodes;
 using HydraLib.Nodes.NodeTypes;
@@ -34,13 +35,14 @@ namespace HYDRA
     public partial class Form1 : Form
     {
         //Used to store logic nodes.
-        private List<DrawableNode> _LogicNodes = new List<DrawableNode>();
+        //private List<DrawableNode> _LogicNodes = new List<DrawableNode>();
         //Used to store connectors
         private List<DrawAbleConnector> _DrawAbleConnectors = new List<DrawAbleConnector>();
 
         //Store all nodes using GUID as key and ONode as value.
         //Todo: should be only one list, requires some more refactoring.
-        private Dictionary<Guid, Node> AllNodes = new Dictionary<Guid, Node>();
+        private Dictionary<Guid, Composite> Composites = new Dictionary<Guid, Composite>();
+        //private Dictionary<Guid, Node> AllNodes = new Dictionary<Guid, Node>();
         private Dictionary<Guid, DrawableNode> AllDrawableNodes = new Dictionary<Guid, DrawableNode>();
 
         //Used as a stack for tool selection menu
@@ -59,7 +61,10 @@ namespace HYDRA
         {
             InitializeComponent();
             CreateDrawPanelCtxMenu();
-            ExecuteLoop.Interval = 1000;
+            Composite composite = new Composite(Guid.NewGuid());
+            //DrawableNode node = new DrawableNode(composite, this, listVarWatch);
+            Composites.Add(composite.Guid, composite);
+            ExecuteLoop.Interval = 100;
         }
 
         //Connector Button
@@ -98,6 +103,26 @@ namespace HYDRA
         //Execute.
         private void timer1_Tick(object sender, EventArgs e)
         {
+            foreach (KeyValuePair<Guid, Composite> composite in Composites)
+            {
+                composite.Value.Evaluate();
+                //var node = (composite.Value.GetNode() as Composite);
+                foreach (var _node in composite.Value.childs)
+                {
+                    AllDrawableNodes[_node.Guid].ValueLabel.Text = _node.Value.ToString();
+                    //_node.ValueLabel.Text = (node as Node).Value.ToString();
+                    //(_node as DrawableNode).ValueLabel = _node.Value.ToString();
+                }
+            }
+
+            /*
+            foreach (INode node in (Composites.First().Value as Composite).childs)
+            {
+                (node as DrawableNode).ValueLabel.Text = (node as Node).Value.ToString();
+            }*/
+
+            ExecuteLoop.Enabled = false;
+            /*
             foreach (DrawableNode node in _LogicNodes)
             {
                 node.Process(AllNodes);
@@ -111,7 +136,7 @@ namespace HYDRA
                         listVarWatch.FindItemWithText(node.GUID.ToString()).SubItems[1].Text = node.Value.ToString();
                 }
                 catch { }
-            }
+            }*/
         }
         #endregion
 
@@ -131,9 +156,11 @@ namespace HYDRA
             else if (e.Button == MouseButtons.Left)
             {
                 //Node Drawing
-                if (_selectedNodeType != null)
+                if (_selectedNodeType != null && _selectedNodeType != typeof(Composite))
                 {
                     var node = new DrawableNode(getNode(), drawPanel, listVarWatch);
+                    Composites.First().Value.AddNode(node.GetNode());
+                    //(Composites.First().Value as Composite).AddNode(node.GetNode() as INode);
                     node.Draw(_placementPos);
                     //Deploy log into the bottom textlog.
                     ConsoleLogTextBox.Text += node.Log();
@@ -143,11 +170,15 @@ namespace HYDRA
                     this.Cursor = DefaultCursor;
                     // Null Node selection
                     _selectedNodeType = null;
-                    //Scroll Console Log
-                    ConsoleLogTextBox.SelectionStart = ConsoleLogTextBox.TextLength;
-                    ConsoleLogTextBox.ScrollToCaret();
                     return;
                 }
+                else if (_selectedNodeType == typeof(Composite))
+                {
+                    ConsoleLogTextBox.Text += "---New Composite--" + Environment.NewLine;
+                }
+
+                ConsoleLogTextBox.SelectionStart = ConsoleLogTextBox.TextLength;
+                ConsoleLogTextBox.ScrollToCaret();
             }
         }
         #endregion
@@ -186,10 +217,12 @@ namespace HYDRA
         /// <param name="isLogic">True if this is a logic node</param>
         private void addNode(DrawableNode node, bool isLogic)
         {
+            //Composites.Add(node.GUID, node);
             AllDrawableNodes.Add(node.GUID, node);
+            /*
             AllNodes.Add(node.GUID, node.GetNode());
             if (isLogic)
-                _LogicNodes.Add(node); //Add to a node List.
+                _LogicNodes.Add(node); //Add to a node List.*/
 
             node.onNodeClick += node_onNodeClick; // Grab the onclick event, and send to node_onNodeClick
         }
@@ -211,9 +244,9 @@ namespace HYDRA
                 DrawAbleConnector con = new DrawAbleConnector(Connector.TailMouseOverGuid, Connector.HeadOverGuid);
                 _DrawAbleConnectors.Add(con); //Add the DrawAbleConnector to a Local List
                 sender.Input.Add(con); //Add the connection to the destination node Input list.
-                con.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);//Draw the connector
+                //con.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);//Draw the connector
                 //Debug
-                Console.WriteLine("Log: " + sender.Name + "|| Input count: " + sender.Input.Count + " || Output count: " + sender.Output.Count);
+                Debug.WriteLine("Log: " + sender.Name + "|| Input count: " + sender.Input.Count + " || Output count: " + sender.Output.Count);
                 return;
             }
 
@@ -269,7 +302,7 @@ namespace HYDRA
             {
                 Parallel.ForEach(_DrawAbleConnectors, connector =>
                     {
-                        connector.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);
+                        //connector.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);
                     });
             }
         }

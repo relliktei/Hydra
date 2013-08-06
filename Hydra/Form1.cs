@@ -94,10 +94,12 @@ namespace HYDRA
         #region Execute Button
         private void ExecuteToolButton_MouseClick(object sender, EventArgs e)
         {
+            timer1_Tick(sender, e);
+            /*
             if (ExecuteLoop.Enabled)
                 ExecuteLoop.Enabled = false;
             else
-                ExecuteLoop.Enabled = true;
+                ExecuteLoop.Enabled = true;*/
         }
 
         //Execute.

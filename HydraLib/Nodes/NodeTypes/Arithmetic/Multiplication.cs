@@ -30,9 +30,11 @@ namespace HydraLib.Nodes.NodeTypes
             this.Name = "Multiplication";
         }
 
+        Random rand = new Random();
         public override float Evaluate()
         {
             Debug.WriteLine(string.Format("Evaluating node: {0}", this.Name));
+            this.Value = rand.Next(1, 10);
             return 1f;
         }
 

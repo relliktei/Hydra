@@ -39,7 +39,7 @@ namespace HydraLib.Nodes.NodeTypes
         public override float Evaluate()
         {
             Debug.WriteLine(string.Format("Evaluating node: {0}", this.Name));
-            this.Value = rand.Next();
+            this.Value = rand.Next(1, 10);
             return 1f;
         }
 

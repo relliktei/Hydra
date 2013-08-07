@@ -217,6 +217,7 @@ namespace HYDRA
         {
             //Composites.Add(node.GUID, node);
             AllDrawableNodes.Add(node.GUID, node);
+            NodeMap.Nodes.Add(node.GetNode().Guid, node.GetNode());
             /*
             AllNodes.Add(node.GUID, node.GetNode());
             if (isLogic)
@@ -242,7 +243,7 @@ namespace HYDRA
                 DrawAbleConnector con = new DrawAbleConnector(Connector.TailMouseOverGuid, Connector.HeadOverGuid);
                 _DrawAbleConnectors.Add(con); //Add the DrawAbleConnector to a Local List
                 sender.Input.Add(con); //Add the connection to the destination node Input list.
-                //con.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);//Draw the connector
+                con.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);//Draw the connector
                 //Debug
                 Debug.WriteLine("Log: " + sender.Name + "|| Input count: " + sender.Input.Count + " || Output count: " + sender.Output.Count);
                 return;

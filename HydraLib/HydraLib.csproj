@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HydraLib.cs" />
+    <Compile Include="Nodes\NodeMap.cs" />
     <Compile Include="Nodes\NodeTypes\Arithmetic\Composite.cs" />
     <Compile Include="Nodes\Connector.cs" />
     <Compile Include="Nodes\INode.cs" />

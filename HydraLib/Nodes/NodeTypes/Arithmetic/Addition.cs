@@ -30,12 +30,25 @@ namespace HydraLib.Nodes.NodeTypes
             this.Name = "Addition";
         }
 
-        Random rand = new Random();
         public override float Evaluate()
         {
             Debug.WriteLine(string.Format("Evaluating child : {0}", this.Name));
-            this.Value = rand.Next(1,10);
-            return 1f;            
+            float Result = 0;
+
+            if (Input.Count >= 2)
+            {
+                for (int i = 0; i < Input.Count; i++)
+                {
+                    var _floatValue = NodeMap.Nodes[Input[i].TailNodeGuid].Value;
+                    Result += _floatValue;
+                }
+                Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
+
+                this.Value = Result;
+                // Return the result, so DrawableNode which called this Process(), can update its display label
+                return Result;
+            }
+            return 0f;        
         }
         /// <summary>
         /// We pass Allnodes in so the Node doesnt need any static refrence to all the nodes.
@@ -54,8 +67,8 @@ namespace HydraLib.Nodes.NodeTypes
                     var _floatValue = allNodes[Input[i].TailNodeGuid].Value;
                     Result += _floatValue;
                 }
-                Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
 
+                Console.WriteLine("Log: " + this.Name + "|| Processed an operation with " + Input.Count + " input elements the result was " + Result);
                 this.Value = Result;
                 // Return the result, so DrawableNode which called this Process(), can update its display label
                 return Result;

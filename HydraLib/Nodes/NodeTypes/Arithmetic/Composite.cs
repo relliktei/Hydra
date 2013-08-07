@@ -15,10 +15,12 @@ namespace HydraLib.Nodes.NodeTypes
         public override float Evaluate()
         {
             Debug.WriteLine(string.Format("Evaluating CompositeNode"));
-            foreach (Node node in childs)
+            foreach (Node node in childs.Where(x => x.Input.Count > 0))
+            {
                 node.Evaluate();
+            }
 
-            return 0f;
+            return 0f; //Must return error code?
         }
 
         public void AddNode(Node node)

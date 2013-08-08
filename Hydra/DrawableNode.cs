@@ -14,6 +14,8 @@ namespace HYDRA
     {
         //Event handlers to pass click events to main form
         public delegate void NodeClickedHandler(DrawableNode sender, MouseEventArgs e);
+        public delegate void NodeDoubleClickedHandler(DrawableNode sender, MouseEventArgs e);
+        public event NodeDoubleClickedHandler onNodeDoubleClick;
         public event NodeClickedHandler onNodeClick;
 
         //The real node
@@ -71,6 +73,56 @@ namespace HYDRA
             _nodePBox.MouseClick += new MouseEventHandler(nodeMouseClick);
             _nodePBox.MouseHover += nodeMouseHover;
             _nodePBox.ContextMenu = buildContextMenu();
+            _nodePBox.MouseDoubleClick += new MouseEventHandler(nodeMouseDoubleClick);
+        }
+
+        private void nodeMouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Panel newPanel = new Panel();
+            newPanel.Size = _panel.Size;
+            newPanel.Location = _panel.Location;
+            newPanel.BackColor = _panel.BackColor;
+            newPanel.BorderStyle = BorderStyle.FixedSingle;           
+            _panel.Parent.Controls.Add(newPanel);
+            newPanel.BringToFront();
+            _panel = newPanel;
+            newPanel.MouseClick += newPanel_MouseClick;          
+        }
+
+        private void newPanel_MouseClick(object sender, MouseEventArgs e)
+        {
+            var _placementPos = new Point(e.Location.X - 15, e.Location.Y - 15);
+
+            if (e.Button == MouseButtons.Right)
+            {
+                Form1.drawPanelCtxMenu.Show(_panel.Parent, _placementPos);
+            }
+
+            else if (e.Button == MouseButtons.Left)
+            {
+                //Node Drawing
+                if (Form1._selectedNodeType != null /*&& _selectedNodeType != typeof(Composite)*/)
+                {
+                    var node = new DrawableNode(this.getNode(), _panel, null);
+                    Form1.Composites.Last().Value.AddNode(node.getNode());
+                    //(Composites.First().Value as Composite).AddNode(node.GetNode() as INode);
+                    node.Draw(_placementPos);
+                    //Deploy log into the bottom textlog.
+                    //ConsoleLogTextBox.Text += node.Log();
+                    // Adds the node to all our lists
+                    Form1.addNode(this, true);
+                    // Switch back to arrow cursor
+                    _panel.Cursor = Cursors.Arrow;
+                    // Null Node selection
+                    Form1._selectedNodeType = null;
+                    return;
+                }
+            }
+        }
+
+        public Node getNode()
+        {
+            return (Node)Activator.CreateInstance(Form1._selectedNodeType, new object[] { Guid.NewGuid() });
         }
 
         /// <summary>

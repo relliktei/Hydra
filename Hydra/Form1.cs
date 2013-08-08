@@ -41,18 +41,18 @@ namespace HYDRA
 
         //Store all nodes using GUID as key and ONode as value.
         //Todo: should be only one list, requires some more refactoring.
-        private Dictionary<Guid, Composite> Composites = new Dictionary<Guid, Composite>();
+        public static Dictionary<Guid, Composite> Composites = new Dictionary<Guid, Composite>();
         //private Dictionary<Guid, Node> AllNodes = new Dictionary<Guid, Node>();
-        private Dictionary<Guid, DrawableNode> AllDrawableNodes = new Dictionary<Guid, DrawableNode>();
+        public static Dictionary<Guid, DrawableNode> AllDrawableNodes = new Dictionary<Guid, DrawableNode>();
 
         //Used as a stack for tool selection menu
         private List<ToolStripButton> lastSelectedTool = new List<ToolStripButton>();
 
         //Stores the TYPE of the node that its being drawed/selected
-        private Type _selectedNodeType;
+        public static Type _selectedNodeType;
 
         //Context menu for drawPanel, this is used to add nodes into the drawPanel.
-        private ToolStripDropDownMenu drawPanelCtxMenu;
+        public static ToolStripDropDownMenu drawPanelCtxMenu;
 
         //List used to link the ContextMenu selected item with the proper Node Type the user wants to use.
         private List<ComboBoxObject> usuableNodeList = new List<ComboBoxObject>();
@@ -144,7 +144,7 @@ namespace HYDRA
 
         //Draws || Interact with the graph panel.
         #region Graph_Panel
-        private void drawPanel_MouseClick(object sender, MouseEventArgs e)
+        public void drawPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //Make the center of the node appear on mouse position.
             var _placementPos = new Point(e.Location.X - 15, e.Location.Y - 15);
@@ -213,7 +213,7 @@ namespace HYDRA
         /// </summary>
         /// <param name="node">The Drawable node to add</param>
         /// <param name="isLogic">True if this is a logic node</param>
-        private void addNode(DrawableNode node, bool isLogic)
+        public static void addNode(DrawableNode node, bool isLogic)
         {
             //Composites.Add(node.GUID, node);
             AllDrawableNodes.Add(node.GUID, node);
@@ -223,7 +223,7 @@ namespace HYDRA
             if (isLogic)
                 _LogicNodes.Add(node); //Add to a node List.*/
 
-            node.onNodeClick += node_onNodeClick; // Grab the onclick event, and send to node_onNodeClick
+            //node.onNodeClick += node_onNodeClick; // Grab the onclick event, and send to node_onNodeClick
         }
 
         /// <summary>

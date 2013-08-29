@@ -24,7 +24,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Resources;
 using System.Threading.Tasks;
-using System.Diagnostics;
 
 using HydraLib.Nodes;
 using HydraLib.Nodes.NodeTypes;
@@ -35,24 +34,23 @@ namespace HYDRA
     public partial class Form1 : Form
     {
         //Used to store logic nodes.
-        //private List<DrawableNode> _LogicNodes = new List<DrawableNode>();
+        private List<DrawableNode> _LogicNodes = new List<DrawableNode>();
         //Used to store connectors
         private List<DrawAbleConnector> _DrawAbleConnectors = new List<DrawAbleConnector>();
 
         //Store all nodes using GUID as key and ONode as value.
         //Todo: should be only one list, requires some more refactoring.
-        public static Dictionary<Guid, Composite> Composites = new Dictionary<Guid, Composite>();
-        //private Dictionary<Guid, Node> AllNodes = new Dictionary<Guid, Node>();
-        public static Dictionary<Guid, DrawableNode> AllDrawableNodes = new Dictionary<Guid, DrawableNode>();
+        private Dictionary<Guid, Node> AllNodes = new Dictionary<Guid, Node>();
+        private Dictionary<Guid, DrawableNode> AllDrawableNodes = new Dictionary<Guid, DrawableNode>();
 
         //Used as a stack for tool selection menu
         private List<ToolStripButton> lastSelectedTool = new List<ToolStripButton>();
 
         //Stores the TYPE of the node that its being drawed/selected
-        public static Type _selectedNodeType;
+        private Type _selectedNodeType;
 
         //Context menu for drawPanel, this is used to add nodes into the drawPanel.
-        public static ToolStripDropDownMenu drawPanelCtxMenu;
+        private ToolStripDropDownMenu drawPanelCtxMenu;
 
         //List used to link the ContextMenu selected item with the proper Node Type the user wants to use.
         private List<ComboBoxObject> usuableNodeList = new List<ComboBoxObject>();
@@ -61,10 +59,7 @@ namespace HYDRA
         {
             InitializeComponent();
             CreateDrawPanelCtxMenu();
-            Composite composite = new Composite(Guid.NewGuid());
-            //DrawableNode node = new DrawableNode(composite, this, listVarWatch);
-            Composites.Add(composite.Guid, composite);
-            ExecuteLoop.Interval = 100;
+            ExecuteLoop.Interval = 1000;
         }
 
         //Connector Button
@@ -94,57 +89,33 @@ namespace HYDRA
         #region Execute Button
         private void ExecuteToolButton_MouseClick(object sender, EventArgs e)
         {
-            timer1_Tick(sender, e);
-            /*
             if (ExecuteLoop.Enabled)
                 ExecuteLoop.Enabled = false;
             else
-                ExecuteLoop.Enabled = true;*/
+                ExecuteLoop.Enabled = true;
         }
 
         //Execute.
         private void timer1_Tick(object sender, EventArgs e)
         {
-            foreach (KeyValuePair<Guid, Composite> composite in Composites)
+            foreach (DrawableNode a in _LogicNodes)
             {
-                composite.Value.Evaluate();
-                //var node = (composite.Value.GetNode() as Composite);
-                foreach (var _node in composite.Value.childs)
-                {
-                    AllDrawableNodes[_node.Guid].ValueLabel.Text = _node.Value.ToString();
-                    //_node.ValueLabel.Text = (node as Node).Value.ToString();
-                    //(_node as DrawableNode).ValueLabel = _node.Value.ToString();
-                }
-            }
-
-            /*
-            foreach (INode node in (Composites.First().Value as Composite).childs)
-            {
-                (node as DrawableNode).ValueLabel.Text = (node as Node).Value.ToString();
-            }*/
-
-            ExecuteLoop.Enabled = false;
-            /*
-            foreach (DrawableNode node in _LogicNodes)
-            {
-                node.Process(AllNodes);
-
-                //Nodes that return 0 || 1 which are bool type must be shown over the varwatch as True/False.
+                a.Process(AllNodes);
                 try
                 {
-                    if (node.GetNode().isBool)
-                        listVarWatch.FindItemWithText(node.GUID.ToString()).SubItems[1].Text = Convert.ToBoolean(node.Value).ToString();
+                    if (a.GetNode().isBool)
+                        listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = Convert.ToBoolean(a.Value).ToString();
                     else
-                        listVarWatch.FindItemWithText(node.GUID.ToString()).SubItems[1].Text = node.Value.ToString();
+                        listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = a.Value.ToString();
                 }
                 catch { }
-            }*/
+            }
         }
         #endregion
 
         //Draws || Interact with the graph panel.
         #region Graph_Panel
-        public void drawPanel_MouseClick(object sender, MouseEventArgs e)
+        private void drawPanel_MouseClick(object sender, MouseEventArgs e)
         {
             //Make the center of the node appear on mouse position.
             var _placementPos = new Point(e.Location.X - 15, e.Location.Y - 15);
@@ -158,11 +129,9 @@ namespace HYDRA
             else if (e.Button == MouseButtons.Left)
             {
                 //Node Drawing
-                if (_selectedNodeType != null /*&& _selectedNodeType != typeof(Composite)*/)
+                if (_selectedNodeType != null)
                 {
                     var node = new DrawableNode(getNode(), drawPanel, listVarWatch);
-                    Composites.First().Value.AddNode(node.GetNode());
-                    //(Composites.First().Value as Composite).AddNode(node.GetNode() as INode);
                     node.Draw(_placementPos);
                     //Deploy log into the bottom textlog.
                     ConsoleLogTextBox.Text += node.Log();
@@ -172,11 +141,11 @@ namespace HYDRA
                     this.Cursor = DefaultCursor;
                     // Null Node selection
                     _selectedNodeType = null;
+                    //Scroll Console Log
+                    ConsoleLogTextBox.SelectionStart = ConsoleLogTextBox.TextLength;
+                    ConsoleLogTextBox.ScrollToCaret();
                     return;
                 }
-
-                ConsoleLogTextBox.SelectionStart = ConsoleLogTextBox.TextLength;
-                ConsoleLogTextBox.ScrollToCaret();
             }
         }
         #endregion
@@ -193,6 +162,7 @@ namespace HYDRA
             foreach (var nodeSubClass in FindSubClassesOf<Node>())
             {
                 //Todo: Remove ComboBoxObject and apply a new implementation.
+
                 //First we make a list with all the avialable nodes in our program.
                 usuableNodeList.Add(new ComboBoxObject(nodeSubClass, nodeSubClass.Name));
             }
@@ -213,17 +183,14 @@ namespace HYDRA
         /// </summary>
         /// <param name="node">The Drawable node to add</param>
         /// <param name="isLogic">True if this is a logic node</param>
-        public static void addNode(DrawableNode node, bool isLogic)
+        private void addNode(DrawableNode node, bool isLogic)
         {
-            //Composites.Add(node.GUID, node);
             AllDrawableNodes.Add(node.GUID, node);
-            NodeMap.Nodes.Add(node.GetNode().Guid, node.GetNode());
-            /*
             AllNodes.Add(node.GUID, node.GetNode());
             if (isLogic)
-                _LogicNodes.Add(node); //Add to a node List.*/
+                _LogicNodes.Add(node); //Add to a node List.
 
-            //node.onNodeClick += node_onNodeClick; // Grab the onclick event, and send to node_onNodeClick
+            node.onNodeClick += node_onNodeClick; // Grab the onclick event, and send to node_onNodeClick
         }
 
         /// <summary>
@@ -245,7 +212,7 @@ namespace HYDRA
                 sender.Input.Add(con); //Add the connection to the destination node Input list.
                 con.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);//Draw the connector
                 //Debug
-                Debug.WriteLine("Log: " + sender.Name + "|| Input count: " + sender.Input.Count + " || Output count: " + sender.Output.Count);
+                Console.WriteLine("Log: " + sender.Name + "|| Input count: " + sender.Input.Count + " || Output count: " + sender.Output.Count);
                 return;
             }
 
@@ -301,7 +268,7 @@ namespace HYDRA
             {
                 Parallel.ForEach(_DrawAbleConnectors, connector =>
                     {
-                        //connector.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);
+                        connector.Draw(drawPanel.CreateGraphics(), AllDrawableNodes);
                     });
             }
         }

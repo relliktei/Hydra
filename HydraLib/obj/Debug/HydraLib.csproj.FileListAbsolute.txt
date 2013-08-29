@@ -1,0 +1,5 @@
+C:\Users\Iker\Hydra\HydraLib\bin\Debug\HydraLib.dll
+C:\Users\Iker\Hydra\HydraLib\bin\Debug\HydraLib.pdb
+C:\Users\Iker\Hydra\HydraLib\obj\Debug\HydraLib.dll
+C:\Users\Iker\Hydra\HydraLib\obj\Debug\HydraLib.pdb
+C:\Users\Iker\Hydra\HydraLib\obj\Debug\HydraLib.csprojResolveAssemblyReference.cache

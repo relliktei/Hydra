@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
+
 
 namespace HydraLib.Nodes.NodeTypes
 {
@@ -37,13 +37,6 @@ namespace HydraLib.Nodes.NodeTypes
         {
             this.Value = Value;
             this.Name = "Constant";
-        }
-
-        Random rand = new Random();
-        public override float Evaluate()
-        {
-            Debug.WriteLine(string.Format("Evaluating child : {0}", this.Name));
-            return this.Value;
-        }
+        }     
     }
 }

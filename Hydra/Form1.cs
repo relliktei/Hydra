@@ -98,15 +98,17 @@ namespace HYDRA
         //Execute.
         private void timer1_Tick(object sender, EventArgs e)
         {
-            foreach (DrawableNode a in _LogicNodes)
+            foreach (DrawableNode node in _LogicNodes)
             {
-                a.Process(AllNodes);
+                node.Process(AllNodes);
+
+                //Nodes that return 0 || 1 which are bool type must be shown over the varwatch as True/False.
                 try
                 {
-                    if (a.GetNode().isBool)
-                        listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = Convert.ToBoolean(a.Value).ToString();
+                    if (node.GetNode().isBool)
+                        listVarWatch.FindItemWithText(node.GUID.ToString()).SubItems[1].Text = Convert.ToBoolean(node.Value).ToString();
                     else
-                        listVarWatch.FindItemWithText(a.GUID.ToString()).SubItems[1].Text = a.Value.ToString();
+                        listVarWatch.FindItemWithText(node.GUID.ToString()).SubItems[1].Text = node.Value.ToString();
                 }
                 catch { }
             }
@@ -162,7 +164,6 @@ namespace HYDRA
             foreach (var nodeSubClass in FindSubClassesOf<Node>())
             {
                 //Todo: Remove ComboBoxObject and apply a new implementation.
-
                 //First we make a list with all the avialable nodes in our program.
                 usuableNodeList.Add(new ComboBoxObject(nodeSubClass, nodeSubClass.Name));
             }

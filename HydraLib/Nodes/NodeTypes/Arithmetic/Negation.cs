@@ -33,6 +33,8 @@ namespace HYDRA.Nodes.NodeTypes
             this.Name = "Negation";
         }
 
+
+
         public override float Process(Dictionary<Guid, Node> allNodes)
         {
             //Implement

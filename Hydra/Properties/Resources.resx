@@ -188,7 +188,7 @@
   <data name="NodePlacement" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACEAAAAhCAYAAABX5MJvAAAABHNCSVQICAgIfAhkiAAAAAFzUkdCAK7O
-        HOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA7AAAAOwAFq1okJAAAAFnRFWHRDcmVhdGlvbiBUaW1l
+        HOkAAAAEZ0FNQQAAsY8L/GEFAAAACXBIWXMAAA7BAAAOwQG4kWvtAAAAFnRFWHRDcmVhdGlvbiBUaW1l
         ADA0LzA3LzEz91ebMQAAABh0RVh0U29mdHdhcmUAQWRvYmUgRmlyZXdvcmtzT7MfTgAAA0ZwclZXeJzt
         nPtW00AQxpM0yW6Ugng9VRDxwtEDilgRvD6Of/M6fRkfwNN38Q0cZ5LZdprWnKQn6aDZki9LCeWXvXxn
         9hZ+/v7xK7gKrgBgiscUJgCTKXzHYwLjKYwnEOCPYrw+gCJ1GpQUsiJWKNJAKBQKvLwUNWuLwYZfyDRS
@@ -992,8 +992,5 @@
   </data>
   <data name="TestDevice" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TestDevice.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Composite" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\composite.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

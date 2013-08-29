@@ -1,0 +1,11 @@
+C:\Users\Iker\Hydra\Hydra\obj\x86\Debug\HYDRA.csprojResolveAssemblyReference.cache
+C:\Users\Iker\Hydra\Hydra\obj\x86\Debug\HYDRA.Form1.resources
+C:\Users\Iker\Hydra\Hydra\obj\x86\Debug\HYDRA.InputBox.resources
+C:\Users\Iker\Hydra\Hydra\obj\x86\Debug\HYDRA.csproj.GenerateResource.Cache
+C:\Users\Iker\Hydra\Hydra\bin\Debug\HYDRA.exe
+C:\Users\Iker\Hydra\Hydra\bin\Debug\HYDRA.pdb
+C:\Users\Iker\Hydra\Hydra\bin\Debug\HydraLib.dll
+C:\Users\Iker\Hydra\Hydra\bin\Debug\HydraLib.pdb
+C:\Users\Iker\Hydra\Hydra\obj\x86\Debug\HYDRA.Properties.Resources.resources
+C:\Users\Iker\Hydra\Hydra\obj\x86\Debug\HYDRA.exe
+C:\Users\Iker\Hydra\Hydra\obj\x86\Debug\HYDRA.pdb

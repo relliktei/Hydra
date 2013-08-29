@@ -18,7 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Diagnostics;
+
 
 namespace HydraLib.Nodes.NodeTypes
 {
@@ -28,14 +28,6 @@ namespace HydraLib.Nodes.NodeTypes
             : base(id)
         {
             this.Name = "Division";
-        }
-
-        Random rand = new Random();
-        public override float Evaluate()
-        {
-            Debug.WriteLine(string.Format("Evaluating child : {0}", this.Name));
-            this.Value = rand.Next(1, 10);
-            return 1f;
         }
 
         public override float Process(Dictionary<Guid, Node> allNodes)
